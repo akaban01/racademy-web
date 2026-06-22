@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parent Resources — Renaissance Academy</title>
+  <meta name="description" content="Resources for Renaissance Academy families — including the 2025–2026 Student Supply Lists for Pre-K through High School." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <script defer src="../nav.js"></script>
+  <style data-page-styles>
+    /* ── Page hero (slimmer than the homepage hero) ── */
+    .page-hero {
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 70% at 88% 0%, var(--lavender-2), transparent 65%),
+        radial-gradient(ellipse 60% 55% at 0% 100%, var(--lavender), transparent 60%),
+        var(--white);
+      overflow: hidden;
+      padding: 64px 0 56px;
+    }
+    .page-hero .wrap { position: relative; z-index: 2; }
+    .page-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin: 0.9rem 0 1.1rem;
+    }
+    .page-hero h1 .accent { color: var(--purple); }
+    .page-hero p.lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 640px;
+      line-height: 1.72;
+    }
+
+    /* ── Resource quick-links grid ── */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.6rem;
+    }
+    .resource-card {
+      background: var(--lavender);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.4rem 1.4rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .resource-card h3 {
+      font-size: 1.05rem;
+      color: var(--ink);
+    }
+    .resource-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+    .resource-card a {
+      margin-top: 0.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      text-decoration: none;
+    }
+    .resource-card a:hover { color: var(--purple-strong); }
+
+    /* ── Supply list intro note ── */
+    .supply-note {
+      background: rgba(124,58,237,0.05);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--purple);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-top: 2rem;
+      max-width: 760px;
+    }
+    .supply-note strong { color: var(--ink); }
+
+    /* ── Grade accordions ── */
+    .grades {
+      margin-top: 2.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .grade {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--white);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .grade[open] {
+      border-color: var(--purple-light);
+      box-shadow: 0 14px 34px rgba(124,58,237,0.08);
+    }
+    .grade > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .grade > summary::-webkit-details-marker { display: none; }
+    .grade-title {
+      display: flex;
+      align-items: baseline;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .grade-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(124,58,237,0.08);
+      padding: 4px 9px;
+      border-radius: 999px;
+    }
+    .grade-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .grade-chev {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--purple);
+      flex-shrink: 0;
+      transition: transform 0.25s ease, background 0.2s;
+    }
+    .grade[open] .grade-chev { transform: rotate(180deg); background: rgba(124,58,237,0.08); }
+    .grade-body {
+      padding: 0 1.4rem 1.5rem;
+      border-top: 1px solid var(--line-soft);
+    }
+    .grade-body > .subject:first-child { margin-top: 1.3rem; }
+    .subject + .subject { margin-top: 1.4rem; }
+    .subject h4 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.6rem;
+    }
+    .subject .subject-note {
+      font-size: 0.88rem;
+      color: var(--muted-dim);
+      margin: -0.3rem 0 0.55rem;
+      font-style: italic;
+    }
+    .supply-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.35rem 1.6rem;
+      padding: 0;
+    }
+    .supply-list li {
+      position: relative;
+      padding-left: 1.05rem;
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    .supply-list li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0.65em;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--purple);
+    }
+    .supply-list li em {
+      color: var(--muted);
+      font-style: normal;
+      font-size: 0.86rem;
+      display: block;
+    }
+    .supply-list li.note { color: var(--muted); font-style: italic; }
+
+    /* ── Checkbox interaction ── */
+    .supply-list li.has-check { padding-left: 0; }
+    .supply-list li.has-check::before { display: none; }
+    .supply-label {
+      display: flex;
+      gap: 0.65rem;
+      align-items: flex-start;
+      cursor: pointer;
+      user-select: none;
+      width: 100%;
+      line-height: 1.55;
+    }
+    .supply-text { flex: 1; }
+    .supply-check {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px; height: 18px;
+      border: 1.5px solid var(--purple);
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 3px;
+      position: relative;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .supply-check:hover { background: rgba(124,58,237,0.08); }
+    .supply-check:checked { background: var(--purple); border-color: var(--purple); }
+    .supply-check:checked::after {
+      content: "";
+      position: absolute;
+      left: 4px; top: 0px;
+      width: 6px; height: 11px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .supply-check:focus-visible { outline: 2px solid var(--purple-light); outline-offset: 2px; }
+    .supply-list li.is-checked .supply-text {
+      color: var(--muted-dim);
+      text-decoration: line-through;
+      text-decoration-color: rgba(124,58,237,0.45);
+    }
+
+    /* ── Per-grade progress badge & clear button ── */
+    .grade-progress {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--muted-dim);
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(124,58,237,0.06);
+      border: 1px solid var(--line);
+      white-space: nowrap;
+    }
+    .grade-progress.is-complete {
+      color: var(--purple);
+      background: rgba(124,58,237,0.12);
+      border-color: var(--purple-light);
+    }
+    .grade-actions {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 1rem;
+    }
+    .grade-clear {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .grade-clear:hover {
+      color: var(--purple);
+      border-color: var(--purple);
+      background: rgba(124,58,237,0.04);
+    }
+    .grade-clear:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* ── Tabs ── */
+    .tabs-wrap {
+      position: relative;
+      margin-top: 2.4rem;
+    }
+    /* Edge-fade gradients to signal "more tabs that way" when scrolled. */
+    .tabs-wrap::before,
+    .tabs-wrap::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 1px;
+      width: 36px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .tabs-wrap::before {
+      left: 0;
+      background: linear-gradient(to right, var(--lavender), rgba(247,245,254,0));
+    }
+    .tabs-wrap::after {
+      right: 0;
+      background: linear-gradient(to left, var(--lavender), rgba(247,245,254,0));
+    }
+    .tabs-wrap.has-overflow-left::before { opacity: 1; }
+    .tabs-wrap.has-overflow-right::after { opacity: 1; }
+
+    .tabs {
+      display: flex;
+      gap: 0.1rem;
+      border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+    }
+    .tabs::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 0.95rem 1.3rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+      margin-bottom: -1px;
+      scroll-snap-align: center;
+      flex-shrink: 0;
+    }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn[aria-selected="true"] {
+      color: var(--purple);
+      border-bottom-color: var(--purple);
+    }
+    .tab-btn:focus-visible {
+      outline: 2px solid var(--purple-light);
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+    .tab-panel { padding-top: 2.4rem; }
+    .tab-panel[hidden] { display: none; }
+
+    @media (max-width: 640px) {
+      .tabs-wrap { margin-top: 1.8rem; }
+      .tab-btn {
+        padding: 0.85rem 0.95rem;
+        font-size: 0.93rem;
+      }
+      .tab-panel { padding-top: 1.6rem; }
+    }
+
+    /* ── Academic Calendar ── */
+    .cal-disclaimer {
+      background: rgba(217, 119, 6, 0.05);
+      border: 1px solid rgba(217, 119, 6, 0.18);
+      border-left: 3px solid #d97706;
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.65;
+      max-width: 760px;
+    }
+    .cal-disclaimer strong { color: var(--ink); }
+
+    .cal-highlights {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line-soft);
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 2rem 0 2.6rem;
+      box-shadow: 0 14px 36px rgba(42,18,89,0.10);
+    }
+    .cal-highlight { background: var(--white); padding: 1.4rem 1.3rem; }
+    .cal-highlight-date {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--purple);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .cal-highlight-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.45rem;
+    }
+
+    .cal-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin: 0 0 1.4rem;
+    }
+    .cal-legend .cal-tag { font-size: 0.62rem; }
+
+    .cal-months {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    .cal-month {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .cal-month:hover {
+      border-color: var(--purple-light);
+      box-shadow: 0 14px 28px rgba(124,58,237,0.08);
+    }
+    .cal-month h3 {
+      font-size: 1.05rem;
+      color: var(--ink);
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--line-soft);
+      margin-bottom: 0.4rem;
+    }
+    .cal-events { list-style: none; padding: 0; display: flex; flex-direction: column; }
+    .cal-event-row {
+      display: grid;
+      grid-template-columns: 92px 1fr auto;
+      gap: 0.7rem;
+      align-items: center;
+      padding: 0.55rem 0;
+      border-bottom: 1px dashed var(--line-soft);
+    }
+    .cal-event-row:last-child { border-bottom: none; }
+    .cal-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: var(--purple);
+      text-transform: uppercase;
+    }
+    .cal-event-name {
+      color: var(--ink);
+      line-height: 1.4;
+      font-size: 0.93rem;
+    }
+    .cal-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .tag-key      { background: rgba(124,58,237,0.10);  color: var(--purple-strong); }
+    .tag-break    { background: rgba(167, 139, 250, 0.16); color: var(--purple-strong); }
+    .tag-holiday  { background: rgba(217, 119, 6, 0.10); color: #b45309; }
+    .tag-islamic  { background: rgba(16, 122, 95, 0.10); color: #047857; }
+    .tag-staff    { background: rgba(75, 85, 99, 0.10);  color: #4b5563; }
+    .tag-conf     { background: rgba(37, 99, 235, 0.10); color: #1d4ed8; }
+    .tag-halfday  { background: rgba(190, 24, 93, 0.08); color: #be185d; }
+
+    /* ── ParentsWeb: top quick-info card ── */
+    .pw-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line-soft);
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 2rem 0 2.4rem;
+      box-shadow: 0 14px 36px rgba(42,18,89,0.10);
+    }
+    .pw-info-card {
+      background: var(--white);
+      padding: 1.3rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .pw-info-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+    }
+    .pw-info-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
+      word-break: break-word;
+      line-height: 1.25;
+    }
+    .pw-info-value a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--purple-light);
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .pw-info-value a:hover { color: var(--purple); border-bottom-color: var(--purple); }
+    .pw-info-hint { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── ParentsWeb sections ── */
+    .pw-section { margin-top: 2.4rem; }
+    .pw-section > h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .pw-section > p.pw-lead {
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      max-width: 720px;
+      margin-bottom: 1.4rem;
+    }
+
+    /* ── Numbered steps ── */
+    .pw-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      counter-reset: stepc;
+      list-style: none;
+      padding: 0;
+    }
+    .pw-step {
+      position: relative;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.1rem 1.3rem 1.1rem 4.4rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .pw-step:hover {
+      border-color: var(--purple-light);
+      box-shadow: 0 12px 24px rgba(124,58,237,0.08);
+    }
+    .pw-step::before {
+      counter-increment: stepc;
+      content: counter(stepc);
+      position: absolute;
+      left: 1.1rem;
+      top: 1.05rem;
+      width: 2.2rem;
+      height: 2.2rem;
+      background: var(--purple);
+      color: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 6px 14px rgba(124,58,237,0.32);
+    }
+    .pw-step h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.02rem;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .pw-step p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+    .pw-step code, .pw-info-value code, .pw-faq-a code {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9em;
+      background: rgba(124,58,237,0.08);
+      color: var(--purple-strong);
+      padding: 1px 7px;
+      border-radius: 5px;
+    }
+
+    /* ── Feature grid ── */
+    .pw-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.2rem 1.4rem;
+    }
+    .pw-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.93rem;
+      color: var(--ink);
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .pw-feature::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--purple);
+      flex-shrink: 0;
+    }
+
+    /* ── FAQs ── */
+    .pw-faqs { display: flex; flex-direction: column; gap: 0.7rem; }
+    .pw-faq {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--white);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .pw-faq[open] {
+      border-color: var(--purple-light);
+      box-shadow: 0 10px 24px rgba(124,58,237,0.06);
+    }
+    .pw-faq > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .pw-faq > summary::-webkit-details-marker { display: none; }
+    .pw-faq-q {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--ink);
+      flex: 1;
+      line-height: 1.4;
+    }
+    .pw-faq-chev {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--purple);
+      flex-shrink: 0;
+      transition: transform 0.25s ease, background 0.2s;
+    }
+    .pw-faq[open] .pw-faq-chev { transform: rotate(180deg); background: rgba(124,58,237,0.08); }
+    .pw-faq-a {
+      padding: 0 1.2rem 1.2rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+    .pw-faq-a ol, .pw-faq-a ul { padding-left: 1.3rem; margin-top: 0.5rem; }
+    .pw-faq-a li { margin: 0.3rem 0; }
+
+    /* ── Security callout (reuses cal-disclaimer styling) ── */
+    .pw-security {
+      background: rgba(217, 119, 6, 0.05);
+      border: 1px solid rgba(217, 119, 6, 0.18);
+      border-left: 3px solid #d97706;
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.65;
+      max-width: 760px;
+    }
+    .pw-security strong { color: var(--ink); }
+
+    /* ── Launch button (open ParentsWeb in new tab) ── */
+    .pw-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--purple);
+      color: #fff;
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.96rem;
+      text-decoration: none;
+      border: 1.5px solid var(--purple);
+      box-shadow: 0 8px 22px rgba(124,58,237,0.4);
+      transition: all 0.22s;
+      margin-top: 0.4rem;
+    }
+    .pw-launch:hover { background: var(--purple-strong); transform: translateY(-2px); }
+
+    /* ── "Coming soon" callout (Transcript online ordering) ── */
+    .coming-soon {
+      position: relative;
+      background:
+        radial-gradient(ellipse 60% 120% at 100% 0%, rgba(124,58,237,0.12), transparent 65%),
+        var(--lavender);
+      border: 1px solid var(--purple-light);
+      border-radius: 14px;
+      padding: 1.4rem 1.6rem;
+      max-width: 760px;
+      overflow: hidden;
+    }
+    .coming-soon::after {
+      content: "";
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(124,58,237,0.18), transparent 60%);
+      pointer-events: none;
+    }
+    .coming-soon-head {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.7rem;
+      position: relative;
+      z-index: 1;
+    }
+    .coming-soon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--purple);
+      padding: 4px 10px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(124,58,237,0.32);
+    }
+    .coming-soon-tech {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+    }
+    .coming-soon h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+      position: relative;
+      z-index: 1;
+    }
+    .coming-soon p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+    .coming-soon-meta {
+      margin-top: 0.6rem;
+      font-size: 0.86rem;
+      color: var(--muted-dim);
+      font-style: italic;
+    }
+
+    /* ── Uniform Requirements ── */
+    .uniform-deny {
+      background: rgba(220, 38, 38, 0.04);
+      border: 1px solid rgba(220, 38, 38, 0.18);
+      border-left: 3px solid #dc2626;
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      margin-top: 0;
+    }
+    .uniform-deny-head {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.7rem;
+    }
+    .uniform-deny-head h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      color: #991b1b;
+    }
+    .uniform-deny-icon {
+      width: 26px; height: 26px;
+      border-radius: 7px;
+      background: rgba(220, 38, 38, 0.10);
+      color: #dc2626;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .uniform-deny-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.3rem 1rem;
+      padding: 0;
+    }
+    .uniform-deny-list li {
+      color: var(--ink);
+      font-size: 0.92rem;
+      position: relative;
+      padding: 0.3rem 0 0.3rem 1.3rem;
+    }
+    .uniform-deny-list li::before {
+      content: "✕";
+      position: absolute;
+      left: 0;
+      top: 0.25rem;
+      color: #dc2626;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .uniform-groups {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    .uniform-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.4rem 1.5rem 1.3rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .uniform-card:hover {
+      border-color: var(--purple-light);
+      box-shadow: 0 14px 28px rgba(124,58,237,0.08);
+    }
+    .uniform-card-head {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--line-soft);
+      margin-bottom: 1rem;
+    }
+    .uniform-card-head h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .uniform-card-grade {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(124,58,237,0.08);
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    .uniform-items {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .uniform-items > li {
+      position: relative;
+      padding-left: 1.15rem;
+      font-size: 0.94rem;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    .uniform-items > li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.62em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--purple);
+    }
+    .uniform-note {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      line-height: 1.55;
+    }
+    .uniform-note .pill-grade {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple-strong);
+      background: rgba(124,58,237,0.08);
+      padding: 1px 7px;
+      border-radius: 999px;
+      margin-right: 0.3rem;
+    }
+    .shop-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+    .shop-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(124,58,237,0.05);
+      border: 1px solid var(--line);
+      padding: 5px 10px;
+      border-radius: 7px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .shop-link:hover {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+    .shop-link svg { flex-shrink: 0; opacity: 0.65; }
+    .shop-link:hover svg { opacity: 1; }
+
+    @media (max-width: 900px) {
+      .resource-grid { grid-template-columns: 1fr; }
+      .supply-list { grid-template-columns: 1fr; }
+      .page-hero { padding: 48px 0 40px; }
+      .cal-highlights { grid-template-columns: 1fr 1fr; }
+      .cal-months { grid-template-columns: 1fr; }
+      .cal-event-row {
+        grid-template-columns: 80px 1fr;
+        column-gap: 0.6rem;
+      }
+      .cal-event-row .cal-tag {
+        grid-column: 1 / -1;
+        justify-self: start;
+        margin-top: 2px;
+      }
+      .pw-info { grid-template-columns: 1fr; }
+      .pw-features { grid-template-columns: 1fr; }
+      .uniform-groups { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── ANNOUNCEMENT ────────────────────────────── -->
+<div class="announce">
+  <span class="dot"></span>
+  Admissions are open for Pre-K through High School — limited seats per grade.
+  <a href="mailto:contact@racademy.org">Apply today →</a>
+</div>
+
+<!-- ── HEADER ──────────────────────────────────── -->
+<header class="header">
+  <div class="wrap header-inner">
+    <a href="../" class="brand">
+      <div class="brand-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5C2 6.5 5 5 8.5 5S15 6.5 15 6.5"/><path d="M22 6.5S19 5 15.5 5 12 6.5 12 6.5"/><path d="M12 6.5V20"/><path d="M2 6.5V19C2 19 5 17.5 8.5 17.5S15 19 15 19"/><path d="M22 6.5V19S19 17.5 15.5 17.5 12 19 12 19"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">Renaissance Academy</div>
+        <div class="brand-sub">Full-time Islamic School</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-menu" id="primary-nav">
+      <li><a href="../#stand">Our Pillars</a></li>
+      <li><a href="../#journey">Academics</a></li>
+      <li><a href="../#why">Why Us</a></li>
+      <li><a href="./">Parent Resources</a></li>
+      <li><a href="mailto:contact@racademy.org" class="nav-apply">Apply for Admission</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ── PAGE HERO ───────────────────────────────── -->
+<section class="page-hero">
+  <div class="arch-bg">
+    <svg width="620" height="640" viewBox="0 0 620 640" fill="none" style="right:-60px; top:-40px;">
+      <g stroke="#7c3aed" stroke-width="1.4" opacity="0.16">
+        <path d="M110 600 L110 300 Q110 80 310 80 Q510 80 310 80 Q510 80 510 300 L510 600"/>
+        <path d="M170 600 L170 320 Q170 150 310 150 Q450 150 450 320 L450 600"/>
+        <path d="M230 600 L230 350 Q230 220 310 220 Q390 220 390 350 L390 600"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <span class="mono">For Renaissance Families</span>
+    <h1>Parent <span class="accent">Resources</span>.</h1>
+    <p class="lead">
+      The 2025–2026 student supply lists for Pre-K through High School, organized by grade and subject — plus quick ways to reach our team.
+    </p>
+  </div>
+</section>
+
+<!-- ── QUICK RESOURCES ─────────────────────────── -->
+<section class="pad">
+  <div class="wrap">
+    <span class="mono sec-label">Quick Links</span>
+    <h2 class="sec-title">Start here.</h2>
+    <p class="sec-lead">The most-asked-for items for families this year.</p>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h3>2025–2026 Supply Lists</h3>
+        <p>Required supplies for Pre-K through High School, organized by grade and subject.</p>
+        <a href="#supply-lists">Jump to lists →</a>
+      </div>
+      <div class="resource-card">
+        <h3>Contact the Office</h3>
+        <p>Questions about your child's grade, classroom, or required materials? Our team can help.</p>
+        <a href="mailto:contact@racademy.org">Email us →</a>
+      </div>
+      <div class="resource-card">
+        <h3>Call the School</h3>
+        <p>Speak with our office directly — Monday through Friday during school hours.</p>
+        <a href="tel:5122522277">512-252-2277 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SUPPLY LISTS ────────────────────────────── -->
+<section class="band-panel pad" id="supply-lists">
+  <div class="wrap">
+    <span class="mono sec-label">2025–2026 School Year</span>
+    <h2 class="sec-title">Student supply lists.</h2>
+    <p class="sec-lead">Find your child's grade below and tap to view the required supplies. Please label all items with your child's name using a permanent marker.</p>
+
+    <div class="supply-note">
+        <strong>A few notes for everyone:</strong> Please send only what is on your child's list — extra items take up classroom space. No rolling backpacks at most grade levels (see specific lists). Items marked with a clear front pocket should not be paper folders. If you have questions about a specific item, the office is happy to help.
+        <br /><br />
+        <strong>Tip:</strong> Tap the checkboxes to mark items off as you shop — your progress is saved on this device.
+      </div>
+
+      <div class="grades">
+
+      <!-- PRE-K -->
+      <details class="grade">
+        <summary>
+          <div class="grade-title">
+            <span class="grade-tag">Ages 2–4</span>
+            <span class="grade-name">Pre-K (PK2, PK3, PK4)</span>
+          </div>
+          <span class="grade-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="grade-body">
+          <div class="subject">
+            <h4>For PK2 Only</h4>
+            <ul class="supply-list">
+              <li>Two weeks' supply of diapers and baby wipes (labeled)</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>For PK2, PK3, and PK4</h4>
+            <p class="subject-note">A 3×5 picture of your child is needed for the first day of school — this goes in the classroom emergency book.</p>
+            <ul class="supply-list">
+              <li>1 backpack (labeled)</li>
+              <li>1 lunch box (labeled)</li>
+              <li>1 small non-spill water bottle (labeled)</li>
+              <li>1 nap mat (labeled) — with cover if bringing vinyl mat</li>
+              <li>2 sets of clothes (labeled), including undergarments, socks, and shoes</li>
+              <li>1 small blanket for nap (labeled) — no pillows please</li>
+              <li>4 boxes of tissue</li>
+              <li>4 packs of baby wipes</li>
+              <li>4 packs of flushable wipes</li>
+              <li>2 containers of Clorox wipes</li>
+              <li>2 boxes of gallon-size Ziploc</li>
+              <li>1 box of small Ziploc</li>
+              <li>2 rolls of paper towels</li>
+              <li>1 plastic folder with two pockets inside</li>
+              <li>1 box of 36 Crayola crayons</li>
+              <li>Play-Doh — 12 containers of assorted colors</li>
+              <li>3 glue sticks</li>
+              <li>2 packs of colored construction paper</li>
+              <li>5 packs of white construction paper</li>
+              <li>1 pair of blunt children's scissors</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- KINDERGARTEN -->
+      <details class="grade">
+        <summary>
+          <div class="grade-title">
+            <span class="grade-tag">Grade K</span>
+            <span class="grade-name">Kindergarten</span>
+          </div>
+          <span class="grade-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="grade-body">
+          <div class="subject">
+            <h4>Homeroom</h4>
+            <ul class="supply-list">
+              <li>Seat Sack — BLACK only please (standard 14")</li>
+              <li>3 boxes of tissues</li>
+              <li>4 rolls of paper towels</li>
+              <li>3 boxes of 16-pack Crayola Crayons</li>
+              <li>10 Expo dry-erase markers</li>
+              <li>16 glue sticks</li>
+              <li>2 packages of white erasers (8 total)</li>
+              <li>1 pair of blunt, child-size scissors</li>
+              <li>1 red plastic pocket folder with brads (no paper folders)</li>
+              <li>3 Ticonderoga 12-pack yellow pencils</li>
+              <li>2 pencil pouches</li>
+              <li>4 Clorox wipes</li>
+              <li>Extra change of clothes (must bring, to stay at school)</li>
+              <li>Lunch box</li>
+              <li>1 reusable water bottle with straw / flip / sport lid (no screw tops)</li>
+              <li>Backpack — no rolling backpacks</li>
+              <li>Boys: 1 quart-sized Ziploc bags</li>
+              <li>Girls: 1 gallon-sized Ziploc bags</li>
+              <li>1 four-pack of Play-Doh</li>
+              <li>1 package of white cardstock paper</li>
+              <li>1 Composition Primary Journal (top half blank for picture)</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Arabic</h4>
+            <p class="subject-note">Label with student's name.</p>
+            <ul class="supply-list">
+              <li>1 yellow plastic folder with brads, pockets, and clear front pocket (no paper folders)</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Quran &amp; Islamic Studies</h4>
+            <p class="subject-note">Label with student's name.</p>
+            <ul class="supply-list">
+              <li>2 green plastic folders with brads, pockets, and clear front pocket (no paper folders)</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- 1ST GRADE -->
+      <details class="grade">
+        <summary>
+          <div class="grade-title">
+            <span class="grade-tag">Grade 1</span>
+            <span class="grade-name">1st Grade</span>
+          </div>
+          <span class="grade-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="grade-body">
+          <div class="subject">
+            <h4>Homeroom</h4>
+            <ul class="supply-list">
+              <li>3 chisel-tip highlighters</li>
+              <li>2 wide-ruled composition books</li>
+              <li>2 composition notebooks with top half blank for pictures</li>
+              <li>1 red plastic folder with pockets and brads (no paper folders)</li>
+              <li>3 plastic folders — orange, blue, purple — with pockets and brads</li>
+              <li>1 pack of colored pencils</li>
+              <li>2 packs of color markers</li>
+              <li>2 packs of white erasers</li>
+              <li>12 glue sticks</li>
+              <li>2 bottles of glue</li>
+              <li>2 boxes of 24-pack Crayola Crayons (no more than 24)</li>
+              <li>1 package of Play-Doh (4-pack only)</li>
+              <li>6 Ticonderoga 12-pack pencils</li>
+              <li>1 pair of blunt, child-size scissors</li>
+              <li>6 Expo dry-erase markers</li>
+              <li>1 whiteboard (no oversized)</li>
+              <li>1 box of tissues</li>
+              <li>1 cylinder of disinfecting wipes</li>
+              <li>1 box of sandwich-sized Ziploc bags</li>
+              <li>1 box of gallon-sized Ziploc bags</li>
+              <li>1 pencil box</li>
+              <li>1 pack of plain cardstock</li>
+              <li>1 pack of colored cardstock</li>
+              <li>1 pack of 100 index cards</li>
+              <li>1 index card ring</li>
+              <li>1 ruler</li>
+              <li>Lunch box and water bottle</li>
+              <li>Backpack (no rolling backpacks)</li>
+              <li>Seat Sack — RED or BLUE only</li>
+            </ul>
+            <p class="subject-note">Please do not purchase anything that is not on this list. Write the student's name on items with a permanent marker.</p>
+          </div>
+          <div class="subject">
+            <h4>Arabic &amp; Islamic Studies</h4>
+            <p class="subject-note">Label with student's name.</p>
+            <ul class="supply-list">
+              <li>1 green plastic folder with brads, pockets, and clear front pocket (no paper folders)</li>
+              <li>1 yellow plastic folder with brads, pockets, and clear front pocket (no paper folders)</li>
+              <li>1 yellow wide-ruled composition notebook (no side spiral)</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- 2ND GRADE -->
+      <details class="grade">
+        <summary>
+          <div class="grade-title">
+            <span class="grade-tag">Grade 2</span>
+            <span class="grade-name">2nd Grade</span>
+          </div>
+          <span class="grade-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="grade-body">
+          <div class="subject">
+            <h4>Homeroom</h4>
+            <ul class="supply-list">
+              <li>2 wide-ruled composition books</li>
+              <li>1 pack of white cardstock</li>
+              <li>1 pack of highlighters in different colors (total of 4)</li>
+              <li>1 small dry-erase whiteboard with eraser (no oversized)</li>
+              <li>6–8 black Expo dry-erase markers</li>
+              <li>2 red plastic folders with pockets and brads (no paper folders)</li>
+              <li>1 blue plastic folder with pockets and brads (no paper folders)</li>
+              <li>1 black plastic folder with pockets and brads (no paper folders)</li>
+              <li>8 glue sticks</li>
+              <li>1 set of Crayola washable paint</li>
+              <li>3 small Scotch tape with dispenser</li>
+              <li>4 12-pack #2 Ticonderoga pencils</li>
+              <li>6 pack of erasers (pink or white)</li>
+              <li>1 pack of colored pencils</li>
+              <li>1 pack of 24 crayons</li>
+              <li>4-pack Play-Doh</li>
+              <li>1 handheld pencil sharpener</li>
+              <li>1 30 cm ruler (with inches and cm)</li>
+              <li>1 pair of child-safe scissors</li>
+              <li>1 pencil box</li>
+              <li>2 rolls of paper towels</li>
+              <li>3 boxes of tissue</li>
+              <li>2 cylinders of disinfecting wipes</li>
+              <li>1 hand sanitizer</li>
+              <li>1 lunch box and water bottle</li>
+              <li>1 backpack / roller backpack</li>
+              <li>Boys: 1 pack of quart-size Ziploc</li>
+              <li>Girls: 1 pack of gallon-size Ziploc</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Islamic Studies / Quran</h4>
+            <ul class="supply-list">
+              <li>1 green plastic folder with brads, pockets, and clear front pocket (no paper folders)</li>
+              <li>1-inch white binder with 3 rings</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Arabic</h4>
+            <ul class="supply-list">
+              <li>1 yellow wide-ruled composition notebook (no side spiral)</li>
+              <li>1 yellow plastic folder with pockets and brads</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3RD GRADE -->
+      <details class="grade">
+        <summary>
+          <div class="grade-title">
+            <span class="grade-tag">Grade 3</span>
+            <span class="grade-name">3rd Grade</span>
+          </div>
+          <span class="grade-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="grade-body">
+          <div class="subject">
+            <h4>Homeroom</h4>
+            <ul class="supply-list">
+              <li>3 wide-ruled composition notebooks (no spirals)</li>
+              <li>1 3-ring binder with clear plastic overlay (1"–1.5" rings)</li>
+              <li>1 set of 8-tab numbered dividers for binder</li>
+              <li>1 pack of wide-ruled filler paper with reinforced holes</li>
+              <li>1 blue plastic folder with pockets and prongs</li>
+              <li>1 black plastic folder with pockets and prongs</li>
+              <li>1 red plastic folder with pockets and prongs</li>
+              <li>4 12-pack #2 pencils</li>
+              <li>1 pack of colored pencils (12–24 ct)</li>
+              <li>1 handheld pencil sharpener</li>
+              <li>3 erasers (approximately 2" × 1")</li>
+              <li>4 highlighters (any color)</li>
+              <li>6 glue sticks</li>
+              <li>1 pair of kid scissors (5" long)</li>
+              <li>1 pack of sticky notes</li>
+              <li>1 school supplies box or pencil pouch (8"–9" long)</li>
+              <li>1 standard-length ruler with 30 cm &amp; 12 in (no metal edge)</li>
+              <li>1 pack of colored construction paper (no cardstock)</li>
+              <li>1 reusable water bottle with straw / flip / sport lid</li>
+              <li>1 lunchbox</li>
+              <li>1 backpack (no rolling backpacks)</li>
+              <li>1 container of disinfecting wipes for desks</li>
+              <li>1 paper towel</li>
+              <li>2 boxes of tissues</li>
+              <li>Boys: 1 small box of quart-size zipper/slider bags</li>
+              <li>Boys: 1 container of baby wipes for hands &amp; face</li>
+              <li>Girls: 1 small box of gallon-size zipper/slider bags</li>
+              <li>Girls: 1 bottle of hand sanitizer (8 oz)</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Arabic</h4>
+            <ul class="supply-list">
+              <li>1 wide-ruled composition notebook (no side spiral)</li>
+              <li>1 yellow plastic folder with pockets and brads</li>
+              <li>1 small dry-erase whiteboard (last year's is fine)</li>
+              <li>1 highlighter (any color / kind)</li>
+              <li>1 dry-erase marker to keep in the student's pencil box</li>
+              <li>1 pack of index cards</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Islamic Studies / Quran</h4>
+            <ul class="supply-list">
+              <li>2 green plastic folders with brads, pockets, and clear front pocket (no paper folders)</li>
+              <li>2 packs (100 count) index cards — one lined, one blank</li>
+              <li>1 wide-ruled composition book</li>
+              <li>Headphones labeled in a Ziploc bag</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- 4TH GRADE -->
+      <details class="grade">
+        <summary>
+          <div class="grade-title">
+            <span class="grade-tag">Grade 4</span>
+            <span class="grade-name">4th Grade</span>
+          </div>
+          <span class="grade-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="grade-body">
+          <div class="subject">
+            <h4>Homeroom</h4>
+            <ul class="supply-list">
+              <li>1 pack of lined writing paper</li>
+              <li>2 composition notebooks (Science &amp; Social Studies)</li>
+              <li>2" binder with pockets</li>
+              <li>1 pack of dividers</li>
+              <li>1 yellow homework folder with pockets and prongs</li>
+              <li>4-pack of glue sticks</li>
+              <li>36 No. 2 pencils</li>
+              <li>1 pack of colored pencils</li>
+              <li>4-pack of white erasers</li>
+              <li>1 pair of scissors</li>
+              <li>2 boxes of tissues</li>
+              <li>2 rolls of paper towels</li>
+              <li>1 bottle of hand sanitizer</li>
+              <li>1 classic backpack (no wheels)</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Arabic</h4>
+            <ul class="supply-list">
+              <li>1 composition journal</li>
+              <li>One 1.5-inch binder</li>
+              <li>1 box of tissues</li>
+              <li>1 set of dry-erase markers</li>
+              <li>1 small whiteboard</li>
+              <li>1 pack of flash cards</li>
+              <li>1 pack of loose lined paper</li>
+              <li>1 pack of sheet protectors</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Islamic Studies / Quran</h4>
+            <ul class="supply-list">
+              <li>1 green plastic folder with pockets (not a paper folder)</li>
+              <li>1-inch binder</li>
+              <li>1 wide-ruled composition book</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- 5TH GRADE -->
+      <details class="grade">
+        <summary>
+          <div class="grade-title">
+            <span class="grade-tag">Grade 5</span>
+            <span class="grade-name">5th Grade</span>
+          </div>
+          <span class="grade-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="grade-body">
+          <div class="subject">
+            <h4>Homeroom</h4>
+            <ul class="supply-list">
+              <li>Pencil box / pouch</li>
+              <li>4 composition books (one each for Math, ELA, Science, Social Studies)</li>
+              <li>4 plastic folders with pockets (red, yellow, blue, green)</li>
+              <li>2 rolls of Scotch tape</li>
+              <li>1 small bottle of Elmer's liquid glue</li>
+              <li>2-pack of glue sticks</li>
+              <li>1 small handheld whiteboard</li>
+              <li>4 dry-erase markers (replace through the year as needed)</li>
+              <li>2 highlighters</li>
+              <li>36 Ticonderoga pencils</li>
+              <li>1 pack of colored pencils (minimum 24-pack)</li>
+              <li>2 red pens</li>
+              <li>1 individual pencil sharpener</li>
+              <li>4-pack of white erasers</li>
+              <li>1 ruler</li>
+              <li>1 pair of scissors</li>
+              <li>2 boxes of tissues</li>
+              <li>2 rolls of paper towels</li>
+              <li>2 packs of baby wipes</li>
+              <li>2 packs of disinfectant wipes (preferably Lysol)</li>
+              <li>1 Febreze brand air freshener</li>
+              <li>Lunchbox and reusable water bottle</li>
+              <li>Backpack</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Arabic</h4>
+            <ul class="supply-list">
+              <li>1 composition journal</li>
+              <li>Folder (for handouts)</li>
+              <li>1 box of tissues</li>
+              <li>1 box of dry-erase markers</li>
+              <li>1 small whiteboard</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Islamic Studies / Quran</h4>
+            <ul class="supply-list">
+              <li>2 green plastic folders with pockets (not paper folders)</li>
+              <li>2 packs (100 count) index cards — one lined, one blank</li>
+              <li>1 wide-ruled composition book</li>
+              <li>1 set of personal headphones</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- MIDDLE SCHOOL -->
+      <details class="grade">
+        <summary>
+          <div class="grade-title">
+            <span class="grade-tag">Grades 6–8</span>
+            <span class="grade-name">Middle School</span>
+          </div>
+          <span class="grade-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="grade-body">
+          <div class="subject">
+            <h4>For All Classes</h4>
+            <ul class="supply-list">
+              <li>Black and blue pens</li>
+              <li>Colored pencils</li>
+              <li>Ruler</li>
+              <li>Scissors</li>
+              <li>2 pencils</li>
+              <li>Wide or college-ruled loose-leaf paper</li>
+              <li>Highlighters (at least three colors)</li>
+              <li>Eraser</li>
+              <li>2 glue sticks</li>
+              <li>1 pack of index cards</li>
+              <li>Small daily planner to write assignments in all classes</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>6th Grade Social Studies</h4>
+            <ul class="supply-list">
+              <li>1 composition notebook (wide-ruled for larger handwriting; college-ruled for smaller)</li>
+              <li>1 one-inch binder</li>
+              <li>8-tab dividers</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>English</h4>
+            <ul class="supply-list">
+              <li>1 composition notebook (wide-ruled for larger handwriting; college-ruled for smaller)</li>
+              <li>1 one-inch binder</li>
+              <li>8-tab dividers</li>
+              <li>1 box of tissues</li>
+              <li>1 Clorox wipes container</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Math</h4>
+            <ul class="supply-list">
+              <li>1 ruled solid composition notebook</li>
+              <li>2 three-ring binders (2") for handouts</li>
+              <li>Colored pack of 8 binder dividers</li>
+              <li>1 whiteboard</li>
+              <li>3 tissue boxes</li>
+              <li>2 packs of disinfectant wipes (preferably Lysol)</li>
+              <li>1 air freshener</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Science</h4>
+            <ul class="supply-list">
+              <li>1 composition notebook (NO spiral notebooks)</li>
+              <li>2 three-ring binders for handouts</li>
+              <li>1 Clorox wipe container</li>
+              <li>1 tissue box</li>
+              <li>1 dry-erase marker</li>
+              <li>Four-function / graphing calculator (8th, 9th, 10th/11th grades only)</li>
+              <li>1 glue stick / bottle (student's choice)</li>
+              <li>Hand sanitizer</li>
+              <li>1 roll of paper towels</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Arabic</h4>
+            <ul class="supply-list">
+              <li>1 composition journal</li>
+              <li>Folder (for handouts)</li>
+              <li>1 box of tissues</li>
+              <li>1 box of dry-erase markers</li>
+              <li>1 small whiteboard</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Islamic Studies</h4>
+            <ul class="supply-list">
+              <li>1 three-subject wide-ruled spiral notebook (for Quran, Tajweed, and Islamic Studies)</li>
+              <li>1 folder for handouts</li>
+              <li>Sticky notes (any color / size)</li>
+              <li>1 tissue box</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Quran</h4>
+            <ul class="supply-list">
+              <li>1 set of headphones labeled with the student's name</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Islamic Studies &amp; Quran (Grade 6)</h4>
+            <ul class="supply-list">
+              <li>1 green plastic folder with pockets (not a paper folder)</li>
+              <li>2 packs (100 count) index cards — one lined, one blank</li>
+              <li>1 three-subject wide-ruled spiral notebook</li>
+              <li>Headphones</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Computer Applications</h4>
+            <ul class="supply-list">
+              <li>1 folder for handouts</li>
+              <li>1 composition notebook</li>
+              <li>1 tissue box</li>
+              <li>1 Clorox wipes container or Weiman electronic disinfecting wipes</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <!-- HIGH SCHOOL -->
+      <details class="grade">
+        <summary>
+          <div class="grade-title">
+            <span class="grade-tag">Grades 9–12</span>
+            <span class="grade-name">High School</span>
+          </div>
+          <span class="grade-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="grade-body">
+          <div class="subject">
+            <h4>For All Classes</h4>
+            <ul class="supply-list">
+              <li>Black and blue pens</li>
+              <li>Colored pencils</li>
+              <li>Ruler</li>
+              <li>Scissors</li>
+              <li>2 pencils</li>
+              <li>Glue stick</li>
+              <li>Wide or college-ruled loose-leaf paper</li>
+              <li>Highlighters (at least two colors)</li>
+              <li>Eraser</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Social Studies — 9th Grade AP Human Geography</h4>
+            <ul class="supply-list">
+              <li>1 spiral / bound notebook</li>
+              <li>1.5-inch 3-ring binder</li>
+              <li>1 three-hole folder with pockets for the binder</li>
+              <li>Highly recommended: APHG exam study guide (AMSCO or Kaplan)</li>
+              <li>7 section dividers with pockets (labels: Important Info., Reading Notes, Key Issues, Assignments / Quizzes, FRQ's, Article Summary)</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Social Studies — 10th &amp; 11th Grade AP US History</h4>
+            <ul class="supply-list">
+              <li>1 spiral / bound notebook</li>
+              <li>1 three-hole folder with pockets for the binder</li>
+              <li>2 three-ring binders</li>
+              <li>1 two-inch binder</li>
+              <li>1 one-inch binder</li>
+              <li>9-tab dividers (4 for each binder)</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>English</h4>
+            <ul class="supply-list">
+              <li>1 composition notebook (no glitter)</li>
+              <li>1 notebook of any type (composition or spiral bound)</li>
+              <li>1 tissue box</li>
+              <li>1 Clorox wipe container</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Math</h4>
+            <ul class="supply-list">
+              <li>1 pack graph-ruled 5×5, 80 sheets, 8" × 10.5"</li>
+              <li>2" binder</li>
+              <li>Geometry tool box (grade 9 only)</li>
+              <li>1 pack of index cards</li>
+              <li>Sticky notes</li>
+              <li>Graphing calculator TI-84 Plus</li>
+              <li>3 tissue boxes</li>
+              <li>1 Clorox wipe container</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Science</h4>
+            <ul class="supply-list">
+              <li>Composition notebook (NO spiral notebooks)</li>
+              <li>1 folder / binder for handouts</li>
+              <li>1 Clorox wipe container</li>
+              <li>1 tissue box</li>
+              <li>1 dry-erase marker</li>
+              <li>Four-function / graphing calculator (8th, 9th, 10th/11th grades only)</li>
+              <li>1 glue stick / bottle (student's choice)</li>
+              <li>Hand sanitizer</li>
+              <li>1 roll of paper towels</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Arabic</h4>
+            <ul class="supply-list">
+              <li>1 composition journal</li>
+              <li>Folder (for handouts)</li>
+              <li>1 box of tissues</li>
+              <li>1 box of dry-erase markers</li>
+              <li>1 small whiteboard</li>
+            </ul>
+          </div>
+          <div class="subject">
+            <h4>Art of Recitation I</h4>
+            <ul class="supply-list">
+              <li>1 green plastic folder with pockets (not a paper folder)</li>
+              <li>2 packs (100 count) index cards — one lined, one blank</li>
+              <li>1 three-subject wide-ruled spiral notebook</li>
+              <li>Headphones</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      </div>
+
+  </div>
+</section>
+
+<!-- ── FINAL CTA ───────────────────────────────── -->
+<section class="band-deep pad final-cta">
+  <div class="wrap">
+    <h2 class="sec-title" style="color:var(--on-dark);">Questions? We're here to help.</h2>
+    <p class="sec-lead" style="color:var(--on-dark-mut);">If anything on the supply list is unclear or you need help sourcing an item, please reach out — we want every family ready for day one.</p>
+    <div class="final-actions">
+      <a href="mailto:contact@racademy.org" class="btn-primary">
+        Email the Office
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:5122522277" class="btn-outline" style="color:var(--on-dark); border-color: rgba(255,255,255,0.25);">📞 512-252-2277</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────── -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="../" class="brand">
+          <div class="brand-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5C2 6.5 5 5 8.5 5S15 6.5 15 6.5"/><path d="M22 6.5S19 5 15.5 5 12 6.5 12 6.5"/><path d="M12 6.5V20"/><path d="M2 6.5V19C2 19 5 17.5 8.5 17.5S15 19 15 19"/><path d="M22 6.5V19S19 17.5 15.5 17.5 12 19 12 19"/></svg>
+          </div>
+          <div>
+            <div class="brand-name">Renaissance Academy</div>
+            <div class="brand-sub">Academics · Character · Leadership</div>
+          </div>
+        </a>
+        <p class="footer-desc">A full-time Islamic school serving the Greater Austin community since 2007 — Pre-K through College-Prep High School, accredited with distinction by Cognia, SACS &amp; CASI.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Academics</h4>
+        <ul>
+          <li><a href="../#journey">Pre-K</a></li>
+          <li><a href="../#journey">Elementary School</a></li>
+          <li><a href="../#journey">Middle School</a></li>
+          <li><a href="../#journey">High School</a></li>
+          <li><a href="../#journey">AP Program</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Families</h4>
+        <ul>
+          <li><a href="./">Parent Resources</a></li>
+          <li><a href="#supplies">Supply Lists</a></li>
+          <li><a href="mailto:contact@racademy.org">Admissions</a></li>
+          <li><a href="../#stand">Our Pillars</a></li>
+          <li><a href="mailto:contact@racademy.org">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="#">North Austin, Texas</a></li>
+          <li><a href="tel:5122522277">512-252-2277</a></li>
+          <li><a href="mailto:contact@racademy.org">contact@racademy.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Renaissance Academy. All rights reserved.</span>
+      <span class="mono" style="color:var(--on-dark-dim);">Bismillah · Since 2007</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── Supply-list checkboxes (localStorage-persisted) ─── */
+(function () {
+  var STORAGE_PREFIX = 'racademy-supplies::v1::';
+
+  function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function safeRemove(k) { try { localStorage.removeItem(k); } catch (e) {} }
+
+  function normalize(s) { return (s || '').replace(/\s+/g, ' ').trim(); }
+
+  document.querySelectorAll('.grade').forEach(function (grade) {
+    var gradeName = normalize((grade.querySelector('.grade-name') || {}).textContent);
+    var allCheckboxes = [];
+
+    grade.querySelectorAll('.subject').forEach(function (subject) {
+      var subjectName = normalize((subject.querySelector('h4') || {}).textContent);
+
+      subject.querySelectorAll('.supply-list > li').forEach(function (li) {
+        if (li.classList.contains('note')) return;
+
+        var itemText = normalize(li.textContent);
+        var key = STORAGE_PREFIX + gradeName + '::' + subjectName + '::' + itemText;
+
+        var label = document.createElement('label');
+        label.className = 'supply-label';
+
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'supply-check';
+        checkbox.dataset.key = key;
+
+        var textSpan = document.createElement('span');
+        textSpan.className = 'supply-text';
+        while (li.firstChild) textSpan.appendChild(li.firstChild);
+
+        label.appendChild(checkbox);
+        label.appendChild(textSpan);
+        li.appendChild(label);
+        li.classList.add('has-check');
+
+        if (safeGet(key) === '1') {
+          checkbox.checked = true;
+          li.classList.add('is-checked');
+        }
+
+        checkbox.addEventListener('change', function () {
+          if (checkbox.checked) {
+            safeSet(key, '1');
+            li.classList.add('is-checked');
+          } else {
+            safeRemove(key);
+            li.classList.remove('is-checked');
+          }
+          updateProgress();
+        });
+
+        allCheckboxes.push(checkbox);
+      });
+    });
+
+    var title = grade.querySelector('.grade-title');
+    var progress = document.createElement('span');
+    progress.className = 'grade-progress';
+    title.appendChild(progress);
+
+    var body = grade.querySelector('.grade-body');
+    var actions = document.createElement('div');
+    actions.className = 'grade-actions';
+    var clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'grade-clear';
+    clearBtn.textContent = 'Clear all in this list';
+    clearBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      allCheckboxes.forEach(function (cb) {
+        if (cb.checked) {
+          cb.checked = false;
+          safeRemove(cb.dataset.key);
+          var parentLi = cb.closest('li');
+          if (parentLi) parentLi.classList.remove('is-checked');
+        }
+      });
+      updateProgress();
+    });
+    actions.appendChild(clearBtn);
+    body.appendChild(actions);
+
+    function updateProgress() {
+      var total = allCheckboxes.length;
+      var checked = 0;
+      for (var i = 0; i < total; i++) if (allCheckboxes[i].checked) checked++;
+      progress.textContent = checked + ' / ' + total;
+      progress.classList.toggle('is-complete', total > 0 && checked === total);
+      clearBtn.disabled = checked === 0;
+    }
+    updateProgress();
+  });
+})();
+</script>
+
+</body>
+</html>
