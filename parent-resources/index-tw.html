@@ -970,6 +970,219 @@
       .pw-features { grid-template-columns: 1fr; }
       .uniform-groups { grid-template-columns: 1fr; }
     }
+
+    /* ── Print buttons (on-screen) ── */
+    .print-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+      max-width: 760px;
+    }
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(124,58,237,0.06);
+      border: 1px solid var(--purple-light);
+      border-radius: 8px;
+      padding: 9px 14px;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
+    }
+    .btn-print:hover {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+    .btn-print svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    .grade-print {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: transparent;
+      border: 1px solid var(--purple-light);
+      border-radius: 7px;
+      padding: 6px 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .grade-print:hover {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+    .grade-print svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .grade-actions { gap: 0.5rem; flex-wrap: wrap; }
+
+    /* ── Print stylesheet ── */
+    @media print {
+      @page { margin: 0.55in; }
+
+      .announce, .header, .page-hero, .final-cta, footer,
+      .nav-toggle, .nav-menu,
+      .print-toolbar, .grade-actions, .grade-progress,
+      .grade-chev, .arch-bg, .supply-note { display: none !important; }
+
+      body > section:not(#supply-lists) { display: none !important; }
+
+      body { background: #fff !important; color: #111 !important; }
+      .band-panel, #supply-lists { background: #fff !important; padding: 0 !important; }
+      .wrap { max-width: 100% !important; padding: 0 !important; }
+
+      #supply-lists .sec-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 8pt;
+        color: #555 !important;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 2pt;
+      }
+      #supply-lists .sec-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 18pt;
+        color: #111 !important;
+        margin: 0 0 4pt;
+        letter-spacing: -0.01em;
+      }
+      #supply-lists .sec-lead {
+        font-size: 9.5pt;
+        color: #333 !important;
+        line-height: 1.45;
+        margin: 0 0 12pt;
+        max-width: 100%;
+      }
+      .grades { margin-top: 8pt; gap: 0; display: block; }
+
+      details.grade {
+        border: 1px solid #999 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        background: #fff !important;
+        margin: 0 0 10pt;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      details.grade > summary {
+        padding: 6pt 8pt !important;
+        background: #f3f0fa !important;
+        list-style: none;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        pointer-events: none;
+      }
+      details.grade > .grade-body {
+        display: block !important;
+        border-top: 1px solid #ccc !important;
+        padding: 6pt 8pt 8pt !important;
+      }
+      .grade-title { gap: 0.4rem !important; flex-wrap: nowrap; align-items: center; }
+      .grade-tag {
+        background: transparent !important;
+        color: #444 !important;
+        border: 1px solid #888;
+        padding: 1pt 5pt;
+        font-size: 6.5pt;
+        letter-spacing: 0.12em;
+      }
+      .grade-name {
+        font-size: 13pt !important;
+        color: #111 !important;
+        letter-spacing: 0;
+      }
+
+      .subject + .subject { margin-top: 6pt; }
+      .grade-body > .subject:first-child { margin-top: 0; }
+      .subject h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 7.5pt;
+        color: #444 !important;
+        margin: 0 0 3pt;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .subject .subject-note {
+        font-size: 8pt;
+        color: #333 !important;
+        font-style: italic;
+        margin: -1pt 0 3pt;
+      }
+
+      .supply-list {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1pt 18pt !important;
+        margin: 0;
+      }
+      .supply-list li {
+        font-size: 9pt !important;
+        color: #111 !important;
+        line-height: 1.35;
+        padding: 0 !important;
+        page-break-inside: avoid;
+      }
+      .supply-list li::before { display: none !important; }
+      .supply-list li em { color: #555 !important; font-size: 7.5pt; }
+      .supply-list li.note { color: #555 !important; }
+
+      .supply-label { gap: 5pt; align-items: flex-start; }
+      .supply-text { flex: 1; }
+      .supply-check {
+        appearance: none !important;
+        -webkit-appearance: none !important;
+        width: 9pt !important;
+        height: 9pt !important;
+        border: 1px solid #111 !important;
+        border-radius: 0 !important;
+        background: #fff !important;
+        margin-top: 2pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .supply-check:checked { background: #fff !important; border-color: #111 !important; }
+      .supply-check:checked::after {
+        content: "" !important;
+        position: absolute !important;
+        left: 1.5pt !important; top: -0.5pt !important;
+        width: 3.5pt !important; height: 7pt !important;
+        border: solid #111 !important;
+        border-width: 0 1.5pt 1.5pt 0 !important;
+        transform: rotate(45deg) !important;
+      }
+      .supply-list li.has-check { padding-left: 0 !important; }
+      .supply-list li.is-checked .supply-text {
+        color: #111 !important;
+        text-decoration: none !important;
+      }
+
+      /* Single-grade print: hide every other grade */
+      body.printing-single .grade:not(.print-target) { display: none !important; }
+
+      /* Printout footer line */
+      #supply-lists::after {
+        content: "Renaissance Academy  ·  contact@racademy.org  ·  512-252-2277  ·  racademy.org/parent-resources";
+        display: block;
+        font-family: 'Space Mono', monospace;
+        font-size: 7.5pt;
+        color: #666 !important;
+        text-align: center;
+        margin-top: 10pt;
+        border-top: 1px solid #ccc;
+        padding-top: 6pt;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1062,7 +1275,14 @@
     <div class="supply-note">
         <strong>A few notes for everyone:</strong> Please send only what is on your child's list — extra items take up classroom space. No rolling backpacks at most grade levels (see specific lists). Items marked with a clear front pocket should not be paper folders. If you have questions about a specific item, the office is happy to help.
         <br /><br />
-        <strong>Tip:</strong> Tap the checkboxes to mark items off as you shop — your progress is saved on this device.
+        <strong>Tip:</strong> Tap the checkboxes to mark items off as you shop — your progress is saved on this device. Want a paper copy? Use the print buttons below or on any grade.
+      </div>
+
+      <div class="print-toolbar">
+        <button type="button" class="btn-print" id="print-all-supplies">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print all supply lists
+        </button>
       </div>
 
       <div class="grades">
@@ -1781,6 +2001,45 @@
 
   function normalize(s) { return (s || '').replace(/\s+/g, ' ').trim(); }
 
+  /* ─── Printing helpers ─── */
+  var savedOpenStates = null;
+  function openAllGrades() {
+    var grades = document.querySelectorAll('details.grade');
+    savedOpenStates = [];
+    grades.forEach(function (d) {
+      savedOpenStates.push(d.open);
+      d.open = true;
+    });
+  }
+  function restoreGradeStates() {
+    if (!savedOpenStates) return;
+    document.querySelectorAll('details.grade').forEach(function (d, i) {
+      d.open = savedOpenStates[i];
+    });
+    savedOpenStates = null;
+  }
+  function printAll() {
+    openAllGrades();
+    document.body.classList.add('printing', 'printing-all');
+    window.print();
+  }
+  function printGrade(grade) {
+    openAllGrades();
+    document.querySelectorAll('.grade.print-target').forEach(function (g) { g.classList.remove('print-target'); });
+    grade.classList.add('print-target');
+    document.body.classList.add('printing', 'printing-single');
+    window.print();
+  }
+  function cleanupPrint() {
+    document.body.classList.remove('printing', 'printing-all', 'printing-single');
+    document.querySelectorAll('.grade.print-target').forEach(function (g) { g.classList.remove('print-target'); });
+    restoreGradeStates();
+  }
+  window.addEventListener('afterprint', cleanupPrint);
+
+  var printAllBtn = document.getElementById('print-all-supplies');
+  if (printAllBtn) printAllBtn.addEventListener('click', printAll);
+
   document.querySelectorAll('.grade').forEach(function (grade) {
     var gradeName = normalize((grade.querySelector('.grade-name') || {}).textContent);
     var allCheckboxes = [];
@@ -1839,6 +2098,18 @@
     var body = grade.querySelector('.grade-body');
     var actions = document.createElement('div');
     actions.className = 'grade-actions';
+
+    var printBtn = document.createElement('button');
+    printBtn.type = 'button';
+    printBtn.className = 'grade-print';
+    printBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span>Print this list</span>';
+    printBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      printGrade(grade);
+    });
+    actions.appendChild(printBtn);
+
     var clearBtn = document.createElement('button');
     clearBtn.type = 'button';
     clearBtn.className = 'grade-clear';
