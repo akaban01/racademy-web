@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Renaissance Academy</title>
+  <meta name="description" content="About Renaissance Academy — a full-time Islamic school in North Austin, Texas, serving the Greater Austin community since 2007. Accredited with distinction by Cognia, SACS &amp; CASI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../dist/styles.css" />
+  <script defer src="../nav.js"></script>
+  <style data-page-styles>
+    /* ── Page hero ── */
+    .page-hero {
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 70% at 88% 0%, var(--lavender-2), transparent 65%),
+        radial-gradient(ellipse 60% 55% at 0% 100%, var(--lavender), transparent 60%),
+        var(--white);
+      overflow: hidden;
+      padding: 64px 0 56px;
+    }
+    .page-hero .wrap { position: relative; z-index: 2; }
+    .page-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin: 0.9rem 0 1.1rem;
+    }
+    .page-hero h1 .accent { color: var(--purple); }
+    .page-hero p.lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 640px;
+      line-height: 1.72;
+    }
+
+    /* ── Mission statement block ── */
+    .mission {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--purple);
+      border-radius: 14px;
+      padding: 1.6rem 1.8rem;
+      margin-top: 2.4rem;
+      max-width: 820px;
+    }
+    .mission .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .mission p {
+      font-size: 1.05rem;
+      color: var(--ink);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ── Story block (long-form text) ── */
+    .story-body {
+      max-width: 760px;
+      margin-top: 2.4rem;
+      color: var(--ink);
+      font-size: 1.02rem;
+      line-height: 1.78;
+    }
+    .story-body p + p { margin-top: 1.05rem; }
+    .story-body .arabic {
+      font-family: 'Amiri', serif;
+      direction: rtl;
+      color: var(--purple-strong);
+      font-size: 1.25rem;
+      line-height: 1.5;
+      margin: 1.6rem 0;
+      text-align: center;
+    }
+    .story-body .arabic-tx {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-style: italic;
+      margin-top: -0.6rem;
+    }
+
+    /* ── Accreditation strip ── */
+    .accred-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 2.6rem;
+    }
+    .accred-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.5rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .accred-card .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+    }
+    .accred-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      color: var(--ink);
+      margin: 0;
+    }
+    .accred-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── "What makes us different" comparison ── */
+    .compare {
+      margin-top: 2.6rem;
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--line-soft);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+    }
+    .compare > div {
+      background: var(--white);
+      padding: 1.6rem 1.7rem;
+    }
+    .compare h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--ink);
+      font-size: 1.05rem;
+      margin: 0 0 1rem;
+    }
+    .compare ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .compare li {
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.55;
+      padding-left: 1.45rem;
+      position: relative;
+    }
+    .compare .col-typical li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--muted-dim);
+    }
+    .compare .col-typical { background: rgba(124,58,237,0.02); }
+    .compare .col-typical h4 { color: var(--muted); }
+    .compare .col-typical li { color: var(--muted); }
+    .compare .col-us li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--purple);
+      font-weight: 700;
+    }
+
+    /* ── Leadership philosophy callout ── */
+    .lead-callout {
+      margin-top: 2.6rem;
+      background: var(--lavender);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 2rem 2.2rem;
+      max-width: 820px;
+    }
+    .lead-callout .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      display: block;
+      margin-bottom: 0.55rem;
+    }
+    .lead-callout h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      color: var(--ink);
+      margin: 0 0 0.7rem;
+    }
+    .lead-callout p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.72;
+      margin: 0;
+    }
+
+    @media (max-width: 900px) {
+      .accred-grid { grid-template-columns: 1fr; }
+      .compare { grid-template-columns: 1fr; }
+      .page-hero { padding: 48px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="announce">
+  <span class="dot"></span>
+  Admissions are open for Pre-K through High School — limited seats per grade.
+  <a href="../admissions/">Start your application →</a>
+</div>
+
+<header class="header">
+  <div class="wrap header-inner">
+    <a href="../" class="brand">
+      <div class="brand-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5C2 6.5 5 5 8.5 5S15 6.5 15 6.5"/><path d="M22 6.5S19 5 15.5 5 12 6.5 12 6.5"/><path d="M12 6.5V20"/><path d="M2 6.5V19C2 19 5 17.5 8.5 17.5S15 19 15 19"/><path d="M22 6.5V19S19 17.5 15.5 17.5 12 19 12 19"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">Renaissance Academy</div>
+        <div class="brand-sub">Full-time Islamic School</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-menu" id="primary-nav">
+      <li><a href="./">About</a></li>
+      <li><a href="../#journey">Academics</a></li>
+      <li><a href="../parent-resources/">Parent Resources</a></li>
+      <li><a href="../admissions/" class="nav-apply">Apply for Admission</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="arch-bg">
+    <svg width="620" height="640" viewBox="0 0 620 640" fill="none" style="right:-60px; top:-40px;">
+      <g stroke="#7c3aed" stroke-width="1.4" opacity="0.16">
+        <path d="M110 600 L110 300 Q110 80 310 80 Q510 80 310 80 Q510 80 510 300 L510 600"/>
+        <path d="M170 600 L170 320 Q170 150 310 150 Q450 150 450 320 L450 600"/>
+        <path d="M230 600 L230 350 Q230 220 310 220 Q390 220 390 350 L390 600"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <span class="mono">About Renaissance</span>
+    <h1>A school for the <span class="accent">whole child</span>.</h1>
+    <p class="lead">
+      We've been quietly building a different kind of school in North Austin since 2007 — one that holds academic excellence and faith formation as one and the same task, not two competing priorities.
+    </p>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <span class="mono sec-label">Our Mission</span>
+    <h2 class="sec-title">Knowledge with character.</h2>
+    <div class="mission">
+      <span class="label">Mission statement</span>
+      <p>Renaissance Academy exists to raise a generation of Muslims who are grounded in the Qur'an and Sunnah, prepared for rigorous academic and professional paths, and ready to serve the community they live in. We measure success not by test scores alone, but by the kind of adult each student becomes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band-panel pad">
+  <div class="wrap">
+    <span class="mono sec-label">Our Story</span>
+    <h2 class="sec-title">Since 2007 — and still small on purpose.</h2>
+    <p class="sec-lead">A short version of a longer journey.</p>
+    <div class="story-body">
+      <p>Renaissance Academy began in 2007 with a handful of students, a few committed teachers, and a clear conviction: that Muslim children in Austin deserved a school where they didn't have to choose between strong academics and a deep relationship with their faith. Where Qur'an wasn't an extra hour after school, but part of the day. Where teachers knew families by name.</p>
+      <p>Eighteen years later, we're still that school. We've grown from a small Pre-K program into a full Pre-K through 12 school. We've earned accreditation, sent graduates to top universities, and watched the first cohort of students become parents of their own children at Renaissance. But the size of any individual class — and the relationship between teachers, students, and families — is the same as the day we opened.</p>
+      <div class="arabic">إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ</div>
+      <div class="arabic-tx">"Actions are by intentions." — Sahih Bukhari</div>
+      <p>That hadith sits behind everything we do. The intention has stayed the same: educate the whole child, raise good adults, serve the Ummah in Austin and beyond. The methods have grown with the years — accredited curriculum, AP coursework, technology-rich classrooms, a robust Qur'an program — but the why hasn't moved.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <span class="mono sec-label">Accreditation</span>
+    <h2 class="sec-title">Independently verified.</h2>
+    <p class="sec-lead">Renaissance is accredited with distinction — meaning our academic program meets the same standards as the top private and public schools in the country, evaluated by independent reviewers.</p>
+    <div class="accred-grid">
+      <div class="accred-card">
+        <span class="label">Accrediting Body</span>
+        <h3>Cognia</h3>
+        <p>The largest community of education professionals in the world. Their accreditation is recognized across all 50 states and over 80 countries.</p>
+      </div>
+      <div class="accred-card">
+        <span class="label">Regional</span>
+        <h3>SACS &amp; CASI</h3>
+        <p>The Southern Association of Colleges and Schools Council on Accreditation and School Improvement — recognized regional accreditation, important for transcripts and college admissions.</p>
+      </div>
+      <div class="accred-card">
+        <span class="label">Character</span>
+        <h3>Kindness Certified School</h3>
+        <p>A national recognition for schools that embed kindness, empathy, and character development into their daily program. Earned annually.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band-panel pad">
+  <div class="wrap">
+    <span class="mono sec-label">What's Different</span>
+    <h2 class="sec-title">How a typical day looks here vs. elsewhere.</h2>
+    <p class="sec-lead">Most Islamic schools either prioritize academics with token religious instruction, or prioritize religious instruction with weak academics. We aim to refuse that trade-off.</p>
+    <div class="compare">
+      <div class="col-typical">
+        <h4>Typical school day</h4>
+        <ul>
+          <li>Faith instruction once a week or after school</li>
+          <li>Qur'an as a side subject taught by a non-specialist</li>
+          <li>Arabic taught as a "foreign language" with limited contact hours</li>
+          <li>Prayer ad-hoc — students figure it out themselves</li>
+          <li>Standards-based academics, faith bolted on</li>
+        </ul>
+      </div>
+      <div class="col-us">
+        <h4>A day at Renaissance</h4>
+        <ul>
+          <li>Day begins with morning du'a and a short reflection together</li>
+          <li>Daily Qur'an with dedicated, trained Qur'an teachers</li>
+          <li>Arabic taught as a living language from Pre-K through 12</li>
+          <li>Dhuhr prayer in jama'ah every day, on campus</li>
+          <li>Accredited academics and faith formation as one integrated program</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <span class="mono sec-label">Leadership</span>
+    <h2 class="sec-title">Who runs the school.</h2>
+    <p class="sec-lead">Renaissance is led by a head of school in partnership with a board of trustees and our families. We deliberately stay flat — parents have direct access to leadership, not gatekeepers.</p>
+    <div class="lead-callout">
+      <span class="label">Our approach to leadership</span>
+      <h3>Open door, high standards, low ego.</h3>
+      <p>Whatever the question — a curriculum decision, a discipline issue, a tuition concern — the path to leadership is short. We've held that as a value since day one, because a school that knows its families well makes better decisions than one that doesn't. If you'd like to meet our leadership team in person, schedule a visit — the head of school personally greets every prospective family.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band-deep pad final-cta">
+  <div class="wrap">
+    <h2 class="sec-title" style="color:var(--on-dark);">Come see for yourself.</h2>
+    <p class="sec-lead" style="color:var(--on-dark-mut);">Reading about a school can only tell you so much. Spend an hour with us on a school day and you'll know if we're the right fit.</p>
+    <div class="final-actions">
+      <a href="../admissions/" class="btn-primary">
+        Start application
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:5122522277" class="btn-outline" style="color:var(--on-dark); border-color: rgba(255,255,255,0.25);">📞 512-252-2277</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="../" class="brand">
+          <div class="brand-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5C2 6.5 5 5 8.5 5S15 6.5 15 6.5"/><path d="M22 6.5S19 5 15.5 5 12 6.5 12 6.5"/><path d="M12 6.5V20"/><path d="M2 6.5V19C2 19 5 17.5 8.5 17.5S15 19 15 19"/><path d="M22 6.5V19S19 17.5 15.5 17.5 12 19 12 19"/></svg>
+          </div>
+          <div>
+            <div class="brand-name">Renaissance Academy</div>
+            <div class="brand-sub">Academics · Character · Leadership</div>
+          </div>
+        </a>
+        <p class="footer-desc">A full-time Islamic school serving the Greater Austin community since 2007 — Pre-K through College-Prep High School, accredited with distinction by Cognia, SACS &amp; CASI.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Academics</h4>
+        <ul>
+          <li><a href="../pre-k/">Pre-K</a></li>
+          <li><a href="../elementary/">Elementary School</a></li>
+          <li><a href="../middle-school/">Middle School</a></li>
+          <li><a href="../high-school/">High School</a></li>
+          <li><a href="../high-school/#ap">AP Program</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>School</h4>
+        <ul>
+          <li><a href="./">About Us</a></li>
+          <li><a href="../admissions/">Admissions</a></li>
+          <li><a href="../#stand">Our Pillars</a></li>
+          <li><a href="../parent-resources/">Parent Resources</a></li>
+          <li><a href="mailto:contact@racademy.org">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="#">North Austin, Texas</a></li>
+          <li><a href="tel:5122522277">512-252-2277</a></li>
+          <li><a href="mailto:contact@racademy.org">contact@racademy.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Renaissance Academy. All rights reserved.</span>
+      <span class="mono" style="color:var(--on-dark-dim);">Bismillah · Since 2007</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site Progress — Renaissance Academy</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="dist/styles.css" />
+  <style data-page-styles>
+    body { background: var(--lavender); min-height: 100vh; padding: 56px 0 96px; }
+
+    .ph-hero {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .ph-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--ink);
+      margin: 0.6rem 0 0.6rem;
+    }
+    .ph-hero p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .ph-hero .mono { display: inline-block; }
+
+    /* Summary stat bar */
+    .ph-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line-soft);
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 0 auto 3rem;
+      max-width: 760px;
+      box-shadow: 0 14px 36px rgba(42,18,89,0.08);
+    }
+    .ph-stat {
+      background: var(--white);
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .ph-stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--purple);
+      line-height: 1;
+    }
+    .ph-stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* Page rows */
+    .ph-section {
+      margin: 0 auto 2.4rem;
+      max-width: 960px;
+    }
+    .ph-section h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .ph-section .ph-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(124,58,237,0.08);
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    .ph-section > .lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+      max-width: 640px;
+      line-height: 1.65;
+    }
+
+    .ph-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.7rem;
+    }
+    .ph-row {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      display: grid;
+      grid-template-columns: 76px 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .ph-row:hover {
+      border-color: var(--purple-light);
+      box-shadow: 0 12px 28px rgba(124,58,237,0.08);
+      transform: translateY(-1px);
+    }
+
+    .ph-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 999px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .badge-live   { background: rgba(16, 122, 95, 0.10); color: #047857; border: 1px solid rgba(16, 122, 95, 0.25); }
+    .badge-wip    { background: rgba(217, 119, 6, 0.10); color: #b45309; border: 1px solid rgba(217, 119, 6, 0.30); }
+    .badge-todo   { background: rgba(75, 85, 99, 0.08);  color: #4b5563; border: 1px solid rgba(75, 85, 99, 0.25); }
+    .badge-anchor { background: rgba(37, 99, 235, 0.08); color: #1d4ed8; border: 1px solid rgba(37, 99, 235, 0.25); }
+
+    .ph-info h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin: 0 0 0.2rem;
+    }
+    .ph-info p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .ph-info code {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--purple-strong);
+      background: rgba(124,58,237,0.07);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .ph-actions {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .ph-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(124,58,237,0.04);
+      border: 1px solid var(--purple-light);
+      border-radius: 7px;
+      padding: 6px 11px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
+    }
+    .ph-link:hover {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+    .ph-link.is-disabled {
+      color: var(--muted-dim);
+      border-color: var(--line);
+      background: transparent;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+    .ph-link svg { width: 11px; height: 11px; opacity: 0.7; }
+    .ph-link:hover svg { opacity: 1; }
+
+    /* Anchors sub-list inside the home-page row */
+    .ph-anchors {
+      grid-column: 1 / -1;
+      margin-top: 0.7rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed var(--line-soft);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .ph-meta {
+      text-align: center;
+      color: var(--muted-dim);
+      font-size: 0.84rem;
+      margin-top: 2.5rem;
+      line-height: 1.7;
+    }
+    .ph-meta a { color: var(--purple); text-decoration: none; }
+    .ph-meta a:hover { text-decoration: underline; }
+
+    @media (max-width: 720px) {
+      .ph-stats { grid-template-columns: 1fr 1fr; }
+      .ph-row {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+      .ph-actions { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="ph-hero">
+    <span class="mono">Site progress</span>
+    <h1>Pages built so far.</h1>
+    <p>Internal checklist of every page on racademy-web. Use the links to jump straight to a page for testing. Not linked from the public site.</p>
+  </header>
+
+  <div class="ph-stats" id="ph-stats">
+    <div class="ph-stat"><div class="ph-stat-num" data-stat="live">–</div><div class="ph-stat-label">Live</div></div>
+    <div class="ph-stat"><div class="ph-stat-num" data-stat="wip">–</div><div class="ph-stat-label">In Progress</div></div>
+    <div class="ph-stat"><div class="ph-stat-num" data-stat="todo">–</div><div class="ph-stat-label">To Build</div></div>
+    <div class="ph-stat"><div class="ph-stat-num" data-stat="total">–</div><div class="ph-stat-label">Total</div></div>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <section class="ph-section">
+    <h2>Top-level pages <span class="ph-count">8 live · 1 wip</span></h2>
+    <p class="lead">Every page on the site. Each is its own folder with an <code>index.html</code>, using the Tailwind build (<code>dist/styles.css</code>).</p>
+    <ul class="ph-list">
+
+      <li class="ph-row" data-status="live">
+        <span class="ph-badge badge-live">Live</span>
+        <div class="ph-info">
+          <h3>Home</h3>
+          <p>Hero, pillars, academic journey, why us, get involved, final CTA. The main landing page. <code>/index.html</code></p>
+        </div>
+        <div class="ph-actions">
+          <a class="ph-link" href="/" target="_blank" rel="noopener">
+            Open
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+        <div class="ph-anchors">
+          <a class="ph-link" href="/#stand" target="_blank" rel="noopener">#stand · Pillars</a>
+          <a class="ph-link" href="/#journey" target="_blank" rel="noopener">#journey · Academics</a>
+          <a class="ph-link" href="/#why" target="_blank" rel="noopener">#why · Why Us</a>
+          <a class="ph-link" href="/#involve" target="_blank" rel="noopener">#involve · Get Involved</a>
+        </div>
+      </li>
+
+      <li class="ph-row" data-status="live">
+        <span class="ph-badge badge-live">Live</span>
+        <div class="ph-info">
+          <h3>About Us</h3>
+          <p>Mission, story (since 2007), accreditation (Cognia / SACS / CASI), what's different, leadership philosophy. <code>/about/</code></p>
+        </div>
+        <div class="ph-actions">
+          <a class="ph-link" href="/about/" target="_blank" rel="noopener">
+            Open
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </li>
+
+      <li class="ph-row" data-status="live">
+        <span class="ph-badge badge-live">Live</span>
+        <div class="ph-info">
+          <h3>Admissions</h3>
+          <p>At-a-glance stats, 6-step process, required documents, admissions cycle, tuition, FAQ. Wired into all "Apply" CTAs. <code>/admissions/</code></p>
+        </div>
+        <div class="ph-actions">
+          <a class="ph-link" href="/admissions/" target="_blank" rel="noopener">
+            Open
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </li>
+
+      <li class="ph-row" data-status="live">
+        <span class="ph-badge badge-live">Live</span>
+        <div class="ph-info">
+          <h3>Pre-K <em>(Ages 2–4)</em></h3>
+          <p>PK2, PK3, PK4 — at-a-glance, day-in-the-life schedule, curriculum cards, distinctive highlights, next-band link. <code>/pre-k/</code></p>
+        </div>
+        <div class="ph-actions">
+          <a class="ph-link" href="/pre-k/" target="_blank" rel="noopener">
+            Open
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </li>
+
+      <li class="ph-row" data-status="live">
+        <span class="ph-badge badge-live">Live</span>
+        <div class="ph-info">
+          <h3>Elementary School <em>(K–5)</em></h3>
+          <p>TEKS-aligned core academics + daily Qur'an, Arabic, and Islamic Studies. <code>/elementary/</code></p>
+        </div>
+        <div class="ph-actions">
+          <a class="ph-link" href="/elementary/" target="_blank" rel="noopener">
+            Open
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </li>
+
+      <li class="ph-row" data-status="live">
+        <span class="ph-badge badge-live">Live</span>
+        <div class="ph-info">
+          <h3>Middle School <em>(6–8)</em></h3>
+          <p>Pre-AP tracks, advisory program, block schedule, deeper Qur'an &amp; Arabic literature. <code>/middle-school/</code></p>
+        </div>
+        <div class="ph-actions">
+          <a class="ph-link" href="/middle-school/" target="_blank" rel="noopener">
+            Open
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </li>
+
+      <li class="ph-row" data-status="live">
+        <span class="ph-badge badge-live">Live</span>
+        <div class="ph-info">
+          <h3>High School <em>(9–12)</em></h3>
+          <p>Eight-period day, full Texas Foundation HS program, AP courses, college counseling, senior capstone. Includes <code>#ap</code> anchor. <code>/high-school/</code></p>
+        </div>
+        <div class="ph-actions">
+          <a class="ph-link" href="/high-school/" target="_blank" rel="noopener">
+            Open
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+          <a class="ph-link" href="/high-school/#ap" target="_blank" rel="noopener">#ap · AP Program</a>
+        </div>
+      </li>
+
+      <li class="ph-row" data-status="live">
+        <span class="ph-badge badge-live">Live</span>
+        <div class="ph-info">
+          <h3>Parent Resources</h3>
+          <p>Quick-links cards + 9 grade-level supply lists with localStorage checkboxes and full print support (all lists / per-grade). <code>/parent-resources/</code></p>
+        </div>
+        <div class="ph-actions">
+          <a class="ph-link" href="/parent-resources/" target="_blank" rel="noopener">
+            Open
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+          <a class="ph-link" href="/parent-resources/#supply-lists" target="_blank" rel="noopener">Supply Lists</a>
+        </div>
+      </li>
+
+      <li class="ph-row" data-status="wip">
+        <span class="ph-badge badge-wip">WIP / Alt</span>
+        <div class="ph-info">
+          <h3>Parent Resources <em>(redesign)</em></h3>
+          <p>Tabbed layout: Academic Calendar, Supply Lists, ParentsWeb, FACTS, Uniforms, Transcript. Not linked from the public site. <code>/parent-resources-new/</code></p>
+        </div>
+        <div class="ph-actions">
+          <a class="ph-link" href="/parent-resources-new/" target="_blank" rel="noopener">
+            Open
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </li>
+
+    </ul>
+  </section>
+
+  <!-- ────────────────────────────────────────────── -->
+  <section class="ph-section">
+    <h2>Anchors &amp; external <span class="ph-count">handy</span></h2>
+    <p class="lead">Non-page targets (homepage section anchors, contact endpoints). These are not separate pages but useful while testing.</p>
+    <ul class="ph-list">
+
+      <li class="ph-row" data-status="anchor">
+        <span class="ph-badge badge-anchor">Anchor</span>
+        <div class="ph-info">
+          <h3>Homepage sections</h3>
+          <p>The home page has section anchors that footer links and grade rows currently point to. <code>/#stand</code> · <code>/#journey</code> · <code>/#why</code> · <code>/#involve</code></p>
+        </div>
+        <div class="ph-actions">
+          <a class="ph-link" href="/#stand" target="_blank" rel="noopener">#stand</a>
+          <a class="ph-link" href="/#journey" target="_blank" rel="noopener">#journey</a>
+          <a class="ph-link" href="/#why" target="_blank" rel="noopener">#why</a>
+          <a class="ph-link" href="/#involve" target="_blank" rel="noopener">#involve</a>
+        </div>
+      </li>
+
+      <li class="ph-row" data-status="anchor">
+        <span class="ph-badge badge-anchor">Contact</span>
+        <div class="ph-info">
+          <h3>Contact endpoints</h3>
+          <p>Email and phone used by Apply CTAs (outside of the Admissions page) and by the Contact footer link.</p>
+        </div>
+        <div class="ph-actions">
+          <a class="ph-link" href="mailto:contact@racademy.org">Email</a>
+          <a class="ph-link" href="tel:5122522277">Phone</a>
+        </div>
+      </li>
+
+    </ul>
+  </section>
+
+  <p class="ph-meta">
+    This page is for internal testing only and is not linked from the public site. Edit <a href="progress.html">progress.html</a> to keep it current as pages ship.
+  </p>
+
+</div>
+
+<script>
+  /* Compute the stat counts so they stay in sync when rows are added/removed. */
+  (function () {
+    var rows = document.querySelectorAll('.ph-row[data-status]');
+    var counts = { live: 0, wip: 0, todo: 0, anchor: 0 };
+    rows.forEach(function (r) {
+      var s = r.dataset.status;
+      if (counts[s] != null) counts[s]++;
+    });
+    var pageRows = counts.live + counts.wip + counts.todo;
+    document.querySelector('[data-stat="live"]').textContent  = counts.live;
+    document.querySelector('[data-stat="wip"]').textContent   = counts.wip;
+    document.querySelector('[data-stat="todo"]').textContent  = counts.todo;
+    document.querySelector('[data-stat="total"]').textContent = pageRows;
+  })();
+</script>
+
+</body>
+</html>

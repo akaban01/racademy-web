@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admissions — Renaissance Academy</title>
+  <meta name="description" content="Admissions at Renaissance Academy — application process, required documents, timeline, tuition, and FAQs for Pre-K through High School in North Austin, Texas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../dist/styles.css" />
+  <script defer src="../nav.js"></script>
+  <style data-page-styles>
+    /* ── Page hero (slimmer than the homepage hero) ── */
+    .page-hero {
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 70% at 88% 0%, var(--lavender-2), transparent 65%),
+        radial-gradient(ellipse 60% 55% at 0% 100%, var(--lavender), transparent 60%),
+        var(--white);
+      overflow: hidden;
+      padding: 64px 0 56px;
+    }
+    .page-hero .wrap { position: relative; z-index: 2; }
+    .page-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin: 0.9rem 0 1.1rem;
+    }
+    .page-hero h1 .accent { color: var(--purple); }
+    .page-hero p.lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 640px;
+      line-height: 1.72;
+    }
+    .page-hero .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    /* ── Numbered process steps ── */
+    .steps {
+      counter-reset: stepc;
+      list-style: none;
+      padding: 0;
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .step {
+      position: relative;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.4rem 1.6rem 1.4rem 5.2rem;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .step:hover {
+      border-color: var(--purple-light);
+      box-shadow: 0 14px 32px rgba(124,58,237,0.10);
+      transform: translateY(-2px);
+    }
+    .step::before {
+      counter-increment: stepc;
+      content: counter(stepc);
+      position: absolute;
+      left: 1.4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px; height: 44px;
+      border-radius: 11px;
+      border: 1.5px solid var(--purple);
+      background: rgba(124,58,237,0.08);
+      color: var(--purple);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step h3 {
+      font-size: 1.15rem;
+      color: var(--ink);
+      margin: 0 0 0.35rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .step p {
+      font-size: 0.96rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+    .step-note {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-top: 0.55rem;
+      display: inline-block;
+    }
+
+    /* ── Documents (two grouped checklists) ── */
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.4rem;
+      margin-top: 3rem;
+    }
+    .docs-group {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.6rem 1.7rem;
+    }
+    .docs-group h3 {
+      font-size: 1.15rem;
+      color: var(--ink);
+      margin: 0 0 0.3rem;
+    }
+    .docs-group .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(124,58,237,0.08);
+      padding: 3px 9px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 0.85rem;
+    }
+    .docs-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.6rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .docs-list li {
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+      font-size: 0.96rem;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    .docs-list li::before {
+      content: "";
+      width: 16px; height: 16px;
+      border: 1.5px solid var(--purple);
+      border-radius: 4px;
+      background: rgba(124,58,237,0.06);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .docs-list li em {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-style: normal;
+      display: block;
+      margin-top: 1px;
+    }
+
+    /* ── Admissions-cycle timeline ── */
+    .cycle {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line-soft);
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(42,18,89,0.10);
+    }
+    .cycle-step {
+      background: var(--white);
+      padding: 1.6rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .cycle-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+    }
+    .cycle-step h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin: 0;
+    }
+    .cycle-step p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ── Tuition / investment cards ── */
+    .tuition-note {
+      background: rgba(124,58,237,0.05);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--purple);
+      border-radius: 10px;
+      padding: 1.1rem 1.3rem;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.7;
+      margin-top: 2rem;
+      max-width: 780px;
+    }
+    .tuition-note strong { color: var(--ink); }
+    .tuition-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 2.4rem;
+    }
+    .tuition-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.5rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .tuition-card .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+    }
+    .tuition-card h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      color: var(--ink);
+      margin: 0;
+    }
+    .tuition-card p {
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── FAQ accordions ── */
+    .faq {
+      margin-top: 2.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .faq-item[open] {
+      border-color: var(--purple-light);
+      box-shadow: 0 12px 28px rgba(124,58,237,0.08);
+    }
+    .faq-item > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1.05rem 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 1.02rem;
+    }
+    .faq-item > summary::-webkit-details-marker { display: none; }
+    .faq-chev {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--purple);
+      flex-shrink: 0;
+      transition: transform 0.25s ease, background 0.2s;
+    }
+    .faq-item[open] .faq-chev {
+      transform: rotate(180deg);
+      background: rgba(124,58,237,0.08);
+    }
+    .faq-body {
+      padding: 0 1.3rem 1.2rem;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.72;
+    }
+
+    /* ── Inline mini-CTA used inside content blocks ── */
+    .inline-cta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      text-decoration: none;
+      border-bottom: 1px solid var(--purple-light);
+      padding-bottom: 1px;
+    }
+    .inline-cta:hover { color: var(--purple-strong); border-bottom-color: var(--purple-strong); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .docs-grid { grid-template-columns: 1fr; }
+      .tuition-grid { grid-template-columns: 1fr; }
+      .cycle { grid-template-columns: 1fr; }
+      .page-hero { padding: 48px 0 40px; }
+      .step { padding-left: 4.4rem; }
+      .step::before { width: 38px; height: 38px; left: 1.1rem; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── ANNOUNCEMENT ────────────────────────────── -->
+<div class="announce">
+  <span class="dot"></span>
+  Admissions are open for Pre-K through High School — limited seats per grade.
+  <a href="mailto:contact@racademy.org">Start your application →</a>
+</div>
+
+<!-- ── HEADER ──────────────────────────────────── -->
+<header class="header">
+  <div class="wrap header-inner">
+    <a href="../" class="brand">
+      <div class="brand-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5C2 6.5 5 5 8.5 5S15 6.5 15 6.5"/><path d="M22 6.5S19 5 15.5 5 12 6.5 12 6.5"/><path d="M12 6.5V20"/><path d="M2 6.5V19C2 19 5 17.5 8.5 17.5S15 19 15 19"/><path d="M22 6.5V19S19 17.5 15.5 17.5 12 19 12 19"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">Renaissance Academy</div>
+        <div class="brand-sub">Full-time Islamic School</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-menu" id="primary-nav">
+      <li><a href="../#stand">Our Pillars</a></li>
+      <li><a href="../#journey">Academics</a></li>
+      <li><a href="../#why">Why Us</a></li>
+      <li><a href="../parent-resources/">Parent Resources</a></li>
+      <li><a href="./" class="nav-apply">Apply for Admission</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ── PAGE HERO ───────────────────────────────── -->
+<section class="page-hero">
+  <div class="arch-bg">
+    <svg width="620" height="640" viewBox="0 0 620 640" fill="none" style="right:-60px; top:-40px;">
+      <g stroke="#7c3aed" stroke-width="1.4" opacity="0.16">
+        <path d="M110 600 L110 300 Q110 80 310 80 Q510 80 310 80 Q510 80 510 300 L510 600"/>
+        <path d="M170 600 L170 320 Q170 150 310 150 Q450 150 450 320 L450 600"/>
+        <path d="M230 600 L230 350 Q230 220 310 220 Q390 220 390 350 L390 600"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <span class="mono">Admissions 2025–2026</span>
+    <h1>Begin your child's <span class="accent">Renaissance</span>.</h1>
+    <p class="lead">
+      Applications are open for Pre-K through High School. We welcome families on rolling admissions throughout the year — start with a tour, share a little about your child, and we'll walk you through every step.
+    </p>
+    <div class="hero-actions">
+      <a href="mailto:contact@racademy.org" class="btn-primary">
+        Start application
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:5122522277" class="btn-outline">Schedule a tour</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── AT-A-GLANCE STATS ───────────────────────── -->
+<section class="pad">
+  <div class="wrap">
+    <span class="mono sec-label">At a Glance</span>
+    <h2 class="sec-title">What to expect.</h2>
+    <p class="sec-lead">A small, accredited school where every family is known by name — and every applicant is met as a person, not a file.</p>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-num">PK–12</div>
+        <div class="stat-label">All grade levels offered, one campus</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Since 2007</div>
+        <div class="stat-label">Serving Greater Austin families</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Cognia</div>
+        <div class="stat-label">Accredited with distinction by SACS &amp; CASI</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Rolling</div>
+        <div class="stat-label">Applications reviewed year-round</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW TO APPLY (PROCESS) ──────────────────── -->
+<section class="band-panel pad">
+  <div class="wrap">
+    <span class="mono sec-label">The Process</span>
+    <h2 class="sec-title">Six steps to enrollment.</h2>
+    <p class="sec-lead">Most families move from first inquiry to first day in three to six weeks. We'll guide you through every step — there's no part of this you have to figure out alone.</p>
+    <ol class="steps">
+      <li class="step">
+        <h3>Inquire</h3>
+        <p>Send us a quick note with your child's name, current grade, and what you're looking for. We'll respond within one business day with next steps and answer any early questions.</p>
+        <span class="step-note">Estimated time: 5 minutes</span>
+      </li>
+      <li class="step">
+        <h3>Visit campus</h3>
+        <p>Tour the school during a regular school day. You'll see real classrooms, meet teachers, and observe how Qur'an, Arabic, and academics fit together. Bring your child — we love when they come along.</p>
+        <span class="step-note">Tuesdays &amp; Thursdays, by appointment</span>
+      </li>
+      <li class="step">
+        <h3>Complete the application</h3>
+        <p>Submit the family application along with the application fee. The form covers basic family information, your child's school history, and a few open questions about your goals.</p>
+        <span class="step-note">Estimated time: 25 minutes</span>
+      </li>
+      <li class="step">
+        <h3>Send supporting records</h3>
+        <p>Forward immunization records, the birth certificate, and (for grades 1+) the two most recent report cards, any standardized test results, and a teacher recommendation. See the checklist below.</p>
+        <span class="step-note">See documents checklist</span>
+      </li>
+      <li class="step">
+        <h3>Family conversation</h3>
+        <p>Once the file is complete, you'll meet with the admissions team and a member of school leadership. We'll talk about fit on both sides — your hopes for your child, and how we can support them academically and spiritually.</p>
+        <span class="step-note">About 45 minutes</span>
+      </li>
+      <li class="step">
+        <h3>Decision &amp; enrollment</h3>
+        <p>We aim to send a decision within two weeks of a complete file. Once admitted, you'll secure your seat with the enrollment deposit and join us for new-family orientation before the first day.</p>
+        <span class="step-note">Decision in ~2 weeks</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ── REQUIRED DOCUMENTS ──────────────────────── -->
+<section class="pad">
+  <div class="wrap">
+    <span class="mono sec-label">What to Bring</span>
+    <h2 class="sec-title">Required documents.</h2>
+    <p class="sec-lead">A short, no-surprises checklist. If anything is hard to track down, tell us — we work with families to find a way.</p>
+    <div class="docs-grid">
+      <div class="docs-group">
+        <span class="tag">All applicants</span>
+        <h3>Every family submits</h3>
+        <ul class="docs-list">
+          <li><span>Completed family application<em>One per child applying</em></span></li>
+          <li><span>Application fee<em>Paid online or at the office</em></span></li>
+          <li><span>Copy of birth certificate</span></li>
+          <li><span>Up-to-date immunization records<em>Texas state requirements</em></span></li>
+          <li><span>Recent 3×5 photo of your child<em>Used in the classroom emergency book</em></span></li>
+          <li><span>Parent / guardian photo ID</span></li>
+        </ul>
+      </div>
+      <div class="docs-group">
+        <span class="tag">Grades 1–12</span>
+        <h3>If your child is entering 1st or above</h3>
+        <ul class="docs-list">
+          <li><span>Two most recent report cards or transcripts</span></li>
+          <li><span>Standardized test scores<em>If available — not required</em></span></li>
+          <li><span>Teacher recommendation<em>From current homeroom teacher</em></span></li>
+          <li><span>IEP, 504, or learning-support documentation<em>Only if applicable — helps us support your child from day one</em></span></li>
+          <li><span>Brief writing sample<em>Grades 6–12 only</em></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ADMISSIONS CYCLE ────────────────────────── -->
+<section class="band-panel pad">
+  <div class="wrap">
+    <span class="mono sec-label">Timeline</span>
+    <h2 class="sec-title">How the cycle flows.</h2>
+    <p class="sec-lead">Renaissance reviews applications on a rolling basis — there's no single deadline. Seats are limited per grade, so earlier is better. Priority review for the next school year opens in early winter.</p>
+    <div class="cycle">
+      <div class="cycle-step">
+        <span class="cycle-num">Step 1</span>
+        <h4>Inquire</h4>
+        <p>Open all year. Most families reach out 2–4 months before their target start date.</p>
+      </div>
+      <div class="cycle-step">
+        <span class="cycle-num">Step 2</span>
+        <h4>Tour &amp; apply</h4>
+        <p>Schedule a tour within a week or two. Submit the application alongside or after.</p>
+      </div>
+      <div class="cycle-step">
+        <span class="cycle-num">Step 3</span>
+        <h4>Records review</h4>
+        <p>We review the full file within two weeks of receiving every document.</p>
+      </div>
+      <div class="cycle-step">
+        <span class="cycle-num">Step 4</span>
+        <h4>Family conversation</h4>
+        <p>A 45-minute meeting with the admissions team and school leadership.</p>
+      </div>
+      <div class="cycle-step">
+        <span class="cycle-num">Step 5</span>
+        <h4>Decision &amp; deposit</h4>
+        <p>Admitted families secure their seat with the enrollment deposit.</p>
+      </div>
+      <div class="cycle-step">
+        <span class="cycle-num">Step 6</span>
+        <h4>Orientation &amp; first day</h4>
+        <p>New-family orientation in August, followed by the first day of school.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TUITION & INVESTMENT ────────────────────── -->
+<section class="pad">
+  <div class="wrap">
+    <span class="mono sec-label">Tuition</span>
+    <h2 class="sec-title">An investment in your child.</h2>
+    <p class="sec-lead">Tuition at Renaissance reflects the real cost of small classes, accredited academics, and a faith-rich program — and we work to keep it accessible.</p>
+    <div class="tuition-note">
+      <strong>How pricing is shared:</strong> we walk every family through current tuition, the FACTS monthly payment plan, sibling considerations, and any one-time fees during the family conversation. You'll have the full picture before you're asked to commit.
+      <br /><br />
+      Want a quick ballpark before you visit? <a href="mailto:contact@racademy.org" class="inline-cta">Email the office →</a>
+    </div>
+    <div class="tuition-grid">
+      <div class="tuition-card">
+        <span class="label">Payment plan</span>
+        <h4>FACTS monthly autopay</h4>
+        <p>Spread annual tuition across the school year with automatic monthly payments through FACTS — the same provider many private schools use.</p>
+      </div>
+      <div class="tuition-card">
+        <span class="label">Multiple children</span>
+        <h4>Sibling considerations</h4>
+        <p>Families with more than one child enrolled receive an adjustment on each additional sibling. We'll talk through the specifics during your visit.</p>
+      </div>
+      <div class="tuition-card">
+        <span class="label">What's included</span>
+        <h4>Beyond classroom hours</h4>
+        <p>Tuition covers daily Qur'an &amp; Islamic Studies, Arabic, all core academic subjects, and access to AP coursework in high school. Books, supplies, and lunch are billed separately.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ─────────────────────────────────────── -->
+<section class="band-panel pad">
+  <div class="wrap">
+    <span class="mono sec-label">Common Questions</span>
+    <h2 class="sec-title">You asked, we answered.</h2>
+    <p class="sec-lead">The questions families ask us most often — if yours isn't here, send a quick note and we'll get back the same day.</p>
+    <div class="faq">
+
+      <details class="faq-item">
+        <summary>
+          Do we need to be Muslim to apply?
+          <span class="faq-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="faq-body">
+          Renaissance is a full-time Islamic school, and Qur'an &amp; Islamic Studies are part of every day. Most of our families are Muslim, but we welcome conversations with any family who is genuinely interested in our program and what we teach. The best way to know if we're the right fit is to visit.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          What does a typical school day look like?
+          <span class="faq-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="faq-body">
+          Days begin with morning du'a and a short reflection, then move into core academics in the morning block (math, science, ELA, social studies). Qur'an, Arabic, and Islamic Studies are woven across the day — not tacked on at the end. Lunch, recess, and Dhuhr prayer happen together. Afternoons include electives, projects, and PE depending on grade.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          How is Qur'an integrated into the curriculum?
+          <span class="faq-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="faq-body">
+          Qur'an is a daily class with dedicated teachers, not a side subject. Students at each level work on tajweed, memorization, and meaning at a pace that suits them. Many of our graduates leave with substantial portions of the Qur'an memorized — but more importantly, with a relationship to it they carry into adulthood.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          Is financial assistance available?
+          <span class="faq-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="faq-body">
+          We make every effort to work with families whose circumstances make full tuition difficult. Bring it up early — during your tour or family conversation — and we'll walk through what's possible together. Please don't decide against applying because of cost without talking to us first.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          What's the dress code?
+          <span class="faq-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="faq-body">
+          Students wear school uniforms, with specifics by grade level. Full uniform requirements live in <a href="../parent-resources/" class="inline-cta">Parent Resources →</a> — admitted families also get a printable shopping list and supplier links.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          Can my child start mid-year?
+          <span class="faq-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="faq-body">
+          Yes, if there's a seat in your child's grade. Mid-year transfers follow the same process — inquiry, tour, application, records, family conversation — and we can usually move quickly when the file is complete. Reach out and we'll tell you honestly what's open.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          How big are the classes?
+          <span class="faq-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="faq-body">
+          We deliberately keep classes small enough that teachers know every student well. Exact section sizes vary by grade and year — we'll share current numbers during your tour so you can see firsthand.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          Is lunch provided?
+          <span class="faq-chev" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="faq-body">
+          Most students bring lunch from home. We offer a hot-lunch option on select days through our food-service partner — sign-ups happen at the start of each semester. All food served on campus is halal.
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ───────────────────────────────── -->
+<section class="band-deep pad final-cta">
+  <div class="wrap">
+    <h2 class="sec-title" style="color:var(--on-dark);">Ready to take the next step?</h2>
+    <p class="sec-lead" style="color:var(--on-dark-mut);">Whether you have one quick question or you're ready to apply — we'd love to hear from you.</p>
+    <div class="final-actions">
+      <a href="mailto:contact@racademy.org" class="btn-primary">
+        Start application
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:5122522277" class="btn-outline" style="color:var(--on-dark); border-color: rgba(255,255,255,0.25);">📞 512-252-2277</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────── -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="../" class="brand">
+          <div class="brand-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5C2 6.5 5 5 8.5 5S15 6.5 15 6.5"/><path d="M22 6.5S19 5 15.5 5 12 6.5 12 6.5"/><path d="M12 6.5V20"/><path d="M2 6.5V19C2 19 5 17.5 8.5 17.5S15 19 15 19"/><path d="M22 6.5V19S19 17.5 15.5 17.5 12 19 12 19"/></svg>
+          </div>
+          <div>
+            <div class="brand-name">Renaissance Academy</div>
+            <div class="brand-sub">Academics · Character · Leadership</div>
+          </div>
+        </a>
+        <p class="footer-desc">A full-time Islamic school serving the Greater Austin community since 2007 — Pre-K through College-Prep High School, accredited with distinction by Cognia, SACS &amp; CASI.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Academics</h4>
+        <ul>
+          <li><a href="../#journey">Pre-K</a></li>
+          <li><a href="../#journey">Elementary School</a></li>
+          <li><a href="../#journey">Middle School</a></li>
+          <li><a href="../#journey">High School</a></li>
+          <li><a href="../#journey">AP Program</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Families</h4>
+        <ul>
+          <li><a href="./">Admissions</a></li>
+          <li><a href="../parent-resources/">Parent Resources</a></li>
+          <li><a href="../#stand">Our Pillars</a></li>
+          <li><a href="mailto:contact@racademy.org">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="#">North Austin, Texas</a></li>
+          <li><a href="tel:5122522277">512-252-2277</a></li>
+          <li><a href="mailto:contact@racademy.org">contact@racademy.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Renaissance Academy. All rights reserved.</span>
+      <span class="mono" style="color:var(--on-dark-dim);">Bismillah · Since 2007</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
