@@ -11,34 +11,6 @@
   <link rel="stylesheet" href="../dist/styles.css" />
   <script defer src="../nav.js"></script>
   <style data-page-styles>
-    /* ── Page hero (slimmer than the homepage hero) ── */
-    .page-hero {
-      position: relative;
-      background:
-        radial-gradient(ellipse 80% 70% at 88% 0%, var(--lavender-2), transparent 65%),
-        radial-gradient(ellipse 60% 55% at 0% 100%, var(--lavender), transparent 60%),
-        var(--white);
-      overflow: hidden;
-      padding: 64px 0 56px;
-    }
-    .page-hero .wrap { position: relative; z-index: 2; }
-    .page-hero h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      font-size: clamp(2.1rem, 4vw, 3.2rem);
-      line-height: 1.1;
-      color: var(--ink);
-      margin: 0.9rem 0 1.1rem;
-    }
-    .page-hero h1 .accent { color: var(--purple); }
-    .page-hero p.lead {
-      font-size: 1.08rem;
-      color: var(--muted);
-      max-width: 640px;
-      line-height: 1.72;
-    }
-
     /* ── Resource quick-links grid ── */
     .resource-grid {
       display: grid;
@@ -954,7 +926,6 @@
     @media (max-width: 900px) {
       .resource-grid { grid-template-columns: 1fr; }
       .supply-list { grid-template-columns: 1fr; }
-      .page-hero { padding: 48px 0 40px; }
       .cal-highlights { grid-template-columns: 1fr 1fr; }
       .cal-months { grid-template-columns: 1fr; }
       .cal-event-row {
@@ -1211,6 +1182,9 @@
     <ul class="nav-menu" id="primary-nav">
       <li><a href="../#stand">Our Pillars</a></li>
       <li><a href="../#journey">Academics</a></li>
+      <li><a href="../our-program/">Our Program</a></li>
+      <li><a href="../life-at-ra/">Life at RA</a></li>
+      <li><a href="../donate/">Donate</a></li>
       <li><a href="../#why">Why Us</a></li>
       <li><a href="./">Parent Resources</a></li>
       <li><a href="../admissions/" class="nav-apply">Apply for Admission</a></li>
@@ -1968,15 +1942,15 @@
         <ul>
           <li><a href="./">Parent Resources</a></li>
           <li><a href="#supplies">Supply Lists</a></li>
-          <li><a href="mailto:contact@racademy.org">Admissions</a></li>
+          <li><a href="../admissions/">Admissions</a></li>
           <li><a href="../#stand">Our Pillars</a></li>
-          <li><a href="mailto:contact@racademy.org">Contact</a></li>
+          <li><a href="../about/contact-us/">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Visit</h4>
         <ul>
-          <li><a href="#">North Austin, Texas</a></li>
+          <li><a href="../about/contact-us/">North Austin, Texas</a></li>
           <li><a href="tel:5122522277">512-252-2277</a></li>
           <li><a href="mailto:contact@racademy.org">contact@racademy.org</a></li>
         </ul>

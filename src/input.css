@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./subpages.css";
 
 /* ─────────────────────────────────────────────────────────────────────────
    Design tokens — surfaced as utilities (e.g. bg-purple, text-ink, font-display).
