@@ -11,6 +11,34 @@
   <link rel="stylesheet" href="../dist/styles.css" />
   <script defer src="../nav.js"></script>
   <style data-page-styles>
+    /* ── Page hero (slimmer than the homepage hero) ── */
+    .page-hero {
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 70% at 88% 0%, var(--lavender-2), transparent 65%),
+        radial-gradient(ellipse 60% 55% at 0% 100%, var(--lavender), transparent 60%),
+        var(--white);
+      overflow: hidden;
+      padding: 64px 0 56px;
+    }
+    .page-hero .wrap { position: relative; z-index: 2; }
+    .page-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin: 0.9rem 0 1.1rem;
+    }
+    .page-hero h1 .accent { color: var(--purple); }
+    .page-hero p.lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 640px;
+      line-height: 1.72;
+    }
+
     /* ── Resource quick-links grid ── */
     .resource-grid {
       display: grid;
@@ -926,6 +954,7 @@
     @media (max-width: 900px) {
       .resource-grid { grid-template-columns: 1fr; }
       .supply-list { grid-template-columns: 1fr; }
+      .page-hero { padding: 48px 0 40px; }
       .cal-highlights { grid-template-columns: 1fr 1fr; }
       .cal-months { grid-template-columns: 1fr; }
       .cal-event-row {
@@ -997,6 +1026,9 @@
     .grade-print svg { width: 12px; height: 12px; flex-shrink: 0; }
     .grade-actions { gap: 0.5rem; flex-wrap: wrap; }
 
+    /* Print-only heading shown above the supply lists when printing. */
+    .print-header { display: none; }
+
     /* ── Print stylesheet ── */
     @media print {
       @page { margin: 0.55in; }
@@ -1004,15 +1036,25 @@
       .announce, .header, .page-hero, .final-cta, footer,
       .nav-toggle, .nav-menu,
       .print-toolbar, .grade-actions, .grade-progress,
-      .grade-chev, .arch-bg, .supply-note { display: none !important; }
+      .grade-chev, .arch-bg, .supply-note,
+      .tabs-wrap, #resources > .wrap > .sec-label,
+      #resources > .wrap > .sec-title,
+      #resources > .wrap > .sec-lead { display: none !important; }
 
-      body > section:not(#supply-lists) { display: none !important; }
+      body > section:not(#resources) { display: none !important; }
+
+      .tab-panel { display: none !important; }
+      #tab-supplies { display: block !important; padding: 0 !important; }
 
       body { background: #fff !important; color: #111 !important; }
-      .band-panel, #supply-lists { background: #fff !important; padding: 0 !important; }
+      .band-panel, #resources { background: #fff !important; padding: 0 !important; }
       .wrap { max-width: 100% !important; padding: 0 !important; }
 
-      #supply-lists .sec-label {
+      .print-header {
+        display: block !important;
+        margin: 0 0 10pt;
+      }
+      .print-header .print-eyebrow {
         font-family: 'Space Mono', monospace;
         font-size: 8pt;
         color: #555 !important;
@@ -1021,20 +1063,21 @@
         display: block;
         margin-bottom: 2pt;
       }
-      #supply-lists .sec-title {
+      .print-header .print-title {
         font-family: 'Space Grotesk', sans-serif;
         font-size: 18pt;
         color: #111 !important;
         margin: 0 0 4pt;
         letter-spacing: -0.01em;
       }
-      #supply-lists .sec-lead {
+      .print-header .print-lead {
         font-size: 9.5pt;
         color: #333 !important;
         line-height: 1.45;
-        margin: 0 0 12pt;
+        margin: 0;
         max-width: 100%;
       }
+
       .grades { margin-top: 8pt; gap: 0; display: block; }
 
       details.grade {
@@ -1137,11 +1180,9 @@
         text-decoration: none !important;
       }
 
-      /* Single-grade print: hide every other grade */
       body.printing-single .grade:not(.print-target) { display: none !important; }
 
-      /* Printout footer line */
-      #supply-lists::after {
+      #tab-supplies::after {
         content: "Renaissance Academy  ·  contact@racademy.org  ·  512-252-2277  ·  racademy.org/parent-resources";
         display: block;
         font-family: 'Space Mono', monospace;
@@ -1182,12 +1223,9 @@
     <ul class="nav-menu" id="primary-nav">
       <li><a href="../#stand">Our Pillars</a></li>
       <li><a href="../#journey">Academics</a></li>
-      <li><a href="../our-program/">Our Program</a></li>
-      <li><a href="../life-at-ra/">Life at RA</a></li>
-      <li><a href="../donate/">Donate</a></li>
       <li><a href="../#why">Why Us</a></li>
       <li><a href="./">Parent Resources</a></li>
-      <li><a href="../admissions/" class="nav-apply">Apply for Admission</a></li>
+      <li><a href="mailto:contact@racademy.org" class="nav-apply">Apply for Admission</a></li>
     </ul>
   </div>
 </header>
@@ -1207,7 +1245,7 @@
     <span class="mono">For Renaissance Families</span>
     <h1>Parent <span class="accent">Resources</span>.</h1>
     <p class="lead">
-      The 2025–2026 student supply lists for Pre-K through High School, organized by grade and subject — plus quick ways to reach our team.
+      Everything Renaissance Academy families need to start the year well — supply lists by grade, key documents, and quick links to reach our team.
     </p>
   </div>
 </section>
@@ -1220,32 +1258,72 @@
     <p class="sec-lead">The most-asked-for items for families this year.</p>
     <div class="resource-grid">
       <div class="resource-card">
+        <h3>Academic Calendar</h3>
+        <p>Important dates for the 2025–2026 school year — breaks, holidays, conferences, and observances.</p>
+        <a href="#calendar">View calendar →</a>
+      </div>
+      <div class="resource-card">
         <h3>2025–2026 Supply Lists</h3>
         <p>Required supplies for Pre-K through High School, organized by grade and subject.</p>
-        <a href="#supply-lists">Jump to lists →</a>
+        <a href="#supplies">Jump to lists →</a>
+      </div>
+      <div class="resource-card">
+        <h3>ParentsWeb Login</h3>
+        <p>Access grades, attendance, lesson plans, and teacher communication through RenWeb ParentsWeb.</p>
+        <a href="#parentsweb">Login instructions →</a>
+      </div>
+      <div class="resource-card">
+        <h3>FACTS Payment Plan</h3>
+        <p>Set up tuition payments through FACTS — accessed via the Financial tab of your ParentsWeb account.</p>
+        <a href="#facts">Setup guide →</a>
+      </div>
+      <div class="resource-card">
+        <h3>Uniform Requirements</h3>
+        <p>Full 2025–2026 uniform guide for Pre-K through 12, including PE uniforms and what's not allowed.</p>
+        <a href="#uniforms">View requirements →</a>
+      </div>
+      <div class="resource-card">
+        <h3>Transcript Requests</h3>
+        <p>How to request official or unofficial student transcripts for college, transfer, or verification.</p>
+        <a href="#transcript">Request a transcript →</a>
       </div>
       <div class="resource-card">
         <h3>Contact the Office</h3>
-        <p>Questions about your child's grade, classroom, or required materials? Our team can help.</p>
+        <p>Questions about classrooms, materials, or anything else? Our team is happy to help.</p>
         <a href="mailto:contact@racademy.org">Email us →</a>
-      </div>
-      <div class="resource-card">
-        <h3>Call the School</h3>
-        <p>Speak with our office directly — Monday through Friday during school hours.</p>
-        <a href="tel:5122522277">512-252-2277 →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── SUPPLY LISTS ────────────────────────────── -->
-<section class="band-panel pad" id="supply-lists">
+<!-- ── TABBED RESOURCES (Supply Lists + Calendar) ── -->
+<section class="band-panel pad" id="resources">
   <div class="wrap">
     <span class="mono sec-label">2025–2026 School Year</span>
-    <h2 class="sec-title">Student supply lists.</h2>
-    <p class="sec-lead">Find your child's grade below and tap to view the required supplies. Please label all items with your child's name using a permanent marker.</p>
+    <h2 class="sec-title">Resources for your year ahead.</h2>
+    <p class="sec-lead">Switch between supply lists and the academic calendar — everything you need for the year on one page.</p>
 
-    <div class="supply-note">
+    <div class="tabs-wrap">
+      <div class="tabs" role="tablist" aria-label="Parent resources">
+        <button class="tab-btn" role="tab" id="tabbtn-calendar" data-tab="calendar" aria-selected="true" aria-controls="tab-calendar">Academic Calendar</button>
+        <button class="tab-btn" role="tab" id="tabbtn-supplies" data-tab="supplies" aria-selected="false" aria-controls="tab-supplies">Supply Lists</button>
+        <button class="tab-btn" role="tab" id="tabbtn-parentsweb" data-tab="parentsweb" aria-selected="false" aria-controls="tab-parentsweb">ParentsWeb Login</button>
+        <button class="tab-btn" role="tab" id="tabbtn-facts" data-tab="facts" aria-selected="false" aria-controls="tab-facts">FACTS Payment Plan</button>
+        <button class="tab-btn" role="tab" id="tabbtn-uniforms" data-tab="uniforms" aria-selected="false" aria-controls="tab-uniforms">Uniform Requirements</button>
+        <button class="tab-btn" role="tab" id="tabbtn-transcript" data-tab="transcript" aria-selected="false" aria-controls="tab-transcript">Transcript</button>
+      </div>
+    </div>
+
+    <!-- ─── SUPPLIES TAB ─── -->
+    <div class="tab-panel" id="tab-supplies" role="tabpanel" aria-labelledby="tabbtn-supplies" hidden>
+      <!-- Shown only when printing (display:none on screen). -->
+      <div class="print-header">
+        <span class="print-eyebrow">2025–2026 School Year</span>
+        <h2 class="print-title">Student Supply Lists</h2>
+        <p class="print-lead">Required supplies for Pre-K through High School, organized by grade and subject. Please label all items with your child's name using a permanent marker.</p>
+      </div>
+
+      <div class="supply-note">
         <strong>A few notes for everyone:</strong> Please send only what is on your child's list — extra items take up classroom space. No rolling backpacks at most grade levels (see specific lists). Items marked with a clear front pocket should not be paper folders. If you have questions about a specific item, the office is happy to help.
         <br /><br />
         <strong>Tip:</strong> Tap the checkboxes to mark items off as you shop — your progress is saved on this device. Want a paper copy? Use the print buttons below or on any grade.
@@ -1892,6 +1970,727 @@
       </details>
 
       </div>
+    </div>
+    <!-- ─── /SUPPLIES TAB ─── -->
+
+    <!-- ─── CALENDAR TAB ─── -->
+    <div class="tab-panel" id="tab-calendar" role="tabpanel" aria-labelledby="tabbtn-calendar">
+      <div class="cal-disclaimer">
+        <strong>Heads up:</strong> Calendar dates below reflect the 2025–2026 plan and may be adjusted by the school. Islamic observances marked with <span class="cal-tag tag-islamic">Islamic</span> may shift by a day depending on the moon sighting. Please refer to school communications for final, confirmed dates.
+      </div>
+
+      <div class="cal-highlights">
+        <div class="cal-highlight">
+          <div class="cal-highlight-date">Aug 13</div>
+          <div class="cal-highlight-label">First day of school</div>
+        </div>
+        <div class="cal-highlight">
+          <div class="cal-highlight-date">Nov 24–28</div>
+          <div class="cal-highlight-label">Thanksgiving Break</div>
+        </div>
+        <div class="cal-highlight">
+          <div class="cal-highlight-date">Dec 22 – Jan 2</div>
+          <div class="cal-highlight-label">Winter Break</div>
+        </div>
+        <div class="cal-highlight">
+          <div class="cal-highlight-date">Jun 4</div>
+          <div class="cal-highlight-label">Last day of school</div>
+        </div>
+      </div>
+
+      <div class="cal-legend" aria-label="Calendar legend">
+        <span class="cal-tag tag-key">Key Date</span>
+        <span class="cal-tag tag-holiday">Holiday</span>
+        <span class="cal-tag tag-break">Break</span>
+        <span class="cal-tag tag-islamic">Islamic</span>
+        <span class="cal-tag tag-conf">Conference</span>
+        <span class="cal-tag tag-staff">Staff Day</span>
+        <span class="cal-tag tag-halfday">Half Day</span>
+      </div>
+
+      <div class="cal-months">
+
+        <div class="cal-month">
+          <h3>August 2025</h3>
+          <ul class="cal-events">
+            <li class="cal-event-row"><span class="cal-date">Aug 11–12</span><span class="cal-event-name">Teacher Workdays — No School</span><span class="cal-tag tag-staff">Staff</span></li>
+            <li class="cal-event-row"><span class="cal-date">Aug 13</span><span class="cal-event-name">First Day of School</span><span class="cal-tag tag-key">Key Date</span></li>
+            <li class="cal-event-row"><span class="cal-date">Aug 14–15</span><span class="cal-event-name">Pre-K Phased Orientation</span><span class="cal-tag tag-key">Key Date</span></li>
+          </ul>
+        </div>
+
+        <div class="cal-month">
+          <h3>September 2025</h3>
+          <ul class="cal-events">
+            <li class="cal-event-row"><span class="cal-date">Sep 1</span><span class="cal-event-name">Labor Day — No School</span><span class="cal-tag tag-holiday">Holiday</span></li>
+            <li class="cal-event-row"><span class="cal-date">Sep 5</span><span class="cal-event-name">Mawlid an-Nabi (observed)</span><span class="cal-tag tag-islamic">Islamic</span></li>
+          </ul>
+        </div>
+
+        <div class="cal-month">
+          <h3>October 2025</h3>
+          <ul class="cal-events">
+            <li class="cal-event-row"><span class="cal-date">Oct 13–15</span><span class="cal-event-name">Parent–Teacher Conferences</span><span class="cal-tag tag-conf">Conference</span></li>
+            <li class="cal-event-row"><span class="cal-date">Oct 17</span><span class="cal-event-name">End of Quarter 1 · Early Dismissal</span><span class="cal-tag tag-halfday">Half Day</span></li>
+          </ul>
+        </div>
+
+        <div class="cal-month">
+          <h3>November 2025</h3>
+          <ul class="cal-events">
+            <li class="cal-event-row"><span class="cal-date">Nov 11</span><span class="cal-event-name">Veterans Day — No School</span><span class="cal-tag tag-holiday">Holiday</span></li>
+            <li class="cal-event-row"><span class="cal-date">Nov 24–28</span><span class="cal-event-name">Thanksgiving Break</span><span class="cal-tag tag-break">Break</span></li>
+          </ul>
+        </div>
+
+        <div class="cal-month">
+          <h3>December 2025</h3>
+          <ul class="cal-events">
+            <li class="cal-event-row"><span class="cal-date">Dec 19</span><span class="cal-event-name">Early Dismissal — Last Day Before Break</span><span class="cal-tag tag-halfday">Half Day</span></li>
+            <li class="cal-event-row"><span class="cal-date">Dec 22 – Jan 2</span><span class="cal-event-name">Winter Break</span><span class="cal-tag tag-break">Break</span></li>
+          </ul>
+        </div>
+
+        <div class="cal-month">
+          <h3>January 2026</h3>
+          <ul class="cal-events">
+            <li class="cal-event-row"><span class="cal-date">Jan 5</span><span class="cal-event-name">Classes Resume</span><span class="cal-tag tag-key">Key Date</span></li>
+            <li class="cal-event-row"><span class="cal-date">Jan 19</span><span class="cal-event-name">MLK Jr. Day — No School</span><span class="cal-tag tag-holiday">Holiday</span></li>
+          </ul>
+        </div>
+
+        <div class="cal-month">
+          <h3>February 2026</h3>
+          <ul class="cal-events">
+            <li class="cal-event-row"><span class="cal-date">Feb 16</span><span class="cal-event-name">Presidents Day — No School</span><span class="cal-tag tag-holiday">Holiday</span></li>
+            <li class="cal-event-row"><span class="cal-date">Feb 17</span><span class="cal-event-name">First Day of Ramadan (moon sighting)</span><span class="cal-tag tag-islamic">Islamic</span></li>
+            <li class="cal-event-row"><span class="cal-date">Feb 27</span><span class="cal-event-name">Early Dismissal · Staff Development</span><span class="cal-tag tag-halfday">Half Day</span></li>
+          </ul>
+        </div>
+
+        <div class="cal-month">
+          <h3>March 2026</h3>
+          <ul class="cal-events">
+            <li class="cal-event-row"><span class="cal-date">Mar 13</span><span class="cal-event-name">End of Quarter 3</span><span class="cal-tag tag-key">Key Date</span></li>
+            <li class="cal-event-row"><span class="cal-date">Mar 16–20</span><span class="cal-event-name">Spring Break</span><span class="cal-tag tag-break">Break</span></li>
+            <li class="cal-event-row"><span class="cal-date">Mar 20</span><span class="cal-event-name">Eid al-Fitr (moon sighting)</span><span class="cal-tag tag-islamic">Islamic</span></li>
+          </ul>
+        </div>
+
+        <div class="cal-month">
+          <h3>April 2026</h3>
+          <ul class="cal-events">
+            <li class="cal-event-row"><span class="cal-date">Apr 3</span><span class="cal-event-name">Good Friday — No School</span><span class="cal-tag tag-holiday">Holiday</span></li>
+            <li class="cal-event-row"><span class="cal-date">Apr 16–17</span><span class="cal-event-name">Parent–Teacher Conferences</span><span class="cal-tag tag-conf">Conference</span></li>
+          </ul>
+        </div>
+
+        <div class="cal-month">
+          <h3>May 2026</h3>
+          <ul class="cal-events">
+            <li class="cal-event-row"><span class="cal-date">May 25</span><span class="cal-event-name">Memorial Day — No School</span><span class="cal-tag tag-holiday">Holiday</span></li>
+            <li class="cal-event-row"><span class="cal-date">May 27</span><span class="cal-event-name">Eid al-Adha (moon sighting)</span><span class="cal-tag tag-islamic">Islamic</span></li>
+            <li class="cal-event-row"><span class="cal-date">May 28–29</span><span class="cal-event-name">Final Exam Week</span><span class="cal-tag tag-key">Key Date</span></li>
+          </ul>
+        </div>
+
+        <div class="cal-month">
+          <h3>June 2026</h3>
+          <ul class="cal-events">
+            <li class="cal-event-row"><span class="cal-date">Jun 4</span><span class="cal-event-name">Last Day of School · Early Dismissal</span><span class="cal-tag tag-key">Key Date</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <!-- ─── /CALENDAR TAB ─── -->
+
+    <!-- ─── PARENTSWEB TAB ─── -->
+    <div class="tab-panel" id="tab-parentsweb" role="tabpanel" aria-labelledby="tabbtn-parentsweb" hidden>
+
+      <div class="pw-info">
+        <div class="pw-info-card">
+          <span class="pw-info-label">Login URL</span>
+          <span class="pw-info-value"><a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener">ra-tx.client.renweb.com/pw/</a></span>
+          <span class="pw-info-hint">Opens RenWeb ParentsWeb in a new tab.</span>
+        </div>
+        <div class="pw-info-card">
+          <span class="pw-info-label">District Code</span>
+          <span class="pw-info-value"><code>RA-TX</code></span>
+          <span class="pw-info-hint">Enter this when creating your account.</span>
+        </div>
+        <div class="pw-info-card">
+          <span class="pw-info-label">Support</span>
+          <span class="pw-info-value"><a href="mailto:renwebadmin@racademy.org">renwebadmin@<wbr/>racademy.org</a></span>
+          <span class="pw-info-hint">Email for login or account issues.</span>
+        </div>
+      </div>
+
+      <a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener" class="pw-launch">
+        Open ParentsWeb
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+
+      <div class="pw-section">
+        <h3>What you can access</h3>
+        <p class="pw-lead">RenWeb's ParentsWeb is a private, secure portal giving you a window into your child's school day — anytime, from any internet-capable device.</p>
+        <div class="pw-features">
+          <div class="pw-feature">Attendance</div>
+          <div class="pw-feature">Daily grades</div>
+          <div class="pw-feature">Progress reports</div>
+          <div class="pw-feature">Report cards</div>
+          <div class="pw-feature">Lesson plans</div>
+          <div class="pw-feature">Homework</div>
+          <div class="pw-feature">Missing assignments</div>
+          <div class="pw-feature">Discipline records</div>
+          <div class="pw-feature">School calendar</div>
+          <div class="pw-feature">School announcements</div>
+          <div class="pw-feature">Teacher email addresses</div>
+          <div class="pw-feature">Teacher websites</div>
+        </div>
+      </div>
+
+      <div class="pw-section">
+        <h3>First-time setup</h3>
+        <p class="pw-lead">Follow these steps to create your ParentsWeb account. Make sure the school has your email address on file in RenWeb before you start.</p>
+        <ol class="pw-steps">
+          <li class="pw-step">
+            <h4>Open the ParentsWeb login page</h4>
+            <p>Go to <a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener"><code>ra-tx.client.renweb.com/pw/</code></a> — or, from racademy.org, choose <strong>Admissions → Parent Resources → ParentsWeb</strong>.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Click "Create New ParentsWeb Account"</h4>
+            <p>You'll find the link below the username and password fields on the login page.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Enter the District Code and your email</h4>
+            <p>District Code is <code>RA-TX</code>. Use the same email address you gave on the registration form. Then click <strong>Create Account</strong>.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Check your email and set your password</h4>
+            <p>An email is sent with a "Click to change password" link. The link is valid for <strong>30 minutes</strong>. Open it, set a User Name and Password, then click <strong>Save Password</strong>.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Log in</h4>
+            <p>You'll land on the School Information home page. Click <strong>Tour the New ParentsWeb</strong> to watch a 6-minute video tour of the portal.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="pw-section">
+        <h3>Frequently asked questions</h3>
+        <div class="pw-faqs">
+
+          <details class="pw-faq">
+            <summary>
+              <span class="pw-faq-q">What is the ParentsWeb website address?</span>
+              <span class="pw-faq-chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+              </span>
+            </summary>
+            <div class="pw-faq-a">
+              Type <a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener"><code>ra-tx.client.renweb.com/pw/</code></a> into your browser's address bar, or use the "Open ParentsWeb" button above.
+            </div>
+          </details>
+
+          <details class="pw-faq">
+            <summary>
+              <span class="pw-faq-q">I'm seeing "Error: Invalid Credentials." How do I log in?</span>
+              <span class="pw-faq-chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+              </span>
+            </summary>
+            <div class="pw-faq-a">
+              The fastest fix is to reset your credentials:
+              <ol>
+                <li>On the login page, click <strong>Forgot Username/Password</strong>.</li>
+                <li>Enter your email address — it must match the email the school has in RenWeb.</li>
+                <li>Open the email and click the "Click to change password" link (valid for 30 minutes).</li>
+                <li>You'll see your Name, Person ID, User Name, and an obscured Password. Type a new User Name and Password, then click <strong>Save Password</strong>.</li>
+                <li>A confirmation message appears at the top of the browser. Log in with your new credentials.</li>
+              </ol>
+            </div>
+          </details>
+
+          <details class="pw-faq">
+            <summary>
+              <span class="pw-faq-q">I don't know my username. How do I log in?</span>
+              <span class="pw-faq-chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+              </span>
+            </summary>
+            <div class="pw-faq-a">
+              Click <strong>Forgot Username/Password</strong> and enter the email address the school has on file. The email you receive will display your existing User Name. If you remember your Password, you can simply close the page and log in with your User Name and Password — no need to reset.
+            </div>
+          </details>
+
+          <details class="pw-faq">
+            <summary>
+              <span class="pw-faq-q">I'm a new parent. How do I get a username and password?</span>
+              <span class="pw-faq-chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+              </span>
+            </summary>
+            <div class="pw-faq-a">
+              First, make sure the school has your email address on file in RenWeb. Then:
+              <ol>
+                <li>Go to <a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener"><code>ra-tx.client.renweb.com/pw/</code></a>.</li>
+                <li>The District Code is filled in automatically. If not, enter <code>RA-TX</code>.</li>
+                <li>Click <strong>Create New ParentsWeb Account</strong>.</li>
+                <li>Type your email address — an email is sent to you.</li>
+                <li>Click the "Click to change password" link in the email (valid for 30 minutes).</li>
+                <li>The browser displays your Name and RenWeb ID. Type a User Name, Password, and Confirm Password, then click <strong>Save Password</strong>.</li>
+                <li>You'll see "User Name/Password successfully updated." Log in with your new credentials.</li>
+              </ol>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      <div class="pw-section">
+        <div class="pw-security">
+          <strong>Keep your account secure.</strong> Your login gives access to your child's records — including grades, attendance, and discipline. Please do not share your username or password with others, and use a strong, unique password.
+        </div>
+      </div>
+
+    </div>
+    <!-- ─── /PARENTSWEB TAB ─── -->
+
+    <!-- ─── FACTS PAYMENT PLAN TAB ─── -->
+    <div class="tab-panel" id="tab-facts" role="tabpanel" aria-labelledby="tabbtn-facts" hidden>
+
+      <div class="pw-info">
+        <div class="pw-info-card">
+          <span class="pw-info-label">Access Through</span>
+          <span class="pw-info-value">ParentsWeb → Financial tab</span>
+          <span class="pw-info-hint">FACTS lives inside your ParentsWeb account.</span>
+        </div>
+        <div class="pw-info-card">
+          <span class="pw-info-label">FACTS Support</span>
+          <span class="pw-info-value"><a href="tel:18664414637">(866) 441-4637</a></span>
+          <span class="pw-info-hint">Speak with a FACTS representative directly.</span>
+        </div>
+        <div class="pw-info-card">
+          <span class="pw-info-label">School Office</span>
+          <span class="pw-info-value"><a href="mailto:contact@racademy.org">contact@<wbr/>racademy.org</a></span>
+          <span class="pw-info-hint">For Renaissance-specific tuition questions.</span>
+        </div>
+      </div>
+
+      <a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener" class="pw-launch">
+        Open ParentsWeb to Begin
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+
+      <div class="pw-section">
+        <h3>About FACTS</h3>
+        <p class="pw-lead">FACTS is Renaissance Academy's tuition management system. Setting up a FACTS payment plan lets you spread tuition across the school year with automatic payments from a financial account you choose. You'll set everything up from inside your ParentsWeb account.</p>
+      </div>
+
+      <div class="pw-section">
+        <h3>What you'll need</h3>
+        <div class="pw-features">
+          <div class="pw-feature">An active ParentsWeb account</div>
+          <div class="pw-feature">Financial account information (bank or card)</div>
+          <div class="pw-feature">About 10 minutes to complete setup</div>
+        </div>
+        <p class="pw-lead" style="margin-top:1.2rem;">Don't have a ParentsWeb account yet? <a href="#parentsweb" style="color:var(--purple); font-weight:600;">Follow the ParentsWeb setup instructions first →</a></p>
+      </div>
+
+      <div class="pw-section">
+        <h3>Setting up your payment plan</h3>
+        <p class="pw-lead">Once you're signed in to ParentsWeb, these eight steps will walk you through the FACTS setup wizard.</p>
+        <ol class="pw-steps">
+          <li class="pw-step">
+            <h4>Sign in to ParentsWeb</h4>
+            <p>Log in at <a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener"><code>ra-tx.client.renweb.com/pw/</code></a> using your ParentsWeb credentials.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Open the Financial tab</h4>
+            <p>From the left side menu, click <strong>FINANCIAL</strong>.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Choose "Set up a Payment Plan"</h4>
+            <p>In the <strong>Financial Links</strong> box, select <strong>Set up a Payment Plan</strong>.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Click Begin</h4>
+            <p>Click <strong>Begin</strong> to launch the FACTS setup wizard.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Plan Options</h4>
+            <p>Select a payment plan and click <strong>Next</strong>. Take a moment to review any fee information before continuing.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Payment Details</h4>
+            <p>Enter your financial account information — this is where your tuition payments will be drawn from.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Payment Schedule</h4>
+            <p>Pick your payment date and review the full schedule of upcoming charges.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Review &amp; Authorize</h4>
+            <p>Use the <strong>Change</strong> links on the right to go back and edit any entry. When everything looks correct, check the box to agree to the <strong>Terms &amp; Conditions</strong> and click <strong>Done</strong>.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="pw-section">
+        <div class="pw-security">
+          <strong>Need help mid-setup?</strong> Call a FACTS representative directly at <a href="tel:18664414637" style="color:var(--purple-strong); font-weight:600;">(866) 441-4637</a>. For Renaissance-specific questions about your tuition balance or plan options, please reach out to the school office at <a href="mailto:contact@racademy.org" style="color:var(--purple-strong); font-weight:600;">contact@racademy.org</a> or <a href="tel:5122522277" style="color:var(--purple-strong); font-weight:600;">512-252-2277</a>.
+        </div>
+      </div>
+
+    </div>
+    <!-- ─── /FACTS PAYMENT PLAN TAB ─── -->
+
+    <!-- ─── UNIFORM REQUIREMENTS TAB ─── -->
+    <div class="tab-panel" id="tab-uniforms" role="tabpanel" aria-labelledby="tabbtn-uniforms" hidden>
+
+      <div class="pw-section" style="margin-top:0;">
+        <div class="uniform-deny">
+          <div class="uniform-deny-head">
+            <span class="uniform-deny-icon" aria-hidden="true">✕</span>
+            <h3>Not allowed for any grade</h3>
+          </div>
+          <ul class="uniform-deny-list">
+            <li>Cargo pants</li>
+            <li>Joggers</li>
+            <li>Jeans</li>
+            <li>Ripped pants</li>
+            <li>Sweatpants</li>
+            <li>Different-color hijab</li>
+            <li>Sandals, Crocs, open-toe shoes</li>
+            <li>T-shirts not listed in the requirements</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pw-section">
+        <h3>Elementary (KG – 5th Grade)</h3>
+        <p class="pw-lead">Uniforms by gender for Pre-K through 5th, plus the shared PE uniform.</p>
+        <div class="uniform-groups">
+
+          <div class="uniform-card">
+            <div class="uniform-card-head">
+              <h4>Female Students</h4>
+              <span class="uniform-card-grade">KG – 5th</span>
+            </div>
+            <ul class="uniform-items">
+              <li>
+                Navy blue jumper (no logo required)
+                <div class="shop-links">
+                  <a href="https://www.frenchtoast.com/twin-buckle-tab-jumper-girls4-6x-7/p/1285" target="_blank" rel="noopener" class="shop-link">French Toast <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+              <li>
+                White shirt or polo under the jumper
+                <span class="uniform-note"><span class="pill-grade">KG–3rd</span>Short or long sleeves allowed.</span>
+                <span class="uniform-note"><span class="pill-grade">4th–5th</span>Long sleeves only.</span>
+                <div class="shop-links">
+                  <a href="https://www.frenchtoast.com/short-sleeve-interlock-knit-polo-boys-4-7/p/1010" target="_blank" rel="noopener" class="shop-link">Short polo <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.frenchtoast.com/short-sleeve-modern-peter-pan-girls-uniform-blouse-2t-4t/p/1593" target="_blank" rel="noopener" class="shop-link">Short blouse <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.frenchtoast.com/long-sleeve-modern-peter-pan-girls-uniform-blouse-2t-4t/p/1594" target="_blank" rel="noopener" class="shop-link">Long blouse <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.frenchtoast.com/long-sleeve-pique-polo-toddler-2t-4t/p/1009" target="_blank" rel="noopener" class="shop-link">Long polo <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+              <li>
+                Bottoms
+                <span class="uniform-note"><span class="pill-grade">KG–2nd</span>Navy blue tights or pants.</span>
+                <span class="uniform-note"><span class="pill-grade">3rd–5th</span>Navy blue loose-fitting pants only — no tights, jeans, or skinny pants.</span>
+                <div class="shop-links">
+                  <a href="https://www.frenchtoast.com/elastic-waist-pull-on-pant-girls-4-6x/p/1650" target="_blank" rel="noopener" class="shop-link">French Toast <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+              <li>
+                Hijab
+                <span class="uniform-note"><span class="pill-grade">4th–5th</span>White hijab required — non-sheer fabric (cotton or jersey).</span>
+                <span class="uniform-note"><span class="pill-grade">2nd–3rd</span>White hijab for prayer time only.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="uniform-card">
+            <div class="uniform-card-head">
+              <h4>Male Students</h4>
+              <span class="uniform-card-grade">KG – 5th</span>
+            </div>
+            <ul class="uniform-items">
+              <li>
+                Navy blue dress pants (no jeans)
+                <div class="shop-links">
+                  <a href="https://www.frenchtoast.com/straight-fit-chino-pant-boys-4-7/p/1646" target="_blank" rel="noopener" class="shop-link">French Toast <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+              <li>
+                White long- or short-sleeve shirt or polo
+                <div class="shop-links">
+                  <a href="https://www.frenchtoast.com/short-sleeve-interlock-knit-polo-boys-4-7/p/1010" target="_blank" rel="noopener" class="shop-link">Short polo <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.frenchtoast.com/long-sleeve-pique-polo-toddler-2t-4t/p/1009" target="_blank" rel="noopener" class="shop-link">Long polo <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.frenchtoast.com/short-sleeve-oxford-shirt-toddler-2t-4t/p/1020" target="_blank" rel="noopener" class="shop-link">Short oxford <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.frenchtoast.com/long-sleeve-classic-dress-shirt-boys-toddler-2t-4t/p/1017" target="_blank" rel="noopener" class="shop-link">Long dress shirt <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="uniform-card" style="grid-column: 1 / -1;">
+            <div class="uniform-card-head">
+              <h4>PE Uniform — All Students</h4>
+              <span class="uniform-card-grade">KG – 5th</span>
+            </div>
+            <ul class="uniform-items">
+              <li>
+                Navy blue athletic pants
+                <div class="shop-links">
+                  <a href="https://www.amazon.com/Gioberti-Running-Athletic-Elastic-Bottom/dp/B0898KSTQG/" target="_blank" rel="noopener" class="shop-link">Amazon <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+              <li>
+                White uniform shirt or polo
+                <span class="uniform-note"><span class="pill-grade">4th–5th</span>Long sleeve only.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="pw-section">
+        <h3>Middle &amp; High School (Grades 6 – 12)</h3>
+        <p class="pw-lead">Regular and PE uniforms for boys and girls. PE uniforms are strictly enforced — nothing else will be accepted.</p>
+        <div class="uniform-groups">
+
+          <div class="uniform-card">
+            <div class="uniform-card-head">
+              <h4>Boys — Regular</h4>
+              <span class="uniform-card-grade">Grades 6 – 12</span>
+            </div>
+            <ul class="uniform-items">
+              <li>
+                Khaki pants
+                <div class="shop-links">
+                  <a href="https://www.amazon.com/Dockers-Classic-Khaki-Pants-Timberwolf/dp/B01MV0SWG5/" target="_blank" rel="noopener" class="shop-link">Amazon <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+              <li>
+                Light blue shirt or polo
+                <span class="uniform-note">Button shirts also acceptable. Long or short sleeve. No logo required.</span>
+                <div class="shop-links">
+                  <a href="https://www.amazon.com/Port-Authority-K500-Silk-Touch/dp/B0085N78KE/" target="_blank" rel="noopener" class="shop-link">Polo <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.amazon.com/Amazon-Essentials-Standard-Regular-Fit-Short-Sleeve/dp/B07J6J4ZN5/" target="_blank" rel="noopener" class="shop-link">Short button <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.amazon.com/French-Toast-Sleeve-Oxford-Dress/dp/B00YBQTZUK/" target="_blank" rel="noopener" class="shop-link">Long button <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="uniform-card">
+            <div class="uniform-card-head">
+              <h4>Boys — PE</h4>
+              <span class="uniform-card-grade">Grades 6 – 12</span>
+            </div>
+            <ul class="uniform-items">
+              <li>
+                Navy blue athletic pants
+                <span class="uniform-note">Two options below — pick whichever fits your child best.</span>
+                <div class="shop-links">
+                  <a href="https://www.amazon.com/Gioberti-Running-Athletic-Elastic-Bottom/dp/B0898KTMQK/" target="_blank" rel="noopener" class="shop-link">Option 1 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.amazon.com/Gioberti-Athletic-Track-Pants-Ribbed/dp/B08TKCCD4R/" target="_blank" rel="noopener" class="shop-link">Option 2 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+              <li>
+                Set of gray T-shirts
+                <div class="shop-links">
+                  <a href="https://www.amazon.com/Hanes-ComfortBlend-Sleeve-T-Shirt-Oxford/dp/B00N5PLTHK/" target="_blank" rel="noopener" class="shop-link">Hanes <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="uniform-card">
+            <div class="uniform-card-head">
+              <h4>Girls — Regular</h4>
+              <span class="uniform-card-grade">Grades 6 – 12</span>
+            </div>
+            <ul class="uniform-items">
+              <li>Purple hijab</li>
+              <li>
+                Solid black abaya
+                <span class="uniform-note">The first option below is the strongest recommendation.</span>
+                <div class="shop-links">
+                  <a href="https://www.modanisa.com/en/black-unlined-crew-neck-topcoat-tavin-7853768.html" target="_blank" rel="noopener" class="shop-link">★ Recommended <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.modanisa.com/en/black-unlined-crew-neck-abayas-miss-cazibe-835559.html" target="_blank" rel="noopener" class="shop-link">Option 2 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.modanisa.com/en/black-unlined-crew-neck-abayas-miss-cazibe-1475536.html" target="_blank" rel="noopener" class="shop-link">Option 3 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="uniform-card">
+            <div class="uniform-card-head">
+              <h4>Girls — PE</h4>
+              <span class="uniform-card-grade">Grades 6 – 12</span>
+            </div>
+            <ul class="uniform-items">
+              <li>
+                Gray tracksuit
+                <span class="uniform-note">Please double-check sizing carefully.</span>
+                <div class="shop-links">
+                  <a href="https://www.modanisa.com/en/grey-tracksuit-set-bwest-8901687.html" target="_blank" rel="noopener" class="shop-link">Option 1 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.modanisa.com/en/grey-tracksuit-set-benin-8963233.html" target="_blank" rel="noopener" class="shop-link">Option 2 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                  <a href="https://www.modanisa.com/en/grey-crew-neck-tracksuit-set-bwest-8956199.html" target="_blank" rel="noopener" class="shop-link">Option 3 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+                </div>
+              </li>
+              <li>White cotton (or any non-sheer fabric) hijab on PE days only</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="pw-section">
+        <div class="pw-security">
+          <strong>Questions about a specific item?</strong> Sizing, color matches, or replacements between school years — please reach out to the office at <a href="mailto:contact@racademy.org" style="color:var(--purple-strong); font-weight:600;">contact@racademy.org</a> or <a href="tel:5122522277" style="color:var(--purple-strong); font-weight:600;">512-252-2277</a>.
+        </div>
+      </div>
+
+    </div>
+    <!-- ─── /UNIFORM REQUIREMENTS TAB ─── -->
+
+    <!-- ─── TRANSCRIPT TAB ─── -->
+    <div class="tab-panel" id="tab-transcript" role="tabpanel" aria-labelledby="tabbtn-transcript" hidden>
+
+      <div class="pw-info">
+        <div class="pw-info-card">
+          <span class="pw-info-label">Request By Email</span>
+          <span class="pw-info-value"><a href="mailto:contact@racademy.org?subject=Transcript%20Request">contact@<wbr/>racademy.org</a></span>
+          <span class="pw-info-hint">Fastest way — opens a pre-filled email.</span>
+        </div>
+        <div class="pw-info-card">
+          <span class="pw-info-label">Call the Office</span>
+          <span class="pw-info-value"><a href="tel:5122522277">512-252-2277</a></span>
+          <span class="pw-info-hint">Mon–Fri during school hours.</span>
+        </div>
+        <div class="pw-info-card">
+          <span class="pw-info-label">Mail / In-Person</span>
+          <span class="pw-info-value">14401 Owen Tech Blvd<br/>Austin, TX 78728</span>
+          <span class="pw-info-hint">Office hours vary — call ahead.</span>
+        </div>
+      </div>
+
+      <a href="mailto:contact@racademy.org?subject=Transcript%20Request&body=Hello%2C%0A%0AI%20would%20like%20to%20request%20a%20transcript.%0A%0AStudent%20full%20legal%20name%3A%0ADate%20of%20birth%3A%0AGraduation%20year%20or%20current%20grade%3A%0ATranscript%20type%20(official%20sealed%20%2F%20electronic%20%2F%20unofficial)%3A%0ANumber%20of%20copies%3A%0ADestination%20(school%2C%20college%2C%20employer%20-%20full%20address%20or%20email)%3A%0ARequester%20name%20%26%20relationship%20to%20student%3A%0AContact%20phone%3A%0A%0AThank%20you." class="pw-launch">
+        Email Transcript Request
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+
+      <!--
+        ============================================================
+        TODO: Stripe integration for online transcript ordering
+        ============================================================
+        Replace the .coming-soon block below with a real request +
+        payment form once the integration is in place.
+
+        Implementation outline:
+          1. Form fields (same as the mailto template):
+             - Student full legal name, DOB, grad year / current grade
+             - Transcript type (official sealed / electronic / unofficial)
+             - Number of copies
+             - Destination address or email (multiple destinations?)
+             - Requester name, relationship to student, phone, email
+             - Optional rush-processing flag
+          2. Pricing — CONFIRM WITH SCHOOL OFFICE before launch:
+             - Official sealed copy fee
+             - Electronic delivery fee
+             - Unofficial copy fee
+             - Rush surcharge
+             - Multi-copy discount?
+          3. Stripe:
+             - Stripe Checkout (hosted) is simpler; Payment Element gives more control
+             - Use Stripe Tax if applicable (TX sales tax on services — verify)
+             - Webhook endpoint for `checkout.session.completed` to mark request paid
+             - Store request + payment intent ID server-side (no Stripe data in browser)
+          4. Fulfillment:
+             - On successful payment, email the registrar with full request details
+             - Send the parent a confirmation + receipt (Stripe handles receipts by default)
+             - Add request to internal tracker so office can mark complete
+          5. Edge cases to handle:
+             - Refund policy + how to issue refunds (failed/incorrect requests)
+             - Records for students no longer enrolled (alumni transcripts)
+             - FERPA: only release to parent of minor / adult student / authorized 3rd party
+             - Signature requirement (if any) — DocuSign or e-sig before fulfillment?
+          6. Keep the email + phone fallback for accessibility and edge cases.
+        ============================================================
+      -->
+      <div class="pw-section">
+        <div class="coming-soon">
+          <div class="coming-soon-head">
+            <span class="coming-soon-badge">Coming soon</span>
+            <span class="coming-soon-tech">Powered by Stripe</span>
+          </div>
+          <h3>Order &amp; pay for transcripts online</h3>
+          <p>We're building a secure online transcript request form with payment via Stripe — fill in the request, pay with card, and your transcript moves straight into the office queue. No back-and-forth email needed.</p>
+          <p class="coming-soon-meta">In the meantime, please use the email or phone options above to place a request.</p>
+        </div>
+      </div>
+
+      <div class="pw-section">
+        <h3>About transcripts</h3>
+        <p class="pw-lead">Renaissance Academy issues official and unofficial student transcripts for college and university applications, transfers between schools, scholarship and financial-aid programs, and employment or eligibility verification. Requests are handled by the school office.</p>
+      </div>
+
+      <div class="pw-section">
+        <h3>How to request</h3>
+        <p class="pw-lead">Email is the fastest path — use the button above to start a pre-filled request. Or follow these steps to make a request by phone or in person.</p>
+        <ol class="pw-steps">
+          <li class="pw-step">
+            <h4>Contact the school office</h4>
+            <p>Email <a href="mailto:contact@racademy.org">contact@racademy.org</a>, call <a href="tel:5122522277">512-252-2277</a>, or stop by during office hours.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Share student details</h4>
+            <p>Provide the student's full legal name, date of birth, and graduation year (or current grade). This helps the office locate the correct record quickly.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Specify the type of transcript</h4>
+            <p>Let us know whether you need an <strong>official sealed</strong> copy, an <strong>electronic</strong> copy sent directly to a receiving institution, or an <strong>unofficial</strong> copy for personal records.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Tell us where it should go</h4>
+            <p>For each destination, include the full mailing address or the institution's transcript-receiving email. Official transcripts are typically sent directly from the school to the receiving institution.</p>
+          </li>
+          <li class="pw-step">
+            <h4>Allow processing time</h4>
+            <p>Please allow several business days for the office to prepare and send transcripts. For time-sensitive deadlines (college applications, scholarships), reach out as early as possible.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="pw-section">
+        <h3>What to include in your request</h3>
+        <div class="pw-features">
+          <div class="pw-feature">Student's full legal name</div>
+          <div class="pw-feature">Date of birth</div>
+          <div class="pw-feature">Graduation year or current grade</div>
+          <div class="pw-feature">Transcript type (official / electronic / unofficial)</div>
+          <div class="pw-feature">Number of copies needed</div>
+          <div class="pw-feature">Destination address or email</div>
+          <div class="pw-feature">Requester name &amp; relationship</div>
+          <div class="pw-feature">Contact phone number</div>
+          <div class="pw-feature">Deadline (if applicable)</div>
+        </div>
+      </div>
+
+      <div class="pw-section">
+        <div class="pw-security">
+          <strong>Need it urgently or have a special situation?</strong> If you're approaching a college, scholarship, or transfer deadline — or you need a transcript for a former student — call the office at <a href="tel:5122522277" style="color:var(--purple-strong); font-weight:600;">512-252-2277</a> so we can help right away.
+        </div>
+      </div>
+
+    </div>
+    <!-- ─── /TRANSCRIPT TAB ─── -->
 
   </div>
 </section>
@@ -1942,15 +2741,15 @@
         <ul>
           <li><a href="./">Parent Resources</a></li>
           <li><a href="#supplies">Supply Lists</a></li>
-          <li><a href="../admissions/">Admissions</a></li>
+          <li><a href="mailto:contact@racademy.org">Admissions</a></li>
           <li><a href="../#stand">Our Pillars</a></li>
-          <li><a href="../about/contact-us/">Contact</a></li>
+          <li><a href="mailto:contact@racademy.org">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Visit</h4>
         <ul>
-          <li><a href="../about/contact-us/">North Austin, Texas</a></li>
+          <li><a href="#">North Austin, Texas</a></li>
           <li><a href="tel:5122522277">512-252-2277</a></li>
           <li><a href="mailto:contact@racademy.org">contact@racademy.org</a></li>
         </ul>
@@ -1964,6 +2763,85 @@
 </footer>
 
 <script>
+/* ─── Tabs (Supply Lists ↔ Academic Calendar ↔ …) ─── */
+(function () {
+  var tabs = document.querySelectorAll('.tab-btn');
+  if (!tabs.length) return;
+  var panels = document.querySelectorAll('.tab-panel');
+  var tabsWrap = document.querySelector('.tabs-wrap');
+  var tabsScroller = document.querySelector('.tabs');
+
+  /* Update edge-fade gradient visibility based on scroll position.
+     Tolerates 1px rounding by checking with a 2px slack. */
+  function updateEdgeFades() {
+    if (!tabsWrap || !tabsScroller) return;
+    var sl = tabsScroller.scrollLeft;
+    var max = tabsScroller.scrollWidth - tabsScroller.clientWidth;
+    tabsWrap.classList.toggle('has-overflow-left', sl > 2);
+    tabsWrap.classList.toggle('has-overflow-right', sl < max - 2);
+  }
+
+  /* Scroll the active tab into the visible area on small screens. */
+  function scrollActiveIntoView(btn) {
+    if (!btn || !tabsScroller) return;
+    /* Only worth doing when the strip actually overflows. */
+    if (tabsScroller.scrollWidth <= tabsScroller.clientWidth + 2) return;
+    if (typeof btn.scrollIntoView === 'function') {
+      try {
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } catch (e) {
+        /* Fallback for older Safari that doesn't accept options object. */
+        var btnRect = btn.getBoundingClientRect();
+        var scRect = tabsScroller.getBoundingClientRect();
+        var offset = (btnRect.left + btnRect.width / 2) - (scRect.left + scRect.width / 2);
+        tabsScroller.scrollLeft += offset;
+      }
+    }
+  }
+
+  function activate(tabId, updateHash) {
+    var matched = null;
+    tabs.forEach(function (t) {
+      var selected = t.dataset.tab === tabId;
+      if (selected) matched = t;
+      t.setAttribute('aria-selected', selected ? 'true' : 'false');
+      t.tabIndex = selected ? 0 : -1;
+    });
+    if (!matched) return;
+    panels.forEach(function (p) {
+      p.hidden = p.id !== 'tab-' + tabId;
+    });
+    if (updateHash && history.replaceState) {
+      history.replaceState(null, '', '#' + tabId);
+    }
+    scrollActiveIntoView(matched);
+  }
+
+  tabs.forEach(function (t, idx) {
+    t.addEventListener('click', function () { activate(t.dataset.tab, true); });
+    t.addEventListener('keydown', function (e) {
+      var next = null;
+      if (e.key === 'ArrowRight') next = tabs[(idx + 1) % tabs.length];
+      else if (e.key === 'ArrowLeft') next = tabs[(idx - 1 + tabs.length) % tabs.length];
+      if (next) { e.preventDefault(); next.focus(); activate(next.dataset.tab, true); }
+    });
+  });
+
+  if (tabsScroller) {
+    tabsScroller.addEventListener('scroll', updateEdgeFades, { passive: true });
+  }
+  window.addEventListener('resize', updateEdgeFades);
+  window.addEventListener('hashchange', function () {
+    var id = (location.hash || '').replace('#', '');
+    if (id) activate(id, false);
+  });
+
+  var initial = (location.hash || '').replace('#', '');
+  if (initial) activate(initial, false);
+  /* Initial paint of the edge fades on load. */
+  updateEdgeFades();
+})();
+
 /* ─── Supply-list checkboxes (localStorage-persisted) ─── */
 (function () {
   var STORAGE_PREFIX = 'racademy-supplies::v1::';
@@ -1976,6 +2854,7 @@
 
   /* ─── Printing helpers ─── */
   var savedOpenStates = null;
+  var savedSuppliesHidden = false;
   function openAllGrades() {
     var grades = document.querySelectorAll('details.grade');
     savedOpenStates = [];
@@ -1991,12 +2870,26 @@
     });
     savedOpenStates = null;
   }
+  function showSuppliesTab() {
+    var panel = document.getElementById('tab-supplies');
+    if (panel) {
+      savedSuppliesHidden = panel.hasAttribute('hidden');
+      panel.removeAttribute('hidden');
+    }
+  }
+  function restoreSuppliesTab() {
+    var panel = document.getElementById('tab-supplies');
+    if (panel && savedSuppliesHidden) panel.setAttribute('hidden', '');
+    savedSuppliesHidden = false;
+  }
   function printAll() {
+    showSuppliesTab();
     openAllGrades();
     document.body.classList.add('printing', 'printing-all');
     window.print();
   }
   function printGrade(grade) {
+    showSuppliesTab();
     openAllGrades();
     document.querySelectorAll('.grade.print-target').forEach(function (g) { g.classList.remove('print-target'); });
     grade.classList.add('print-target');
@@ -2007,6 +2900,7 @@
     document.body.classList.remove('printing', 'printing-all', 'printing-single');
     document.querySelectorAll('.grade.print-target').forEach(function (g) { g.classList.remove('print-target'); });
     restoreGradeStates();
+    restoreSuppliesTab();
   }
   window.addEventListener('afterprint', cleanupPrint);
 
