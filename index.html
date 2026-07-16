@@ -9,6 +9,77 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="dist/styles.css" />
+  <style>
+    .hero-home { padding-block: 1.35rem 1.65rem; }
+    .hero-home .hero-inner { padding: 1rem 0.85rem 1.2rem; max-width: 1040px; }
+    .hero-home h1 { font-size: clamp(1.8rem, 4vw, 2.75rem); margin-bottom: 0.7rem; max-width: 760px; text-shadow: none; }
+    .hero-home .hero-lead { margin-bottom: 0.85rem; font-size: 1rem; text-shadow: none; }
+    .hero-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(124,58,237,0.18);
+      background: rgba(124,58,237,0.06);
+      color: #2a1259;
+      font-weight: 600;
+      margin-bottom: 0.95rem;
+      font-size: 0.95rem;
+    }
+    .hero-highlight::before {
+      content: "";
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 50%;
+      background: #7c3aed;
+      box-shadow: 0 0 0 4px rgba(124,58,237,0.16);
+      flex-shrink: 0;
+    }
+    .hero-ask {
+      font-family: "Space Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.72rem;
+      color: #7c3aed;
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+    }
+    .quick-link-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.25rem;
+    }
+    .quick-link-card {
+      display: block;
+      text-decoration: none;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+      border: 1px solid #7c3aed;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(91,33,182,0.28);
+      line-height: 1.4;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .quick-link-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(91,33,182,0.34);
+      background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+    }
+    @media (max-width: 767px) {
+      .hero-home .hero-inner { padding-inline: 0.75rem; }
+      .hero-highlight { border-radius: 14px; white-space: normal; line-height: 1.45; }
+      .quick-link-grid { grid-template-columns: 1fr; }
+      .quick-link-card { min-height: 50px; padding: 0.75rem 0.8rem; }
+    }
+  </style>
   <script defer src="nav.js"></script>
 </head>
 <body>
@@ -46,7 +117,7 @@
 </header>
 
 <!-- ── HERO ────────────────────────────────────── -->
-<section class="hero">
+<section class="hero hero-home">
   <div class="arch-bg">
     <svg width="620" height="640" viewBox="0 0 620 640" fill="none" style="right:-60px; top:-40px;">
       <g stroke="#7c3aed" stroke-width="1.4" opacity="0.16">
@@ -58,22 +129,14 @@
   </div>
   <div class="wrap hero-inner">
     <span class="pill"><span class="dot"></span><span class="mono">Serving Greater Austin · Since 2007</span></span>
-    <h1>Welcome to Renaissance Academy,<br /><span class="accent">where faith and learning flourish</span>.</h1>
-    <p class="hero-lead">
-      Renaissance Academy is a full-time Islamic school in the heart of North Austin, Texas — rooted in Qur'an, character, and academic rigor, guiding students from Pre-K through College-Prep High School.
-    </p>
-    <div class="hero-actions">
-      <a href="admissions/" class="btn-primary">
-        Apply for Admission
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="#stand" class="btn-outline">See Our Vision</a>
-    </div>
-    <div class="stats-row">
-      <div class="stat"><div class="stat-num">2007</div><div class="stat-label">Serving since</div></div>
-      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Graduation rate</div></div>
-      <div class="stat"><div class="stat-num">Pre-K–12</div><div class="stat-label">Full-time school</div></div>
-      <div class="stat"><div class="stat-num">Tier 1</div><div class="stat-label">College admits</div></div>
+    <h1>Welcome to Renaissance Academy</h1>
+    <p class="hero-lead">A 501(c)(3) nonprofit private Islamic school serving students from Pre-K through 12th grade.</p>
+    <div class="hero-highlight">Upcoming events: School opens on 10th August</div>
+    <div class="hero-ask">How can we help you today?</div>
+    <div class="quick-link-grid">
+      <a href="about/" class="quick-link-card">Discover our school community</a>
+      <a href="parent-resources-new/" class="quick-link-card">Access Parent Resources &amp; RenWeb</a>
+      <a href="mailto:contact@racademy.org?subject=Tax%20Deductible%20Donation%20Inquiry" class="quick-link-card">Support the school with a tax-deductible gift</a>
     </div>
   </div>
 </section>
