@@ -10,333 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../dist/styles.css" />
   <script defer src="../nav.js"></script>
-  <style data-page-styles>
-    /* ── Page hero (slimmer than the homepage hero) ── */
-    .page-hero {
-      position: relative;
-      background:
-        radial-gradient(ellipse 80% 70% at 88% 0%, var(--lavender-2), transparent 65%),
-        radial-gradient(ellipse 60% 55% at 0% 100%, var(--lavender), transparent 60%),
-        var(--white);
-      overflow: hidden;
-      padding: 64px 0 56px;
-    }
-    .page-hero .wrap { position: relative; z-index: 2; }
-    .page-hero h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      font-size: clamp(2.1rem, 4vw, 3.2rem);
-      line-height: 1.1;
-      color: var(--ink);
-      margin: 0.9rem 0 1.1rem;
-    }
-    .page-hero h1 .accent { color: var(--purple); }
-    .page-hero p.lead {
-      font-size: 1.08rem;
-      color: var(--muted);
-      max-width: 640px;
-      line-height: 1.72;
-    }
-    .page-hero .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
-
-    /* ── Numbered process steps ── */
-    .steps {
-      counter-reset: stepc;
-      list-style: none;
-      padding: 0;
-      margin-top: 3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .step {
-      position: relative;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 1.4rem 1.6rem 1.4rem 5.2rem;
-      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-    }
-    .step:hover {
-      border-color: var(--purple-light);
-      box-shadow: 0 14px 32px rgba(124,58,237,0.10);
-      transform: translateY(-2px);
-    }
-    .step::before {
-      counter-increment: stepc;
-      content: counter(stepc);
-      position: absolute;
-      left: 1.4rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px; height: 44px;
-      border-radius: 11px;
-      border: 1.5px solid var(--purple);
-      background: rgba(124,58,237,0.08);
-      color: var(--purple);
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.15rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .step h3 {
-      font-size: 1.15rem;
-      color: var(--ink);
-      margin: 0 0 0.35rem;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-    .step p {
-      font-size: 0.96rem;
-      color: var(--muted);
-      line-height: 1.65;
-      margin: 0;
-    }
-    .step-note {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--purple);
-      margin-top: 0.55rem;
-      display: inline-block;
-    }
-
-    /* ── Documents (two grouped checklists) ── */
-    .docs-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.4rem;
-      margin-top: 3rem;
-    }
-    .docs-group {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 1.6rem 1.7rem;
-    }
-    .docs-group h3 {
-      font-size: 1.15rem;
-      color: var(--ink);
-      margin: 0 0 0.3rem;
-    }
-    .docs-group .tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--purple);
-      background: rgba(124,58,237,0.08);
-      padding: 3px 9px;
-      border-radius: 999px;
-      display: inline-block;
-      margin-bottom: 0.85rem;
-    }
-    .docs-list {
-      list-style: none;
-      padding: 0;
-      margin: 0.6rem 0 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-    }
-    .docs-list li {
-      display: flex;
-      gap: 0.7rem;
-      align-items: flex-start;
-      font-size: 0.96rem;
-      color: var(--ink);
-      line-height: 1.55;
-    }
-    .docs-list li::before {
-      content: "";
-      width: 16px; height: 16px;
-      border: 1.5px solid var(--purple);
-      border-radius: 4px;
-      background: rgba(124,58,237,0.06);
-      flex-shrink: 0;
-      margin-top: 4px;
-    }
-    .docs-list li em {
-      color: var(--muted);
-      font-size: 0.85rem;
-      font-style: normal;
-      display: block;
-      margin-top: 1px;
-    }
-
-    /* ── Admissions-cycle timeline ── */
-    .cycle {
-      margin-top: 3rem;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--line-soft);
-      border: 1px solid var(--line-soft);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 14px 36px rgba(42,18,89,0.10);
-    }
-    .cycle-step {
-      background: var(--white);
-      padding: 1.6rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-    .cycle-num {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--purple);
-    }
-    .cycle-step h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.05rem;
-      color: var(--ink);
-      margin: 0;
-    }
-    .cycle-step p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    /* ── Tuition / investment cards ── */
-    .tuition-note {
-      background: rgba(124,58,237,0.05);
-      border: 1px solid var(--line);
-      border-left: 3px solid var(--purple);
-      border-radius: 10px;
-      padding: 1.1rem 1.3rem;
-      color: var(--muted);
-      font-size: 0.96rem;
-      line-height: 1.7;
-      margin-top: 2rem;
-      max-width: 780px;
-    }
-    .tuition-note strong { color: var(--ink); }
-    .tuition-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
-      margin-top: 2.4rem;
-    }
-    .tuition-card {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 1.5rem 1.6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
-    .tuition-card .label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--purple);
-    }
-    .tuition-card h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.1rem;
-      color: var(--ink);
-      margin: 0;
-    }
-    .tuition-card p {
-      font-size: 0.93rem;
-      color: var(--muted);
-      line-height: 1.65;
-      margin: 0;
-    }
-
-    /* ── FAQ accordions ── */
-    .faq {
-      margin-top: 2.6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
-    .faq-item {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .faq-item[open] {
-      border-color: var(--purple-light);
-      box-shadow: 0 12px 28px rgba(124,58,237,0.08);
-    }
-    .faq-item > summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 1.05rem 1.3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      color: var(--ink);
-      font-size: 1.02rem;
-    }
-    .faq-item > summary::-webkit-details-marker { display: none; }
-    .faq-chev {
-      width: 28px; height: 28px;
-      border-radius: 7px;
-      border: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--purple);
-      flex-shrink: 0;
-      transition: transform 0.25s ease, background 0.2s;
-    }
-    .faq-item[open] .faq-chev {
-      transform: rotate(180deg);
-      background: rgba(124,58,237,0.08);
-    }
-    .faq-body {
-      padding: 0 1.3rem 1.2rem;
-      color: var(--muted);
-      font-size: 0.96rem;
-      line-height: 1.72;
-    }
-
-    /* ── Inline mini-CTA used inside content blocks ── */
-    .inline-cta {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--purple);
-      text-decoration: none;
-      border-bottom: 1px solid var(--purple-light);
-      padding-bottom: 1px;
-    }
-    .inline-cta:hover { color: var(--purple-strong); border-bottom-color: var(--purple-strong); }
-
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .docs-grid { grid-template-columns: 1fr; }
-      .tuition-grid { grid-template-columns: 1fr; }
-      .cycle { grid-template-columns: 1fr; }
-      .page-hero { padding: 48px 0 40px; }
-      .step { padding-left: 4.4rem; }
-      .step::before { width: 38px; height: 38px; left: 1.1rem; font-size: 1rem; }
-    }
-  </style>
 </head>
 <body>
 
@@ -365,6 +38,9 @@
     <ul class="nav-menu" id="primary-nav">
       <li><a href="../#stand">Our Pillars</a></li>
       <li><a href="../#journey">Academics</a></li>
+      <li><a href="../our-program/">Our Program</a></li>
+      <li><a href="../life-at-ra/">Life at RA</a></li>
+      <li><a href="../donate/">Donate</a></li>
       <li><a href="../#why">Why Us</a></li>
       <li><a href="../parent-resources/">Parent Resources</a></li>
       <li><a href="./" class="nav-apply">Apply for Admission</a></li>
@@ -395,6 +71,11 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
       </a>
       <a href="tel:5122522277" class="btn-outline">Schedule a tour</a>
+    </div>
+    <div class="section-nav">
+      <a href="./" class="is-active">Overview</a>
+      <a href="how-to-apply/">How to Apply</a>
+      <a href="tuition/">Tuition &amp; Fees</a>
     </div>
   </div>
 </section>
@@ -464,6 +145,7 @@
         <span class="step-note">Decision in ~2 weeks</span>
       </li>
     </ol>
+    <a href="how-to-apply/" class="inline-cta" style="display:block; margin-top:1.6rem;">Read the full application guide →</a>
   </div>
 </section>
 
@@ -570,6 +252,7 @@
         <p>Tuition covers daily Qur'an &amp; Islamic Studies, Arabic, all core academic subjects, and access to AP coursework in high school. Books, supplies, and lunch are billed separately.</p>
       </div>
     </div>
+    <a href="tuition/" class="inline-cta" style="display:block; margin-top:1.6rem;">See the full tuition &amp; fees guide →</a>
   </div>
 </section>
 
@@ -715,26 +398,28 @@
       <div class="footer-col">
         <h4>Academics</h4>
         <ul>
-          <li><a href="../#journey">Pre-K</a></li>
-          <li><a href="../#journey">Elementary School</a></li>
-          <li><a href="../#journey">Middle School</a></li>
-          <li><a href="../#journey">High School</a></li>
-          <li><a href="../#journey">AP Program</a></li>
+          <li><a href="../pre-k/">Pre-K</a></li>
+          <li><a href="../elementary/">Elementary School</a></li>
+          <li><a href="../middle-school/">Middle School</a></li>
+          <li><a href="../high-school/">High School</a></li>
+          <li><a href="../high-school/#ap">AP Program</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Families</h4>
+        <h4>Admissions</h4>
         <ul>
-          <li><a href="./">Admissions</a></li>
-          <li><a href="../parent-resources/">Parent Resources</a></li>
+          <li><a href="./">Overview</a></li>
+          <li><a href="how-to-apply/">How to Apply</a></li>
+          <li><a href="tuition/">Tuition &amp; Fees</a></li>
           <li><a href="../#stand">Our Pillars</a></li>
-          <li><a href="mailto:contact@racademy.org">Contact</a></li>
+          <li><a href="../parent-resources/">Parent Resources</a></li>
+          <li><a href="../about/contact-us/">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Visit</h4>
         <ul>
-          <li><a href="#">North Austin, Texas</a></li>
+          <li><a href="../about/contact-us/">North Austin, Texas</a></li>
           <li><a href="tel:5122522277">512-252-2277</a></li>
           <li><a href="mailto:contact@racademy.org">contact@racademy.org</a></li>
         </ul>
