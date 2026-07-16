@@ -4,7 +4,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2026-06-24.d
 
 const SITE_URL = process.env.SITE_URL || 'https://racademy.org';
 
-// One Stripe Price per item — created in the Stripe Dashboard so amounts
+// One Stripe Price per item - created in the Stripe Dashboard so amounts
 // can change without a code deploy. See .env.example for the env var names.
 const PRICE_IDS = {
   'application-fee': process.env.STRIPE_PRICE_APPLICATION_FEE,

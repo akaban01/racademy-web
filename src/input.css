@@ -2,7 +2,7 @@
 @import "./subpages.css";
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Design tokens — surfaced as utilities (e.g. bg-purple, text-ink, font-display).
+   Design tokens - surfaced as utilities (e.g. bg-purple, text-ink, font-display).
    Tailwind v4 also exposes them as :root CSS vars so component CSS below can
    reference them as var(--color-purple), etc.
    ────────────────────────────────────────────────────────────────────── */
@@ -33,7 +33,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Legacy CSS-variable aliases — keep page-specific <style> blocks that
+   Legacy CSS-variable aliases - keep page-specific <style> blocks that
    reference var(--purple), var(--ink), etc. working without rewrites.
    Anything new should prefer the --color-* names (utility-class friendly).
    ────────────────────────────────────────────────────────────────────── */
@@ -59,7 +59,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Base — global element defaults.
+   Base - global element defaults.
    ────────────────────────────────────────────────────────────────────── */
 @layer base {
   html { scroll-behavior: smooth; }
@@ -80,7 +80,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Components — the design system. Anything used on more than one place
+   Components - the design system. Anything used on more than one place
    lives here as a class. Page-level tweaks go inline as utilities.
    ────────────────────────────────────────────────────────────────────── */
 @layer components {
@@ -661,7 +661,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Responsive collapse — sits outside @layer so component-class specificity
+   Responsive collapse - sits outside @layer so component-class specificity
    wins over Tailwind utilities at this breakpoint.
    ────────────────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {

@@ -68,7 +68,7 @@
   .breadcrumb .sep { color: var(--color-muted-dim); }
   .breadcrumb .current { color: var(--color-purple); }
 
-  /* ── Section nav — jump between sibling pages within a section ── */
+  /* ── Section nav - jump between sibling pages within a section ── */
   .section-nav {
     display: flex;
     gap: 0.6rem;

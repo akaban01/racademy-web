@@ -24,7 +24,7 @@ exports.handler = async (event) => {
     const session = stripeEvent.data.object;
     // TODO: notify the registrar/office (item + metadata + customer_email)
     // and record the request as paid. No email-sending service is wired up
-    // yet — see parent-resources/index.html TODO for the fulfillment plan.
+    // yet - see parent-resources/index.html TODO for the fulfillment plan.
     console.log('Checkout completed:', session.metadata?.item, session.customer_email);
   }
 
