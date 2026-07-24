@@ -28,7 +28,7 @@ content:
             type: object
             list:
               collapsible:
-                collapsed: true
+                collapsed: false
                 summary: "{fields.title}"
             fields:
               - name: title
@@ -86,7 +86,7 @@ content:
             type: object
             list:
               collapsible:
-                collapsed: true
+                collapsed: false
                 summary: "{fields.date} — {fields.name}"
             fields:
               - name: date
