@@ -1,0 +1,124 @@
+content:
+  - name: supply-lists
+    label: Supply Lists
+    type: file
+    path: content/supply-lists.json
+    format: json
+    fields:
+      - name: grades
+        label: Grades
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.name}"
+        fields:
+          - name: tag
+            label: Grade Tag
+            type: string
+            description: "Short badge shown above the grade name, e.g. \"Grade 3\" or \"Ages 2–4\"."
+            required: true
+          - name: name
+            label: Grade Name
+            type: string
+            description: "e.g. \"3rd Grade\" or \"Middle School\"."
+            required: true
+          - name: subjects
+            label: Subjects
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{fields.title}"
+            fields:
+              - name: title
+                label: Subject Title
+                type: string
+                description: "e.g. \"Homeroom\", \"Arabic\", \"Islamic Studies / Quran\"."
+                required: true
+              - name: note
+                label: Note (optional)
+                type: text
+                description: "Short instructions shown above this subject's items, e.g. a labeling reminder."
+              - name: items
+                label: Supply Items
+                type: string
+                list: true
+                description: "One supply item per line."
+
+  - name: academic-calendar
+    label: Academic Calendar
+    type: file
+    path: content/academic-calendar.json
+    format: json
+    fields:
+      - name: highlights
+        label: Key Highlights
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.date} — {fields.label}"
+        fields:
+          - name: date
+            label: Date
+            type: string
+            required: true
+          - name: label
+            label: Label
+            type: string
+            required: true
+      - name: months
+        label: Months
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.name}"
+        fields:
+          - name: name
+            label: Month Name
+            type: string
+            description: "e.g. \"August 2025\"."
+            required: true
+          - name: events
+            label: Events
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{fields.date} — {fields.name}"
+            fields:
+              - name: date
+                label: Date
+                type: string
+                required: true
+              - name: name
+                label: Event Name
+                type: string
+                required: true
+              - name: tag
+                label: Tag Color
+                type: select
+                options:
+                  values:
+                    - name: key
+                      label: Key Date
+                    - name: holiday
+                      label: Holiday
+                    - name: break
+                      label: Break
+                    - name: islamic
+                      label: Islamic
+                    - name: conf
+                      label: Conference
+                    - name: staff
+                      label: Staff Day
+                    - name: halfday
+                      label: Half Day
+                required: true
+              - name: tagLabel
+                label: Tag Text
+                type: string
+                description: "Text shown inside the colored tag, e.g. \"Half Day\" or \"Staff\"."
+                required: true

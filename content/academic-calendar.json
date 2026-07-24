@@ -1,0 +1,90 @@
+{
+  "highlights": [
+    { "date": "Aug 13", "label": "First day of school" },
+    { "date": "Nov 24–28", "label": "Thanksgiving Break" },
+    { "date": "Dec 22 – Jan 2", "label": "Winter Break" },
+    { "date": "Jun 4", "label": "Last day of school" }
+  ],
+  "months": [
+    {
+      "name": "August 2025",
+      "events": [
+        { "date": "Aug 11–12", "name": "Teacher Workdays - No School", "tag": "staff", "tagLabel": "Staff" },
+        { "date": "Aug 13", "name": "First Day of School", "tag": "key", "tagLabel": "Key Date" },
+        { "date": "Aug 14–15", "name": "Pre-K Phased Orientation", "tag": "key", "tagLabel": "Key Date" }
+      ]
+    },
+    {
+      "name": "September 2025",
+      "events": [
+        { "date": "Sep 1", "name": "Labor Day - No School", "tag": "holiday", "tagLabel": "Holiday" },
+        { "date": "Sep 5", "name": "Mawlid an-Nabi (observed)", "tag": "islamic", "tagLabel": "Islamic" }
+      ]
+    },
+    {
+      "name": "October 2025",
+      "events": [
+        { "date": "Oct 13–15", "name": "Parent–Teacher Conferences", "tag": "conf", "tagLabel": "Conference" },
+        { "date": "Oct 17", "name": "End of Quarter 1 · Early Dismissal", "tag": "halfday", "tagLabel": "Half Day" }
+      ]
+    },
+    {
+      "name": "November 2025",
+      "events": [
+        { "date": "Nov 11", "name": "Veterans Day - No School", "tag": "holiday", "tagLabel": "Holiday" },
+        { "date": "Nov 24–28", "name": "Thanksgiving Break", "tag": "break", "tagLabel": "Break" }
+      ]
+    },
+    {
+      "name": "December 2025",
+      "events": [
+        { "date": "Dec 19", "name": "Early Dismissal - Last Day Before Break", "tag": "halfday", "tagLabel": "Half Day" },
+        { "date": "Dec 22 – Jan 2", "name": "Winter Break", "tag": "break", "tagLabel": "Break" }
+      ]
+    },
+    {
+      "name": "January 2026",
+      "events": [
+        { "date": "Jan 5", "name": "Classes Resume", "tag": "key", "tagLabel": "Key Date" },
+        { "date": "Jan 19", "name": "MLK Jr. Day - No School", "tag": "holiday", "tagLabel": "Holiday" }
+      ]
+    },
+    {
+      "name": "February 2026",
+      "events": [
+        { "date": "Feb 16", "name": "Presidents Day - No School", "tag": "holiday", "tagLabel": "Holiday" },
+        { "date": "Feb 17", "name": "First Day of Ramadan (moon sighting)", "tag": "islamic", "tagLabel": "Islamic" },
+        { "date": "Feb 27", "name": "Early Dismissal · Staff Development", "tag": "halfday", "tagLabel": "Half Day" }
+      ]
+    },
+    {
+      "name": "March 2026",
+      "events": [
+        { "date": "Mar 13", "name": "End of Quarter 3", "tag": "key", "tagLabel": "Key Date" },
+        { "date": "Mar 16–20", "name": "Spring Break", "tag": "break", "tagLabel": "Break" },
+        { "date": "Mar 20", "name": "Eid al-Fitr (moon sighting)", "tag": "islamic", "tagLabel": "Islamic" }
+      ]
+    },
+    {
+      "name": "April 2026",
+      "events": [
+        { "date": "Apr 3", "name": "Good Friday - No School", "tag": "holiday", "tagLabel": "Holiday" },
+        { "date": "Apr 16–17", "name": "Parent–Teacher Conferences", "tag": "conf", "tagLabel": "Conference" }
+      ]
+    },
+    {
+      "name": "May 2026",
+      "events": [
+        { "date": "May 25", "name": "Memorial Day - No School", "tag": "holiday", "tagLabel": "Holiday" },
+        { "date": "May 27", "name": "Eid al-Adha (moon sighting)", "tag": "islamic", "tagLabel": "Islamic" },
+        { "date": "May 28–29", "name": "Final Exam Week", "tag": "key", "tagLabel": "Key Date" }
+      ]
+    },
+    {
+      "name": "June 2026",
+      "events": [
+        { "date": "Jun 4", "name": "Last Day of School · Early Dismissal", "tag": "key", "tagLabel": "Key Date" }
+      ]
+    }
+  ]
+}
