@@ -2,10 +2,10 @@
   var scriptTag = Array.from(document.scripts).find(function (script) {
     return /(^|\/)nav\.js($|\?)/.test(script.src);
   });
-  var logoUrl = scriptTag ? new URL('ra_logo_gif_big.gif', scriptTag.src).href : 'ra_logo_gif_big.gif';
+  var logoUrl = scriptTag ? new URL('ra-logo.webp', scriptTag.src).href : 'ra-logo.webp';
   var style = document.createElement('style');
   style.setAttribute('data-brand-mark', 'true');
-  style.textContent = '.brand-mark{overflow:hidden;}.brand-mark img{display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit;}.brand-mark svg{display:none;}';
+  style.textContent = '.brand-mark img{display:block;width:100%;height:100%;object-fit:contain;}.brand-mark svg{display:none;}';
   document.head.appendChild(style);
 
   function applyBrandMark() {
