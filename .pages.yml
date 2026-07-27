@@ -116,6 +116,12 @@ content:
                       label: Staff Day
                     - name: halfday
                       label: Half Day
+                    - name: test
+                      label: Testing
+                    - name: comp
+                      label: Competition
+                    - name: event
+                      label: School Event
                 required: true
               - name: tagLabel
                 label: Tag Text

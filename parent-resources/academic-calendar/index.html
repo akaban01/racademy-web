@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Academic Calendar 2025–2026 - Renaissance Academy</title>
-  <meta name="description" content="Key dates for the Renaissance Academy 2025–2026 school year - first and last day, breaks, holidays, parent-teacher conferences, staff days, and Islamic observances." />
+  <title>Academic Calendar 2026–2027 - Renaissance Academy</title>
+  <meta name="description" content="Key dates for the Renaissance Academy 2026–2027 school year - first and last day, breaks, holidays, parent-teacher conferences, staff days, and Islamic observances." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
@@ -120,6 +120,9 @@
     .tag-staff    { background: rgba(75, 85, 99, 0.10);  color: #4b5563; }
     .tag-conf     { background: rgba(37, 99, 235, 0.10); color: #1d4ed8; }
     .tag-halfday  { background: rgba(190, 24, 93, 0.08); color: #be185d; }
+    .tag-test     { background: rgba(234, 88, 12, 0.10);  color: #c2410c; }
+    .tag-comp     { background: rgba(14, 165, 233, 0.12); color: #0369a1; }
+    .tag-event    { background: rgba(161, 132, 44, 0.14); color: #7c6414; }
 
     @media (max-width: 900px) {
       .cal-highlights { grid-template-columns: 1fr 1fr; }
@@ -185,10 +188,10 @@
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="../../">Home</a><span class="sep">/</span><a href="../">Parent Resources</a><span class="sep">/</span><span class="current">Academic Calendar</span>
     </nav>
-    <span class="mono">2025–2026 School Year</span>
+    <span class="mono">2026–2027 School Year</span>
     <h1>Academic <span class="accent">Calendar</span>.</h1>
     <p class="lead">
-      Every key date for the 2025–2026 school year - breaks, holidays, conferences, and observances, month by month.
+      Every key date for the 2026–2027 school year - breaks, holidays, conferences, and observances, month by month.
     </p>
     <div class="section-nav">
       <a href="../">Overview</a>
@@ -202,19 +205,21 @@
 <section class="pad" id="academic-calendar">
   <div class="wrap">
     <div class="cal-disclaimer">
-      <strong>Heads up:</strong> Calendar dates below reflect the 2025–2026 plan and may be adjusted by the school. Islamic observances marked with <span class="cal-tag tag-islamic">Islamic</span> may shift by a day depending on the moon sighting. Please refer to school communications for final, confirmed dates.
+      <strong>Heads up:</strong> Calendar dates below reflect the 2026–2027 plan and may be adjusted by the school. School events and competition dates are subject to change, and if a weather day is needed, March 26 will be used for it. Islamic observances marked with <span class="cal-tag tag-islamic">Islamic</span> may shift by a day depending on the moon sighting. Please refer to school communications for final, confirmed dates.
     </div>
 
     <div class="cal-highlights" id="cal-highlights-root"></div>
 
     <div class="cal-legend" aria-label="Calendar legend">
       <span class="cal-tag tag-key">Key Date</span>
-      <span class="cal-tag tag-holiday">Holiday</span>
-      <span class="cal-tag tag-break">Break</span>
-      <span class="cal-tag tag-islamic">Islamic</span>
-      <span class="cal-tag tag-conf">Conference</span>
       <span class="cal-tag tag-staff">Staff Day</span>
-      <span class="cal-tag tag-halfday">Half Day</span>
+      <span class="cal-tag tag-break">Break</span>
+      <span class="cal-tag tag-conf">Conference</span>
+      <span class="cal-tag tag-test">Testing</span>
+      <span class="cal-tag tag-comp">Competition</span>
+      <span class="cal-tag tag-event">School Event</span>
+      <span class="cal-tag tag-islamic">Islamic</span>
+      <span class="cal-tag tag-holiday">Holiday</span>
     </div>
 
     <div class="cal-months" id="cal-months-root"></div>
