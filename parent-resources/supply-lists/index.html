@@ -455,7 +455,7 @@
 <div class="announce">
   <span class="dot"></span>
   Admissions are open for Pre-K through High School - limited seats per grade.
-  <a href="mailto:contact@racademy.org">Apply today →</a>
+  <a href="../../admissions/">Start your application →</a>
 </div>
 
 <header class="header">
@@ -473,11 +473,13 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-menu" id="primary-nav">
-      <li><a href="../../#stand">Our Pillars</a></li>
+      <li><a href="../../about/">About</a></li>
       <li><a href="../../#journey">Academics</a></li>
-      <li><a href="../../#why">Why Us</a></li>
+      <li><a href="../../our-program/">Our Program</a></li>
+      <li><a href="../../life-at-ra/">Life at RA</a></li>
+      <li><a href="../../donate/">Donate</a></li>
       <li><a href="../">Parent Resources</a></li>
-      <li><a href="mailto:contact@racademy.org" class="nav-apply">Apply for Admission</a></li>
+      <li><a href="../../admissions/" class="nav-apply">Apply for Admission</a></li>
     </ul>
   </div>
 </header>
@@ -616,6 +618,11 @@ function initSupplyChecklist() {
   /* ─── Printing helpers ─── */
   var savedOpenStates = null;
   function openAllGrades() {
+    /* applyPrintState runs twice per print (directly, then again on
+       beforeprint). Only the first pass may record the states, or the second
+       would capture everything as already-open and cleanup would restore it
+       that way. restoreGradeStates clears this, so each print re-captures. */
+    if (savedOpenStates) return;
     var grades = document.querySelectorAll('details.grade');
     savedOpenStates = [];
     grades.forEach(function (d) {
@@ -630,24 +637,61 @@ function initSupplyChecklist() {
     });
     savedOpenStates = null;
   }
-  function printAll() {
-    openAllGrades();
-    document.body.classList.add('printing', 'printing-all');
-    window.print();
-  }
-  function printGrade(grade) {
+  /* What we want the next print to contain. null = nothing pending. */
+  var pendingTarget = null;
+
+  function applyPrintState() {
+    if (!pendingTarget) return;
     openAllGrades();
     document.querySelectorAll('.grade.print-target').forEach(function (g) { g.classList.remove('print-target'); });
-    grade.classList.add('print-target');
-    document.body.classList.add('printing', 'printing-single');
-    window.print();
+    if (pendingTarget === 'all') {
+      document.body.classList.add('printing', 'printing-all');
+    } else {
+      pendingTarget.classList.add('print-target');
+      document.body.classList.add('printing', 'printing-single');
+    }
   }
+
+  /* Chrome on Android snapshots the document for its print sheet before it
+     applies DOM changes made in the same task. Printing straight after setting
+     .printing-single therefore sent the whole page - every grade, each in
+     whatever open/closed state it was already in. Applying the state, letting
+     the browser lay it out for a frame, and re-applying on beforeprint covers
+     both the desktop and the Android path. */
+  function requestPrint(target) {
+    pendingTarget = target;
+    applyPrintState();
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { window.print(); });
+      });
+    } else {
+      setTimeout(function () { window.print(); }, 60);
+    }
+  }
+
+  function printAll() { requestPrint('all'); }
+  function printGrade(grade) { requestPrint(grade); }
+
   function cleanupPrint() {
+    pendingTarget = null;
+    if (!document.body.classList.contains('printing')) return;
     document.body.classList.remove('printing', 'printing-all', 'printing-single');
     document.querySelectorAll('.grade.print-target').forEach(function (g) { g.classList.remove('print-target'); });
     restoreGradeStates();
   }
+
+  window.addEventListener('beforeprint', applyPrintState);
   window.addEventListener('afterprint', cleanupPrint);
+  /* afterprint does not fire reliably on Android Chrome; leaving the print
+     media query does. Without this the page can stay stuck with every grade
+     forced open and all but one hidden. */
+  if (window.matchMedia) {
+    var printMq = window.matchMedia('print');
+    var onPrintChange = function (e) { if (!e.matches) cleanupPrint(); };
+    if (printMq.addEventListener) printMq.addEventListener('change', onPrintChange);
+    else if (printMq.addListener) printMq.addListener(onPrintChange);
+  }
 
   var printAllBtn = document.getElementById('print-all-supplies');
   if (printAllBtn) printAllBtn.addEventListener('click', printAll);

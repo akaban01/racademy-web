@@ -186,10 +186,10 @@
   }
 
   .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; flex-shrink: 0; }
+  /* The logo is a circular crest on a transparent background, so it needs no
+     frame of its own - a bordered rounded square around a circle read as a box. */
   .brand-mark {
-    width: 42px; height: 42px;
-    border: 1.5px solid var(--color-purple);
-    border-radius: 9px;
+    width: 56px; height: 56px;
     display: flex; align-items: center; justify-content: center;
     color: var(--color-purple);
     flex-shrink: 0;
@@ -632,7 +632,7 @@
     padding: 3.5rem 0 2rem;
   }
   footer .brand-name { color: var(--color-on-dark); }
-  footer .brand-mark { border-color: var(--color-purple-light); color: var(--color-purple-light); }
+  footer .brand-mark { color: var(--color-purple-light); }
   .footer-top {
     display: grid;
     grid-template-columns: 1.7fr 1fr 1fr 1.2fr;
@@ -664,7 +664,11 @@
    Responsive collapse - sits outside @layer so component-class specificity
    wins over Tailwind utilities at this breakpoint.
    ────────────────────────────────────────────────────────────────────── */
-@media (max-width: 900px) {
+/* The full horizontal nav needs ~1080px for the brand plus seven items, but
+   .wrap is capped at 960px until the 1200px breakpoint - so the header
+   overflowed and the page scrolled sideways anywhere from 901px to 1199px.
+   Keep the hamburger until .wrap is wide enough to hold the whole nav. */
+@media (max-width: 1199px) {
   .nav-toggle { display: flex; }
   .nav-menu {
     position: absolute;
@@ -699,6 +703,8 @@
     border-bottom: none;
     padding: 0.9rem 20px !important;
   }
+}
+@media (max-width: 900px) {
   .hero-inner { padding-left: 7%; padding-right: 7%; }
   .quote-inner { padding-left: 7%; padding-right: 7%; }
   .stats-row { grid-template-columns: 1fr 1fr; }
