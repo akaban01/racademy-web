@@ -1,89 +1,377 @@
 {
   "highlights": [
-    { "date": "Aug 13", "label": "First day of school" },
-    { "date": "Nov 24–28", "label": "Thanksgiving Break" },
-    { "date": "Dec 22 – Jan 2", "label": "Winter Break" },
-    { "date": "Jun 4", "label": "Last day of school" }
+    {
+      "date": "Aug 17",
+      "label": "First day of school (K–12)"
+    },
+    {
+      "date": "Nov 23–27",
+      "label": "Thanksgiving Break"
+    },
+    {
+      "date": "Dec 21 – Jan 1",
+      "label": "Winter Break"
+    },
+    {
+      "date": "May 27",
+      "label": "Last day of school"
+    }
   ],
   "months": [
     {
-      "name": "August 2025",
+      "name": "August 2026",
       "events": [
-        { "date": "Aug 11–12", "name": "Teacher Workdays - No School", "tag": "staff", "tagLabel": "Staff" },
-        { "date": "Aug 13", "name": "First Day of School", "tag": "key", "tagLabel": "Key Date" },
-        { "date": "Aug 14–15", "name": "Pre-K Phased Orientation", "tag": "key", "tagLabel": "Key Date" }
+        {
+          "date": "Aug 3–7",
+          "name": "Staff Virtual Planning & Prep",
+          "tag": "staff",
+          "tagLabel": "Staff Day"
+        },
+        {
+          "date": "Aug 10",
+          "name": "First Day of School for Pre-K Students",
+          "tag": "key",
+          "tagLabel": "Key Date"
+        },
+        {
+          "date": "Aug 10–13",
+          "name": "Staff Planning & Prep",
+          "tag": "staff",
+          "tagLabel": "Staff Day"
+        },
+        {
+          "date": "Aug 12",
+          "name": "Open House & Supplies Drop-off",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "Aug 14",
+          "name": "New Families Meet & Greet",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "Aug 17",
+          "name": "First Day of School (K–12)",
+          "tag": "key",
+          "tagLabel": "Key Date"
+        }
       ]
     },
     {
-      "name": "September 2025",
+      "name": "September 2026",
       "events": [
-        { "date": "Sep 1", "name": "Labor Day - No School", "tag": "holiday", "tagLabel": "Holiday" },
-        { "date": "Sep 5", "name": "Mawlid an-Nabi (observed)", "tag": "islamic", "tagLabel": "Islamic" }
+        {
+          "date": "Sep 7",
+          "name": "Labor Day - Student & Staff Holiday",
+          "tag": "holiday",
+          "tagLabel": "Holiday"
+        }
       ]
     },
     {
-      "name": "October 2025",
+      "name": "October 2026",
       "events": [
-        { "date": "Oct 13–15", "name": "Parent–Teacher Conferences", "tag": "conf", "tagLabel": "Conference" },
-        { "date": "Oct 17", "name": "End of Quarter 1 · Early Dismissal", "tag": "halfday", "tagLabel": "Half Day" }
+        {
+          "date": "Oct 5",
+          "name": "PSIA Practice Sessions Begin",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "Oct 19",
+          "name": "PSAT Exam (8th & 9th)",
+          "tag": "test",
+          "tagLabel": "Testing"
+        },
+        {
+          "date": "Oct 20–23",
+          "name": "Fall MAP Testing (K–10th)",
+          "tag": "test",
+          "tagLabel": "Testing"
+        },
+        {
+          "date": "Oct 23",
+          "name": "Quarter 1 Ends",
+          "tag": "key",
+          "tagLabel": "Key Date"
+        },
+        {
+          "date": "Oct 25",
+          "name": "RA Banquet",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "Oct 26",
+          "name": "Student Holiday - Staff Planning & Prep",
+          "tag": "staff",
+          "tagLabel": "Staff Day"
+        },
+        {
+          "date": "Oct 30",
+          "name": "Parent-Teacher Conferences",
+          "tag": "conf",
+          "tagLabel": "Conference"
+        }
       ]
     },
     {
-      "name": "November 2025",
+      "name": "November 2026",
       "events": [
-        { "date": "Nov 11", "name": "Veterans Day - No School", "tag": "holiday", "tagLabel": "Holiday" },
-        { "date": "Nov 24–28", "name": "Thanksgiving Break", "tag": "break", "tagLabel": "Break" }
+        {
+          "date": "Nov 9–12",
+          "name": "School History Fair",
+          "tag": "comp",
+          "tagLabel": "Competition"
+        },
+        {
+          "date": "Nov 20",
+          "name": "Multicultural Day",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "Nov 23–27",
+          "name": "Thanksgiving Break",
+          "tag": "break",
+          "tagLabel": "Break"
+        },
+        {
+          "date": "Nov 30",
+          "name": "Quran Competition (In-Class)",
+          "tag": "comp",
+          "tagLabel": "Competition"
+        }
       ]
     },
     {
-      "name": "December 2025",
+      "name": "December 2026",
       "events": [
-        { "date": "Dec 19", "name": "Early Dismissal - Last Day Before Break", "tag": "halfday", "tagLabel": "Half Day" },
-        { "date": "Dec 22 – Jan 2", "name": "Winter Break", "tag": "break", "tagLabel": "Break" }
+        {
+          "date": "Dec 1",
+          "name": "Quran Competition (In-Class) Continues",
+          "tag": "comp",
+          "tagLabel": "Competition"
+        },
+        {
+          "date": "Dec 3",
+          "name": "Quran Competition (School-Level)",
+          "tag": "comp",
+          "tagLabel": "Competition"
+        },
+        {
+          "date": "Dec 11–17",
+          "name": "Midterms (8th–12th)",
+          "tag": "test",
+          "tagLabel": "Testing"
+        },
+        {
+          "date": "Dec 18",
+          "name": "Quarter 2 Ends",
+          "tag": "key",
+          "tagLabel": "Key Date"
+        },
+        {
+          "date": "Dec 21–31",
+          "name": "Winter Break",
+          "tag": "break",
+          "tagLabel": "Break"
+        }
       ]
     },
     {
-      "name": "January 2026",
+      "name": "January 2027",
       "events": [
-        { "date": "Jan 5", "name": "Classes Resume", "tag": "key", "tagLabel": "Key Date" },
-        { "date": "Jan 19", "name": "MLK Jr. Day - No School", "tag": "holiday", "tagLabel": "Holiday" }
+        {
+          "date": "Jan 1",
+          "name": "Winter Break",
+          "tag": "break",
+          "tagLabel": "Break"
+        },
+        {
+          "date": "Jan 11–14",
+          "name": "School Science Fair",
+          "tag": "comp",
+          "tagLabel": "Competition"
+        },
+        {
+          "date": "Jan 18",
+          "name": "MLK Day",
+          "tag": "holiday",
+          "tagLabel": "Holiday"
+        },
+        {
+          "date": "Jan 19–22",
+          "name": "MAP Growth (Winter, K–2nd)",
+          "tag": "test",
+          "tagLabel": "Testing"
+        },
+        {
+          "date": "Jan 23",
+          "name": "PSIA School Competition",
+          "tag": "comp",
+          "tagLabel": "Competition"
+        }
       ]
     },
     {
-      "name": "February 2026",
+      "name": "February 2027",
       "events": [
-        { "date": "Feb 16", "name": "Presidents Day - No School", "tag": "holiday", "tagLabel": "Holiday" },
-        { "date": "Feb 17", "name": "First Day of Ramadan (moon sighting)", "tag": "islamic", "tagLabel": "Islamic" },
-        { "date": "Feb 27", "name": "Early Dismissal · Staff Development", "tag": "halfday", "tagLabel": "Half Day" }
+        {
+          "date": "Feb 1",
+          "name": "PSIA Targeted Practice Sessions Begin (advancing students only)",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "Feb 1–4",
+          "name": "Islamic Book Fair",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "Feb 5",
+          "name": "Welcome Ramadan Day",
+          "tag": "islamic",
+          "tagLabel": "Islamic"
+        },
+        {
+          "date": "Feb 8",
+          "name": "Ramadan Begins",
+          "tag": "islamic",
+          "tagLabel": "Islamic"
+        }
       ]
     },
     {
-      "name": "March 2026",
+      "name": "March 2027",
       "events": [
-        { "date": "Mar 13", "name": "End of Quarter 3", "tag": "key", "tagLabel": "Key Date" },
-        { "date": "Mar 16–20", "name": "Spring Break", "tag": "break", "tagLabel": "Break" },
-        { "date": "Mar 20", "name": "Eid al-Fitr (moon sighting)", "tag": "islamic", "tagLabel": "Islamic" }
+        {
+          "date": "Mar 1–12",
+          "name": "Ramadan / Eid / Spring Break",
+          "tag": "break",
+          "tagLabel": "Break"
+        },
+        {
+          "date": "Mar 19",
+          "name": "Quarter 3 Ends",
+          "tag": "key",
+          "tagLabel": "Key Date"
+        },
+        {
+          "date": "Mar 25",
+          "name": "Arabic Competition",
+          "tag": "comp",
+          "tagLabel": "Competition"
+        },
+        {
+          "date": "Mar 26",
+          "name": "Parent-Teacher Conferences",
+          "tag": "conf",
+          "tagLabel": "Conference"
+        }
       ]
     },
     {
-      "name": "April 2026",
+      "name": "April 2027",
       "events": [
-        { "date": "Apr 3", "name": "Good Friday - No School", "tag": "holiday", "tagLabel": "Holiday" },
-        { "date": "Apr 16–17", "name": "Parent–Teacher Conferences", "tag": "conf", "tagLabel": "Conference" }
+        {
+          "date": "Apr 1",
+          "name": "PSIA Targeted Practice Sessions End (advancing students only)",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "Apr 2",
+          "name": "Sports Day",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "Apr 5",
+          "name": "STAAR Testing Begins",
+          "tag": "test",
+          "tagLabel": "Testing"
+        },
+        {
+          "date": "Apr 10",
+          "name": "PSIA District Competition",
+          "tag": "comp",
+          "tagLabel": "Competition"
+        },
+        {
+          "date": "Apr 30",
+          "name": "STAAR Testing Ends",
+          "tag": "test",
+          "tagLabel": "Testing"
+        }
       ]
     },
     {
-      "name": "May 2026",
+      "name": "May 2027",
       "events": [
-        { "date": "May 25", "name": "Memorial Day - No School", "tag": "holiday", "tagLabel": "Holiday" },
-        { "date": "May 27", "name": "Eid al-Adha (moon sighting)", "tag": "islamic", "tagLabel": "Islamic" },
-        { "date": "May 28–29", "name": "Final Exam Week", "tag": "key", "tagLabel": "Key Date" }
-      ]
-    },
-    {
-      "name": "June 2026",
-      "events": [
-        { "date": "Jun 4", "name": "Last Day of School · Early Dismissal", "tag": "key", "tagLabel": "Key Date" }
+        {
+          "date": "May 3–6",
+          "name": "MAP Growth (Spring, K–10th)",
+          "tag": "test",
+          "tagLabel": "Testing"
+        },
+        {
+          "date": "May 17",
+          "name": "No School - Eid al-Adha",
+          "tag": "islamic",
+          "tagLabel": "Islamic"
+        },
+        {
+          "date": "May 20–25",
+          "name": "High School Finals",
+          "tag": "test",
+          "tagLabel": "Testing"
+        },
+        {
+          "date": "May 22",
+          "name": "Graduation",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "May 25",
+          "name": "Quarter 4 Ends",
+          "tag": "key",
+          "tagLabel": "Key Date"
+        },
+        {
+          "date": "May 26",
+          "name": "High School End-of-Year Field Trip",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "May 27",
+          "name": "Last Day of School for Students",
+          "tag": "key",
+          "tagLabel": "Key Date"
+        },
+        {
+          "date": "May 28",
+          "name": "Staff Working Day",
+          "tag": "staff",
+          "tagLabel": "Staff Day"
+        },
+        {
+          "date": "May 29",
+          "name": "Graduation",
+          "tag": "event",
+          "tagLabel": "School Event"
+        },
+        {
+          "date": "May 31",
+          "name": "Staff Working Day",
+          "tag": "staff",
+          "tagLabel": "Staff Day"
+        }
       ]
     }
   ]
