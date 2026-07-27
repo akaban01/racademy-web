@@ -37,44 +37,67 @@
       color: var(--muted);
       max-width: 640px;
       line-height: 1.72;
+      margin-bottom: 0;
+    }
+    /* Expand toggle for the clamped intro - only ever shown on small screens. */
+    .lead-more {
+      display: none;
+      margin-top: 0.5rem;
+      padding: 0;
+      background: none;
+      border: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      cursor: pointer;
     }
 
     /* ── Resource quick-links grid ── */
     .resource-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.2rem;
-      margin-top: 2.6rem;
+      gap: 0.9rem;
+      margin-top: 2.2rem;
     }
     .resource-card {
       background: var(--lavender);
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 1.4rem 1.4rem 1.3rem;
+      padding: 1.1rem 1.15rem 1rem;
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.35rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    /* Cards for tabs that are currently turned off (see the tabs strip below). */
+    .resource-card[hidden] { display: none; }
+    .resource-card:hover {
+      border-color: var(--purple-light);
+      background: var(--lavender-2, var(--lavender));
     }
     .resource-card h3 {
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--ink);
     }
     .resource-card p {
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.55;
       flex-grow: 1;
+      margin: 0;
     }
-    .resource-card a {
-      margin-top: 0.6rem;
+    .rc-cta {
+      margin-top: 0.5rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--purple);
-      text-decoration: none;
     }
-    .resource-card a:hover { color: var(--purple-strong); }
+    .resource-card:hover .rc-cta { color: var(--purple-strong); }
 
     /* ── Supply list intro note ── */
     .supply-note {
@@ -952,7 +975,7 @@
     .shop-link:hover svg { opacity: 1; }
 
     @media (max-width: 900px) {
-      .resource-grid { grid-template-columns: 1fr; }
+      .resource-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
       .supply-list { grid-template-columns: 1fr; }
       .page-hero { padding: 48px 0 40px; }
       .cal-highlights { grid-template-columns: 1fr 1fr; }
@@ -969,6 +992,59 @@
       .pw-info { grid-template-columns: 1fr; }
       .pw-features { grid-template-columns: 1fr; }
       .uniform-groups { grid-template-columns: 1fr; }
+    }
+
+    /* On phones the quick links are a compact two-up grid: title + arrow only,
+       so the calendar and supply lists start near the top of the page. */
+    @media (max-width: 640px) {
+      /* Clamp the page intro to two lines; the toggle below reveals the rest. */
+      .page-hero p.lead {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+      }
+      .page-hero p.lead.is-expanded {
+        display: block;
+        overflow: visible;
+      }
+      .lead-more { display: inline-block; }
+
+      /* Pull the quick links up under the hero - the section intro doesn't need
+         a full band of padding when the cards themselves are this small. */
+      #quick-links { padding: 32px 0 28px; }
+      #quick-links .sec-label { margin-bottom: 0.5rem; }
+      #quick-links .sec-title { margin-bottom: 0.5rem; }
+      #quick-links .sec-lead { font-size: 0.95rem; }
+
+      .resource-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+        margin-top: 1.6rem;
+      }
+      .resource-card {
+        padding: 0.85rem 0.9rem;
+        border-radius: 11px;
+        gap: 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .resource-card h3 {
+        font-size: 0.9rem;
+        line-height: 1.3;
+      }
+      /* The blurb is redundant once the card is this small - the title carries it. */
+      .resource-card p { display: none; }
+      .rc-cta {
+        margin-top: 0;
+        font-size: 0.85rem;
+        letter-spacing: 0;
+        flex-shrink: 0;
+        padding-left: 0.5rem;
+      }
+      .rc-cta-text { display: none; }
     }
 
     /* ── Print buttons (on-screen) ── */
@@ -1244,54 +1320,57 @@
   <div class="wrap">
     <span class="mono">For Renaissance Families</span>
     <h1>Parent <span class="accent">Resources</span>.</h1>
-    <p class="lead">
+    <p class="lead" id="hero-lead">
       Everything Renaissance Academy families need to start the year well - supply lists by grade, key documents, and quick links to reach our team.
     </p>
+    <button type="button" class="lead-more" id="lead-more" aria-expanded="false" aria-controls="hero-lead">Read more</button>
   </div>
 </section>
 
 <!-- ── QUICK RESOURCES ─────────────────────────── -->
-<section class="pad">
+<section class="pad" id="quick-links">
   <div class="wrap">
     <span class="mono sec-label">Quick Links</span>
     <h2 class="sec-title">Start here.</h2>
     <p class="sec-lead">The most-asked-for items for families this year.</p>
     <div class="resource-grid">
-      <div class="resource-card">
+      <a class="resource-card" href="#calendar">
         <h3>Academic Calendar</h3>
         <p>Important dates for the 2025–2026 school year - breaks, holidays, conferences, and observances.</p>
-        <a href="#calendar">View calendar →</a>
-      </div>
-      <div class="resource-card">
+        <span class="rc-cta"><span class="rc-cta-text">View calendar </span>→</span>
+      </a>
+      <a class="resource-card" href="#supplies">
         <h3>2025–2026 Supply Lists</h3>
         <p>Required supplies for Pre-K through High School, organized by grade and subject.</p>
-        <a href="#supplies">Jump to lists →</a>
-      </div>
-      <div class="resource-card">
+        <span class="rc-cta"><span class="rc-cta-text">Jump to lists </span>→</span>
+      </a>
+      <!-- Hidden along with their tabs - remove the `hidden` attribute here and on
+           the matching .tab-btn below to bring these back. -->
+      <a class="resource-card" href="#parentsweb" hidden>
         <h3>ParentsWeb Login</h3>
         <p>Access grades, attendance, lesson plans, and teacher communication through RenWeb ParentsWeb.</p>
-        <a href="#parentsweb">Login instructions →</a>
-      </div>
-      <div class="resource-card">
+        <span class="rc-cta"><span class="rc-cta-text">Login instructions </span>→</span>
+      </a>
+      <a class="resource-card" href="#facts" hidden>
         <h3>FACTS Payment Plan</h3>
         <p>Set up tuition payments through FACTS - accessed via the Financial tab of your ParentsWeb account.</p>
-        <a href="#facts">Setup guide →</a>
-      </div>
-      <div class="resource-card">
+        <span class="rc-cta"><span class="rc-cta-text">Setup guide </span>→</span>
+      </a>
+      <a class="resource-card" href="#uniforms">
         <h3>Uniform Requirements</h3>
         <p>Full 2025–2026 uniform guide for Pre-K through 12, including PE uniforms and what's not allowed.</p>
-        <a href="#uniforms">View requirements →</a>
-      </div>
-      <div class="resource-card">
+        <span class="rc-cta"><span class="rc-cta-text">View requirements </span>→</span>
+      </a>
+      <a class="resource-card" href="#transcript" hidden>
         <h3>Transcript Requests</h3>
         <p>How to request official or unofficial student transcripts for college, transfer, or verification.</p>
-        <a href="#transcript">Request a transcript →</a>
-      </div>
-      <div class="resource-card">
+        <span class="rc-cta"><span class="rc-cta-text">Request a transcript </span>→</span>
+      </a>
+      <a class="resource-card" href="mailto:contact@racademy.org">
         <h3>Contact the Office</h3>
         <p>Questions about classrooms, materials, or anything else? Our team is happy to help.</p>
-        <a href="mailto:contact@racademy.org">Email us →</a>
-      </div>
+        <span class="rc-cta"><span class="rc-cta-text">Email us </span>→</span>
+      </a>
     </div>
   </div>
 </section>
@@ -1307,10 +1386,13 @@
       <div class="tabs" role="tablist" aria-label="Parent resources">
         <button class="tab-btn" role="tab" id="tabbtn-calendar" data-tab="calendar" aria-selected="true" aria-controls="tab-calendar">Academic Calendar</button>
         <button class="tab-btn" role="tab" id="tabbtn-supplies" data-tab="supplies" aria-selected="false" aria-controls="tab-supplies">Supply Lists</button>
-        <button class="tab-btn" role="tab" id="tabbtn-parentsweb" data-tab="parentsweb" aria-selected="false" aria-controls="tab-parentsweb">ParentsWeb Login</button>
-        <button class="tab-btn" role="tab" id="tabbtn-facts" data-tab="facts" aria-selected="false" aria-controls="tab-facts">FACTS Payment Plan</button>
+        <!-- ParentsWeb / FACTS / Transcript are turned off for now. The panels
+             below are kept intact - drop the `hidden` attribute on a button (and
+             on its matching .resource-card above) to put the tab back. -->
+        <button class="tab-btn" role="tab" id="tabbtn-parentsweb" data-tab="parentsweb" aria-selected="false" aria-controls="tab-parentsweb" hidden>ParentsWeb Login</button>
+        <button class="tab-btn" role="tab" id="tabbtn-facts" data-tab="facts" aria-selected="false" aria-controls="tab-facts" hidden>FACTS Payment Plan</button>
         <button class="tab-btn" role="tab" id="tabbtn-uniforms" data-tab="uniforms" aria-selected="false" aria-controls="tab-uniforms">Uniform Requirements</button>
-        <button class="tab-btn" role="tab" id="tabbtn-transcript" data-tab="transcript" aria-selected="false" aria-controls="tab-transcript">Transcript</button>
+        <button class="tab-btn" role="tab" id="tabbtn-transcript" data-tab="transcript" aria-selected="false" aria-controls="tab-transcript" hidden>Transcript</button>
       </div>
     </div>
 
@@ -2022,7 +2104,10 @@
 <script>
 /* ─── Tabs (Supply Lists ↔ Academic Calendar ↔ …) ─── */
 (function () {
-  var tabs = document.querySelectorAll('.tab-btn');
+  /* Buttons carrying `hidden` are switched-off tabs - skip them entirely so a
+     stale #facts/#transcript bookmark falls back to the default tab instead of
+     opening a panel with no tab to close it. */
+  var tabs = document.querySelectorAll('.tab-btn:not([hidden])');
   if (!tabs.length) return;
   var panels = document.querySelectorAll('.tab-panel');
   var tabsWrap = document.querySelector('.tabs-wrap');
@@ -2059,12 +2144,16 @@
   function activate(tabId, updateHash) {
     var matched = null;
     tabs.forEach(function (t) {
-      var selected = t.dataset.tab === tabId;
-      if (selected) matched = t;
+      if (t.dataset.tab === tabId) matched = t;
+    });
+    /* Unknown or switched-off tab (e.g. a stale #facts bookmark): leave the
+       current tab as-is instead of clearing the whole strip. */
+    if (!matched) return;
+    tabs.forEach(function (t) {
+      var selected = t === matched;
       t.setAttribute('aria-selected', selected ? 'true' : 'false');
       t.tabIndex = selected ? 0 : -1;
     });
-    if (!matched) return;
     panels.forEach(function (p) {
       p.hidden = p.id !== 'tab-' + tabId;
     });
@@ -2097,6 +2186,18 @@
   if (initial) activate(initial, false);
   /* Initial paint of the edge fades on load. */
   updateEdgeFades();
+})();
+
+/* ─── Hero intro: expand the two-line clamp on phones ─── */
+(function () {
+  var lead = document.getElementById('hero-lead');
+  var btn = document.getElementById('lead-more');
+  if (!lead || !btn) return;
+  btn.addEventListener('click', function () {
+    var expanded = lead.classList.toggle('is-expanded');
+    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    btn.textContent = expanded ? 'Show less' : 'Read more';
+  });
 })();
 
 /* ─── Supply-list checkboxes (localStorage-persisted) ─── */
