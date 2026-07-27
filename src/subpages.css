@@ -472,8 +472,179 @@
   }
   .inline-cta:hover { color: var(--color-purple-strong); border-bottom-color: var(--color-purple-strong); }
 
+  /* ─────────────────────────────────────────────────────────────────────
+     Informational how-to pages (ParentsWeb, FACTS, Transcripts, Uniforms).
+     Shared here because each of these components is used by two or more of
+     those pages; anything used by exactly one page stays inline on it.
+     ──────────────────────────────────────────────────────────────────── */
+  /* ── ParentsWeb: top quick-info card ── */
+  .pw-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--color-line-soft);
+    border: 1px solid var(--color-line-soft);
+    border-radius: 14px;
+    overflow: hidden;
+    margin: 2rem 0 2.4rem;
+    box-shadow: 0 14px 36px rgba(42,18,89,0.10);
+  }
+  .pw-info-card {
+    background: var(--color-white);
+    padding: 1.3rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .pw-info-label {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-purple);
+  }
+  .pw-info-value {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    word-break: break-word;
+    line-height: 1.25;
+  }
+  .pw-info-value a {
+    color: var(--color-ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-purple-light);
+    padding-bottom: 1px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .pw-info-value a:hover { color: var(--color-purple); border-bottom-color: var(--color-purple); }
+  .pw-info-hint { font-size: 0.82rem; color: var(--color-muted); }
+
+  /* ── ParentsWeb sections ── */
+  .pw-section { margin-top: 2.4rem; }
+  .pw-section > h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--color-ink);
+    margin-bottom: 1rem;
+  }
+  .pw-section > p.pw-lead {
+    color: var(--color-muted);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    max-width: 720px;
+    margin-bottom: 1.4rem;
+  }
+
+  /* ── Numbered steps ── */
+  .pw-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    counter-reset: stepc;
+    list-style: none;
+    padding: 0;
+  }
+  .pw-step {
+    position: relative;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    padding: 1.1rem 1.3rem 1.1rem 4.4rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .pw-step:hover {
+    border-color: var(--color-purple-light);
+    box-shadow: 0 12px 24px rgba(124,58,237,0.08);
+  }
+  .pw-step::before {
+    counter-increment: stepc;
+    content: counter(stepc);
+    position: absolute;
+    left: 1.1rem;
+    top: 1.05rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    background: var(--color-purple);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 6px 14px rgba(124,58,237,0.32);
+  }
+  .pw-step h4 {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    color: var(--color-ink);
+    margin-bottom: 0.25rem;
+  }
+  .pw-step p {
+    color: var(--color-muted);
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+  .pw-step code, .pw-info-value code, .pw-faq-a code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: rgba(124,58,237,0.08);
+    color: var(--color-purple-strong);
+    padding: 1px 7px;
+    border-radius: 5px;
+  }
+
+  /* ── Feature grid ── */
+  .pw-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.2rem 1.4rem;
+  }
+  .pw-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.93rem;
+    color: var(--color-ink);
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--color-line-soft);
+  }
+  .pw-feature::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-purple);
+    flex-shrink: 0;
+  }
+
+  /* ── Launch button (open ParentsWeb in new tab) ── */
+  .pw-launch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: var(--color-purple);
+    color: #fff;
+    padding: 13px 26px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.96rem;
+    text-decoration: none;
+    border: 1.5px solid var(--color-purple);
+    box-shadow: 0 8px 22px rgba(124,58,237,0.4);
+    transition: all 0.22s;
+    margin-top: 0.4rem;
+  }
+  .pw-launch:hover { background: var(--color-purple-strong); transform: translateY(-2px); }
+
+
   /* ── Responsive ── */
   @media (max-width: 900px) {
+    .pw-info { grid-template-columns: 1fr; }
+    .pw-features { grid-template-columns: 1fr; }
     .page-hero { padding: 48px 0 40px; }
     .accred-grid { grid-template-columns: 1fr; }
     .docs-grid { grid-template-columns: 1fr; }

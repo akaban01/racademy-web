@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ParentsWeb Login - Renaissance Academy</title>
+  <meta name="description" content="How to create and use your RenWeb ParentsWeb account to see grades, attendance, lesson plans, and teacher communication at Renaissance Academy." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../dist/styles.css" />
+  <script defer src="../../nav.js"></script>
+  <style data-page-styles>
+    /* ── FAQs ── */
+    .pw-faqs { display: flex; flex-direction: column; gap: 0.7rem; }
+    .pw-faq {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--white);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .pw-faq[open] {
+      border-color: var(--purple-light);
+      box-shadow: 0 10px 24px rgba(124,58,237,0.06);
+    }
+    .pw-faq > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .pw-faq > summary::-webkit-details-marker { display: none; }
+    .pw-faq-q {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--ink);
+      flex: 1;
+      line-height: 1.4;
+    }
+    .pw-faq-chev {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--purple);
+      flex-shrink: 0;
+      transition: transform 0.25s ease, background 0.2s;
+    }
+    .pw-faq[open] .pw-faq-chev { transform: rotate(180deg); background: rgba(124,58,237,0.08); }
+    .pw-faq-a {
+      padding: 0 1.2rem 1.2rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+    .pw-faq-a ol, .pw-faq-a ul { padding-left: 1.3rem; margin-top: 0.5rem; }
+    .pw-faq-a li { margin: 0.3rem 0; }
+
+    /* ── Security callout (reuses cal-disclaimer styling) ── */
+    .pw-security {
+      background: rgba(217, 119, 6, 0.05);
+      border: 1px solid rgba(217, 119, 6, 0.18);
+      border-left: 3px solid #d97706;
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.65;
+      max-width: 760px;
+    }
+    .pw-security strong { color: var(--ink); }
+  </style>
+</head>
+<body>
+
+<div class="announce">
+  <span class="dot"></span>
+  Admissions are open for Pre-K through High School - limited seats per grade.
+  <a href="mailto:contact@racademy.org">Apply today →</a>
+</div>
+
+<header class="header">
+  <div class="wrap header-inner">
+    <a href="../../" class="brand">
+      <div class="brand-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5C2 6.5 5 5 8.5 5S15 6.5 15 6.5"/><path d="M22 6.5S19 5 15.5 5 12 6.5 12 6.5"/><path d="M12 6.5V20"/><path d="M2 6.5V19C2 19 5 17.5 8.5 17.5S15 19 15 19"/><path d="M22 6.5V19S19 17.5 15.5 17.5 12 19 12 19"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">Renaissance Academy</div>
+        <div class="brand-sub">Full-time Islamic School</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-menu" id="primary-nav">
+      <li><a href="../../#stand">Our Pillars</a></li>
+      <li><a href="../../#journey">Academics</a></li>
+      <li><a href="../../#why">Why Us</a></li>
+      <li><a href="../">Parent Resources</a></li>
+      <li><a href="mailto:contact@racademy.org" class="nav-apply">Apply for Admission</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ── PAGE HERO ───────────────────────────────── -->
+<section class="page-hero">
+  <div class="arch-bg">
+    <svg width="620" height="640" viewBox="0 0 620 640" fill="none" style="right:-60px; top:-40px;">
+      <g stroke="#7c3aed" stroke-width="1.4" opacity="0.16">
+        <path d="M110 600 L110 300 Q110 80 310 80 Q510 80 310 80 Q510 80 510 300 L510 600"/>
+        <path d="M170 600 L170 320 Q170 150 310 150 Q450 150 450 320 L450 600"/>
+        <path d="M230 600 L230 350 Q230 220 310 220 Q390 220 390 350 L390 600"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../../">Home</a><span class="sep">/</span><a href="../">Parent Resources</a><span class="sep">/</span><span class="current">ParentsWeb Login</span>
+    </nav>
+    <span class="mono">Family Portal</span>
+    <h1>ParentsWeb <span class="accent">Login</span>.</h1>
+    <p class="lead">
+      A private, secure window into your child's school day - grades, attendance, lesson plans, and teacher communication.
+    </p>
+    <div class="section-nav">
+      <a href="../">Overview</a>
+      <a href="../academic-calendar/">Academic Calendar</a>
+      <a href="../supply-lists/">Supply Lists</a>
+      <a href="../uniforms/">Uniform Requirements</a>
+      <a href="./" class="is-active">ParentsWeb Login</a>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="parentsweb">
+  <div class="wrap">
+
+    <div class="pw-info">
+      <div class="pw-info-card">
+        <span class="pw-info-label">Login URL</span>
+        <span class="pw-info-value"><a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener">ra-tx.client.renweb.com/pw/</a></span>
+        <span class="pw-info-hint">Opens RenWeb ParentsWeb in a new tab.</span>
+      </div>
+      <div class="pw-info-card">
+        <span class="pw-info-label">District Code</span>
+        <span class="pw-info-value"><code>RA-TX</code></span>
+        <span class="pw-info-hint">Enter this when creating your account.</span>
+      </div>
+      <div class="pw-info-card">
+        <span class="pw-info-label">Support</span>
+        <span class="pw-info-value"><a href="mailto:renwebadmin@racademy.org">renwebadmin@<wbr/>racademy.org</a></span>
+        <span class="pw-info-hint">Email for login or account issues.</span>
+      </div>
+    </div>
+
+    <a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener" class="pw-launch">
+      Open ParentsWeb
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+    </a>
+
+    <div class="pw-section">
+      <h3>What you can access</h3>
+      <p class="pw-lead">RenWeb's ParentsWeb is a private, secure portal giving you a window into your child's school day - anytime, from any internet-capable device.</p>
+      <div class="pw-features">
+        <div class="pw-feature">Attendance</div>
+        <div class="pw-feature">Daily grades</div>
+        <div class="pw-feature">Progress reports</div>
+        <div class="pw-feature">Report cards</div>
+        <div class="pw-feature">Lesson plans</div>
+        <div class="pw-feature">Homework</div>
+        <div class="pw-feature">Missing assignments</div>
+        <div class="pw-feature">Discipline records</div>
+        <div class="pw-feature">School calendar</div>
+        <div class="pw-feature">School announcements</div>
+        <div class="pw-feature">Teacher email addresses</div>
+        <div class="pw-feature">Teacher websites</div>
+      </div>
+    </div>
+
+    <div class="pw-section">
+      <h3>First-time setup</h3>
+      <p class="pw-lead">Follow these steps to create your ParentsWeb account. Make sure the school has your email address on file in RenWeb before you start.</p>
+      <ol class="pw-steps">
+        <li class="pw-step">
+          <h4>Open the ParentsWeb login page</h4>
+          <p>Go to <a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener"><code>ra-tx.client.renweb.com/pw/</code></a> - or, from racademy.org, choose <strong>Admissions → Parent Resources → ParentsWeb</strong>.</p>
+        </li>
+        <li class="pw-step">
+          <h4>Click "Create New ParentsWeb Account"</h4>
+          <p>You'll find the link below the username and password fields on the login page.</p>
+        </li>
+        <li class="pw-step">
+          <h4>Enter the District Code and your email</h4>
+          <p>District Code is <code>RA-TX</code>. Use the same email address you gave on the registration form. Then click <strong>Create Account</strong>.</p>
+        </li>
+        <li class="pw-step">
+          <h4>Check your email and set your password</h4>
+          <p>An email is sent with a "Click to change password" link. The link is valid for <strong>30 minutes</strong>. Open it, set a User Name and Password, then click <strong>Save Password</strong>.</p>
+        </li>
+        <li class="pw-step">
+          <h4>Log in</h4>
+          <p>You'll land on the School Information home page. Click <strong>Tour the New ParentsWeb</strong> to watch a 6-minute video tour of the portal.</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="pw-section">
+      <h3>Frequently asked questions</h3>
+      <div class="pw-faqs">
+
+        <details class="pw-faq">
+          <summary>
+            <span class="pw-faq-q">What is the ParentsWeb website address?</span>
+            <span class="pw-faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="pw-faq-a">
+            Type <a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener"><code>ra-tx.client.renweb.com/pw/</code></a> into your browser's address bar, or use the "Open ParentsWeb" button above.
+          </div>
+        </details>
+
+        <details class="pw-faq">
+          <summary>
+            <span class="pw-faq-q">I'm seeing "Error: Invalid Credentials." How do I log in?</span>
+            <span class="pw-faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="pw-faq-a">
+            The fastest fix is to reset your credentials:
+            <ol>
+              <li>On the login page, click <strong>Forgot Username/Password</strong>.</li>
+              <li>Enter your email address - it must match the email the school has in RenWeb.</li>
+              <li>Open the email and click the "Click to change password" link (valid for 30 minutes).</li>
+              <li>You'll see your Name, Person ID, User Name, and an obscured Password. Type a new User Name and Password, then click <strong>Save Password</strong>.</li>
+              <li>A confirmation message appears at the top of the browser. Log in with your new credentials.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="pw-faq">
+          <summary>
+            <span class="pw-faq-q">I don't know my username. How do I log in?</span>
+            <span class="pw-faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="pw-faq-a">
+            Click <strong>Forgot Username/Password</strong> and enter the email address the school has on file. The email you receive will display your existing User Name. If you remember your Password, you can simply close the page and log in with your User Name and Password - no need to reset.
+          </div>
+        </details>
+
+        <details class="pw-faq">
+          <summary>
+            <span class="pw-faq-q">I'm a new parent. How do I get a username and password?</span>
+            <span class="pw-faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="pw-faq-a">
+            First, make sure the school has your email address on file in RenWeb. Then:
+            <ol>
+              <li>Go to <a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener"><code>ra-tx.client.renweb.com/pw/</code></a>.</li>
+              <li>The District Code is filled in automatically. If not, enter <code>RA-TX</code>.</li>
+              <li>Click <strong>Create New ParentsWeb Account</strong>.</li>
+              <li>Type your email address - an email is sent to you.</li>
+              <li>Click the "Click to change password" link in the email (valid for 30 minutes).</li>
+              <li>The browser displays your Name and RenWeb ID. Type a User Name, Password, and Confirm Password, then click <strong>Save Password</strong>.</li>
+              <li>You'll see "User Name/Password successfully updated." Log in with your new credentials.</li>
+            </ol>
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+    <div class="pw-section">
+      <div class="pw-security">
+        <strong>Keep your account secure.</strong> Your login gives access to your child's records - including grades, attendance, and discipline. Please do not share your username or password with others, and use a strong, unique password.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band-deep pad final-cta">
+  <div class="wrap">
+    <h2 class="sec-title" style="color:var(--on-dark);">Questions? We're here to help.</h2>
+    <p class="sec-lead" style="color:var(--on-dark-mut);">If you cannot get into ParentsWeb, the office can confirm the email address we have on file for you.</p>
+    <div class="final-actions">
+      <a href="mailto:contact@racademy.org" class="btn-primary">
+        Email the Office
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:5122522277" class="btn-outline" style="color:var(--on-dark); border-color: rgba(255,255,255,0.25);">&#128222; 512-252-2277</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="../../" class="brand">
+          <div class="brand-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5C2 6.5 5 5 8.5 5S15 6.5 15 6.5"/><path d="M22 6.5S19 5 15.5 5 12 6.5 12 6.5"/><path d="M12 6.5V20"/><path d="M2 6.5V19C2 19 5 17.5 8.5 17.5S15 19 15 19"/><path d="M22 6.5V19S19 17.5 15.5 17.5 12 19 12 19"/></svg>
+          </div>
+          <div>
+            <div class="brand-name">Renaissance Academy</div>
+            <div class="brand-sub">Academics · Character · Leadership</div>
+          </div>
+        </a>
+        <p class="footer-desc">A full-time Islamic school serving the Greater Austin community since 2007 - Pre-K through College-Prep High School, accredited with distinction by Cognia, SACS &amp; CASI.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Academics</h4>
+        <ul>
+          <li><a href="../../#journey">Pre-K</a></li>
+          <li><a href="../../#journey">Elementary School</a></li>
+          <li><a href="../../#journey">Middle School</a></li>
+          <li><a href="../../#journey">High School</a></li>
+          <li><a href="../../#journey">AP Program</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Families</h4>
+        <ul>
+          <li><a href="../">Parent Resources</a></li>
+          <li><a href="../supply-lists/">Supply Lists</a></li>
+          <li><a href="mailto:contact@racademy.org">Admissions</a></li>
+          <li><a href="../../#stand">Our Pillars</a></li>
+          <li><a href="mailto:contact@racademy.org">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=14401+Owen-Tech+Blvd+Austin+TX+78728" target="_blank" rel="noopener">North Austin, Texas</a></li>
+          <li><a href="tel:5122522277">512-252-2277</a></li>
+          <li><a href="mailto:contact@racademy.org">contact@racademy.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Renaissance Academy. All rights reserved.</span>
+      <span class="mono" style="color:var(--on-dark-dim);">Bismillah · Since 2007</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
