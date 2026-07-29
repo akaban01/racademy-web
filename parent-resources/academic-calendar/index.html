@@ -59,6 +59,128 @@
     }
     .cal-legend .cal-tag { font-size: 0.62rem; }
 
+    /* ── Year-at-a-glance grid ── */
+    .cal-year {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.5rem 1.6rem 1.3rem;
+      margin-bottom: 1.6rem;
+      box-shadow: 0 14px 36px rgba(42,18,89,0.07);
+    }
+    .cal-year-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .cal-year-head h2 { font-size: 1.15rem; color: var(--ink); }
+    .cal-year-hint {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-dim);
+    }
+    .cal-year-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(184px, 1fr));
+      gap: 1.4rem 1.5rem;
+    }
+    .cal-mini-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple-strong);
+      margin-bottom: 0.5rem;
+    }
+    .cal-mini-name .yr { color: var(--muted-dim); }
+    .cal-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+    .cal-dow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.56rem;
+      text-align: center;
+      color: var(--muted-dim);
+      padding-bottom: 3px;
+    }
+    .cal-cell {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.64rem;
+      color: var(--muted);
+      /* button reset - cells with events are real buttons */
+      border: 0;
+      padding: 0;
+      background: none;
+      font-weight: 400;
+    }
+    .cal-cell.is-blank { visibility: hidden; }
+    /* Quiet the weekends, but never a weekend that actually carries an event. */
+    .cal-cell.is-weekend:not([data-tag]) { color: var(--muted-dim); opacity: 0.55; }
+    .cal-cell[data-tag] {
+      position: relative;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    .cal-cell[data-tag]:hover,
+    .cal-cell[data-tag]:focus-visible {
+      transform: scale(1.16);
+      box-shadow: 0 4px 12px rgba(42,18,89,0.18);
+      outline: none;
+    }
+    /* small corner dot when a day carries more than one kind of event */
+    .cal-cell.has-multi::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.75;
+    }
+    .cal-cell.is-today { box-shadow: inset 0 0 0 1.5px var(--purple); }
+
+    .cal-cell[data-tag="key"]     { background: rgba(124,58,237,0.16);  color: var(--purple-strong); }
+    .cal-cell[data-tag="break"]   { background: rgba(167,139,250,0.30); color: var(--purple-strong); }
+    .cal-cell[data-tag="holiday"] { background: rgba(217,119,6,0.16);   color: #b45309; }
+    .cal-cell[data-tag="islamic"] { background: rgba(16,122,95,0.16);   color: #047857; }
+    .cal-cell[data-tag="staff"]   { background: rgba(75,85,99,0.16);    color: #4b5563; }
+    .cal-cell[data-tag="conf"]    { background: rgba(37,99,235,0.16);   color: #1d4ed8; }
+    .cal-cell[data-tag="halfday"] { background: rgba(190,24,93,0.14);   color: #be185d; }
+    .cal-cell[data-tag="test"]    { background: rgba(234,88,12,0.16);   color: #c2410c; }
+    .cal-cell[data-tag="comp"]    { background: rgba(14,165,233,0.18);  color: #0369a1; }
+    .cal-cell[data-tag="event"]   { background: rgba(161,132,44,0.20);  color: #7c6414; }
+
+    .cal-event-row.is-flash {
+      animation: calFlash 1.8s ease-out;
+      border-radius: 6px;
+    }
+    @keyframes calFlash {
+      0%, 100% { background: transparent; }
+      12%      { background: rgba(124,58,237,0.15); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cal-cell[data-tag]:hover,
+      .cal-cell[data-tag]:focus-visible { transform: none; }
+      .cal-event-row.is-flash { animation: none; background: rgba(124,58,237,0.10); }
+    }
+
     .cal-months {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -127,6 +249,8 @@
     @media (max-width: 900px) {
       .cal-highlights { grid-template-columns: 1fr 1fr; }
       .cal-months { grid-template-columns: 1fr; }
+      .cal-year { padding: 1.2rem 1rem 1rem; }
+      .cal-year-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.2rem 1rem; }
       .cal-event-row {
         grid-template-columns: 80px 1fr;
         column-gap: 0.6rem;
@@ -209,6 +333,14 @@
     </div>
 
     <div class="cal-highlights" id="cal-highlights-root"></div>
+
+    <div class="cal-year" id="cal-year" hidden>
+      <div class="cal-year-head">
+        <h2>The year at a glance</h2>
+        <span class="cal-year-hint">Select a highlighted day to jump to it</span>
+      </div>
+      <div class="cal-year-grid" id="cal-year-root"></div>
+    </div>
 
     <div class="cal-legend" aria-label="Calendar legend">
       <span class="cal-tag tag-key">Key Date</span>
@@ -296,6 +428,212 @@
 <script>
 /* ─── Academic calendar (Pages CMS content) ─── */
 (function () {
+  var MONTH_INDEX = {
+    jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+    jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+  };
+  var MONTH_NAMES = ['January','February','March','April','May','June',
+                     'July','August','September','October','November','December'];
+  var DOW = ['S','M','T','W','T','F','S'];
+  /* Which tag wins the colour of a day that carries several events - parents
+     scan first for "is there school", so breaks and holidays sit at the top. */
+  var TAG_PRIORITY = ['break','holiday','islamic','key','conf','halfday','test','comp','event','staff'];
+
+  function dayKey(y, m, d) { return y + '-' + m + '-' + d; }
+
+  /* "August 2026" -> { month: 7, year: 2026 } */
+  function parseMonthHeading(name) {
+    var match = String(name || '').match(/([A-Za-z]+)\s*(\d{4})/);
+    if (!match) return null;
+    var month = MONTH_INDEX[match[1].slice(0, 3).toLowerCase()];
+    if (month === undefined) return null;
+    return { month: month, year: parseInt(match[2], 10) };
+  }
+
+  /* One side of a date string: "Aug 3", "August 3" or a bare "7". */
+  function parseDatePart(part, fallbackMonth) {
+    var match = String(part).trim().match(/^([A-Za-z]+)?\.?\s*(\d{1,2})$/);
+    if (!match) return null;
+    var month = match[1] ? MONTH_INDEX[match[1].slice(0, 3).toLowerCase()] : fallbackMonth;
+    if (month === undefined) return null;
+    return { month: month, day: parseInt(match[2], 10) };
+  }
+
+  /* An event sitting in the "December 2026" block that reads "Jan 1" belongs to
+     2027 - pick whichever year keeps it closest to its own month block. */
+  function yearFor(month, blockMonth, blockYear) {
+    if (month - blockMonth > 6) return blockYear - 1;
+    if (blockMonth - month > 6) return blockYear + 1;
+    return blockYear;
+  }
+
+  /* "Aug 3–7", "Dec 21 – Jan 1", "Aug 10" -> [Date, ...] (inclusive). */
+  function datesForEvent(dateStr, blockMonth, blockYear) {
+    var parts = String(dateStr || '').split(/\s*[–—-]\s*/);
+    var start = parseDatePart(parts[0], blockMonth);
+    if (!start) return [];
+
+    var startYear = yearFor(start.month, blockMonth, blockYear);
+    var from = new Date(startYear, start.month, start.day);
+    if (isNaN(from) || from.getDate() !== start.day) return [];
+
+    var to = from;
+    if (parts.length > 1) {
+      var end = parseDatePart(parts[1], start.month);
+      if (end) {
+        var endYear = end.month < start.month ? startYear + 1 : startYear;
+        var candidate = new Date(endYear, end.month, end.day);
+        if (!isNaN(candidate) && candidate.getDate() === end.day && candidate >= from) to = candidate;
+      }
+    }
+
+    var out = [];
+    var cursor = new Date(from);
+    while (cursor <= to && out.length < 400) {
+      out.push(new Date(cursor));
+      cursor.setDate(cursor.getDate() + 1);
+    }
+    return out;
+  }
+
+  /* day key -> [{ tag, name, date, rowId }] across every month block. */
+  function buildDayIndex(months) {
+    var index = {};
+    months.forEach(function (month, monthIdx) {
+      var heading = parseMonthHeading(month.name);
+      if (!heading) return;
+      (month.events || []).forEach(function (ev, evIdx) {
+        datesForEvent(ev.date, heading.month, heading.year).forEach(function (d) {
+          var key = dayKey(d.getFullYear(), d.getMonth(), d.getDate());
+          (index[key] || (index[key] = [])).push({
+            tag: ev.tag || 'key',
+            name: ev.name || '',
+            date: ev.date || '',
+            rowId: 'cal-ev-' + monthIdx + '-' + evIdx
+          });
+        });
+      });
+    });
+    return index;
+  }
+
+  function topTag(entries) {
+    var best = null;
+    var bestRank = Infinity;
+    entries.forEach(function (entry) {
+      var rank = TAG_PRIORITY.indexOf(entry.tag);
+      if (rank === -1) rank = TAG_PRIORITY.length;
+      if (rank < bestRank) { bestRank = rank; best = entry.tag; }
+    });
+    return best || 'key';
+  }
+
+  function flashEvent(rowId) {
+    var row = document.getElementById(rowId);
+    if (!row) return;
+    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    row.classList.remove('is-flash');
+    void row.offsetWidth; /* restart the animation on repeat clicks */
+    row.classList.add('is-flash');
+    window.setTimeout(function () { row.classList.remove('is-flash'); }, 1800);
+  }
+
+  function renderMiniMonth(month, dayIndex, today) {
+    var heading = parseMonthHeading(month.name);
+    if (!heading) return null;
+
+    var wrapper = document.createElement('div');
+    var title = document.createElement('div');
+    title.className = 'cal-mini-name';
+    title.appendChild(document.createTextNode(MONTH_NAMES[heading.month].slice(0, 3) + ' '));
+    var yearSpan = document.createElement('span');
+    yearSpan.className = 'yr';
+    yearSpan.textContent = heading.year;
+    title.appendChild(yearSpan);
+    wrapper.appendChild(title);
+
+    var grid = document.createElement('div');
+    grid.className = 'cal-mini-grid';
+    grid.setAttribute('role', 'group');
+    grid.setAttribute('aria-label', MONTH_NAMES[heading.month] + ' ' + heading.year);
+
+    DOW.forEach(function (letter, i) {
+      var head = document.createElement('div');
+      head.className = 'cal-dow';
+      head.setAttribute('aria-hidden', 'true');
+      head.textContent = letter;
+      if (i === 0 || i === 6) head.style.opacity = '0.55';
+      grid.appendChild(head);
+    });
+
+    var firstWeekday = new Date(heading.year, heading.month, 1).getDay();
+    var daysInMonth = new Date(heading.year, heading.month + 1, 0).getDate();
+
+    for (var pad = 0; pad < firstWeekday; pad++) {
+      var blank = document.createElement('div');
+      blank.className = 'cal-cell is-blank';
+      blank.setAttribute('aria-hidden', 'true');
+      grid.appendChild(blank);
+    }
+
+    for (var day = 1; day <= daysInMonth; day++) {
+      var date = new Date(heading.year, heading.month, day);
+      var weekday = date.getDay();
+      var entries = dayIndex[dayKey(heading.year, heading.month, day)] || [];
+      var cell;
+
+      if (entries.length) {
+        cell = document.createElement('button');
+        cell.type = 'button';
+        cell.dataset.tag = topTag(entries);
+        cell.dataset.rowId = entries[0].rowId;
+
+        var tags = entries.map(function (e) { return e.tag; });
+        var distinct = tags.filter(function (t, i) { return tags.indexOf(t) === i; });
+        if (distinct.length > 1) cell.classList.add('has-multi');
+
+        var names = entries.map(function (e) { return e.name; }).join(' · ');
+        var label = MONTH_NAMES[heading.month] + ' ' + day + ': ' + names;
+        cell.title = label;
+        cell.setAttribute('aria-label', label);
+      } else {
+        cell = document.createElement('div');
+      }
+
+      cell.className = 'cal-cell' + (cell.className ? ' ' + cell.className : '');
+      if (weekday === 0 || weekday === 6) cell.classList.add('is-weekend');
+      if (today && date.getTime() === today.getTime()) cell.classList.add('is-today');
+      cell.appendChild(document.createTextNode(String(day)));
+      grid.appendChild(cell);
+    }
+
+    wrapper.appendChild(grid);
+    return wrapper;
+  }
+
+  function renderYearView(months) {
+    var root = document.getElementById('cal-year-root');
+    var panel = document.getElementById('cal-year');
+    if (!root || !panel) return;
+
+    var dayIndex = buildDayIndex(months);
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    var rendered = 0;
+    months.forEach(function (month) {
+      var mini = renderMiniMonth(month, dayIndex, today);
+      if (mini) { root.appendChild(mini); rendered++; }
+    });
+
+    if (!rendered) return;
+    panel.hidden = false;
+    panel.addEventListener('click', function (e) {
+      var cell = e.target.closest('.cal-cell[data-row-id]');
+      if (cell) flashEvent(cell.dataset.rowId);
+    });
+  }
+
   function renderCalendar(data) {
     var highlightsRoot = document.getElementById('cal-highlights-root');
     if (highlightsRoot) {
@@ -316,7 +654,7 @@
 
     var monthsRoot = document.getElementById('cal-months-root');
     if (monthsRoot) {
-      (data.months || []).forEach(function (month) {
+      (data.months || []).forEach(function (month, monthIdx) {
         var monthDiv = document.createElement('div');
         monthDiv.className = 'cal-month';
         var h3 = document.createElement('h3');
@@ -325,9 +663,10 @@
 
         var ul = document.createElement('ul');
         ul.className = 'cal-events';
-        (month.events || []).forEach(function (ev) {
+        (month.events || []).forEach(function (ev, evIdx) {
           var li = document.createElement('li');
           li.className = 'cal-event-row';
+          li.id = 'cal-ev-' + monthIdx + '-' + evIdx;
           var dateSpan = document.createElement('span');
           dateSpan.className = 'cal-date';
           dateSpan.textContent = ev.date || '';
@@ -346,6 +685,8 @@
         monthsRoot.appendChild(monthDiv);
       });
     }
+
+    renderYearView(data.months || []);
   }
 
   fetch('../../content/academic-calendar.json')
