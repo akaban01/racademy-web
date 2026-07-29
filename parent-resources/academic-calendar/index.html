@@ -24,6 +24,33 @@
       max-width: 760px;
     }
     .cal-disclaimer strong { color: var(--ink); }
+    .cal-disclaimer-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 0.55rem;
+    }
+    .cal-disclaimer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .cal-disclaimer li { position: relative; padding-left: 1.05rem; }
+    .cal-disclaimer li::before {
+      content: '';
+      position: absolute;
+      left: 1px;
+      top: 0.66em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #d97706;
+    }
+    .cal-disclaimer p:last-child { margin: 0; }
 
     .cal-highlights {
       display: grid;
@@ -329,7 +356,13 @@
 <section class="pad" id="academic-calendar">
   <div class="wrap">
     <div class="cal-disclaimer">
-      <strong>Heads up:</strong> Calendar dates below reflect the 2026–2027 plan and may be adjusted by the school. School events and competition dates are subject to change, and if a weather day is needed, March 26 will be used for it. Islamic observances marked with <span class="cal-tag tag-islamic">Islamic</span> may shift by a day depending on the moon sighting. Please refer to school communications for final, confirmed dates.
+      <p class="cal-disclaimer-title">These dates can still change</p>
+      <ul>
+        <li>This is the plan for the 2026–2027 year. School events and competition dates are the most likely to move.</li>
+        <li>Islamic observances follow the moon sighting, so they may shift by a day.</li>
+        <li>March 26 is held in reserve as the make-up day if weather closes the school.</li>
+      </ul>
+      <p>School communications always carry the final, confirmed dates.</p>
     </div>
 
     <div class="cal-highlights" id="cal-highlights-root"></div>
