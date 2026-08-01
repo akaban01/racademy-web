@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preschool - Renaissance Academy</title>
+  <meta name="description" content="Renaissance Academy Preschool offers a joyful, faith-centered start for young learners through play, routine, early academics, and warm teacher support." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../dist/styles.css" />
+  <script defer src="../nav.js"></script>
+  <style data-page-styles>
+    body {
+      background: #fcfbff;
+      color: var(--color-ink);
+    }
+
+    .page-hero {
+      position: relative;
+      background:
+        radial-gradient(ellipse 70% 75% at 90% 0%, rgba(167, 139, 250, 0.24), transparent 60%),
+        linear-gradient(135deg, #fbf9ff 0%, #f5f1ff 100%);
+      padding: 70px 0 64px;
+      overflow: hidden;
+    }
+
+    .page-hero .arch-bg svg {
+      position: absolute;
+      right: -70px;
+      top: -40px;
+      opacity: 0.9;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-purple);
+      background: rgba(124, 58, 237, 0.08);
+      padding: 5px 12px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--color-line);
+      border-radius: 20px;
+      padding: 1.2rem 1.25rem;
+      box-shadow: 0 16px 40px rgba(46, 16, 101, 0.06);
+    }
+
+    .hero-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      margin: 0 0 0.55rem;
+      color: var(--color-ink);
+    }
+
+    .hero-card p,
+    .hero-card li {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--color-muted);
+    }
+
+    .hero-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .hero-card li {
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .hero-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-purple);
+    }
+
+    .section-shell {
+      margin-top: 2.4rem;
+      background: var(--color-white);
+      border: 1px solid var(--color-line);
+      border-radius: 18px;
+      padding: 1.7rem 1.8rem;
+      box-shadow: 0 10px 30px rgba(46,16,101,0.04);
+    }
+
+    .section-shell h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin: 0 0 0.5rem;
+      color: var(--color-ink);
+    }
+
+    .section-shell p {
+      color: var(--color-muted);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1.8rem;
+    }
+
+    .stat {
+      background: var(--color-white);
+      border: 1px solid var(--color-line);
+      border-radius: 14px;
+      padding: 1.2rem 1rem;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--color-ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.92rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.6rem;
+    }
+
+    .program-card {
+      background: #fcfbff;
+      border: 1px solid var(--color-line);
+      border-radius: 16px;
+      padding: 1.35rem 1.2rem;
+    }
+
+    .program-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--color-ink);
+      margin: 0 0 0.5rem;
+    }
+
+    .program-card p,
+    .program-card li {
+      font-size: 0.94rem;
+      line-height: 1.7;
+      color: var(--color-muted);
+    }
+
+    .program-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.55rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .program-card li {
+      position: relative;
+      padding-left: 0.9rem;
+    }
+
+    .program-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-purple);
+    }
+
+    .schedule-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+
+    .table-card,
+    .visual-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-line);
+      border-radius: 16px;
+      padding: 1.2rem;
+    }
+
+    .table-card table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .table-card th,
+    .table-card td {
+      text-align: left;
+      padding: 0.7rem 0.6rem;
+      border-bottom: 1px solid var(--color-line-soft);
+      vertical-align: top;
+    }
+
+    .table-card th {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-purple);
+    }
+
+    .table-card tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .visual-card svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #fffdfd, #f7f3ff);
+      border: 1px solid var(--color-line-soft);
+      padding: 0.4rem;
+    }
+
+    .timeline-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+    }
+
+    .timeline-step {
+      background: #f9f7ff;
+      border: 1px solid var(--color-line);
+      border-radius: 12px;
+      padding: 0.9rem;
+    }
+
+    .timeline-step .label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-purple);
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-step strong {
+      display: block;
+      font-size: 0.96rem;
+      color: var(--color-ink);
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-step p {
+      font-size: 0.86rem;
+      color: var(--color-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .next-band {
+      margin-top: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      background: linear-gradient(90deg, #f8f4ff 0%, #fcfbff 100%);
+      border: 1px solid var(--color-line);
+      border-radius: 18px;
+      padding: 1.3rem 1.4rem;
+    }
+
+    .next-band .label {
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-purple);
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .next-band h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--color-ink);
+      margin: 0 0 0.3rem;
+    }
+
+    .next-band p {
+      color: var(--color-muted);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 0.8rem 1.15rem;
+      border: 1px solid var(--color-purple);
+      border-radius: 999px;
+      color: var(--color-purple);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--color-purple);
+      color: #fff;
+    }
+
+    .footer {
+      padding: 2rem 0 3rem;
+      color: var(--color-muted-dim);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .schedule-layout {
+        grid-template-columns: 1fr;
+      }
+      .stats-row,
+      .program-grid,
+      .timeline-steps {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .stats-row,
+      .program-grid,
+      .timeline-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="announce">
+  <span class="dot"></span>
+  Preschool starts Aug 10 · KG-12 starts Aug 17 · Limited seats remain.
+  <a href="../admissions/">Start your application →</a>
+</div>
+
+<header class="header">
+  <div class="wrap header-inner">
+    <a href="../" class="brand">
+      <div class="brand-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5C2 6.5 5 5 8.5 5S15 6.5 15 6.5"/><path d="M22 6.5S19 5 15.5 5 12 6.5 12 6.5"/><path d="M12 6.5V20"/><path d="M2 6.5V19C2 19 5 17.5 8.5 17.5S15 19 15 19"/><path d="M22 6.5V19S19 17.5 15.5 17.5 12 19 12 19"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">Renaissance Academy</div>
+        <div class="brand-sub">Full-time Islamic School</div>
+      </div>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-menu" id="primary-nav">
+      <li><a href="../about/">About</a></li>
+      <li><a href="../#journey">Academics</a></li>
+      <li><a href="../our-program/">Our Program</a></li>
+      <li><a href="../life-at-ra/">Life at RA</a></li>
+      <li><a href="../donate/">Donate</a></li>
+      <li><a href="../parent-resources/">Parent Resources</a></li>
+      <li><a href="../admissions/" class="nav-apply">Apply for Admission</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="arch-bg">
+    <svg width="620" height="640" viewBox="0 0 620 640" fill="none" style="right:-60px; top:-40px;">
+      <g stroke="#7c3aed" stroke-width="1.4" opacity="0.16">
+        <path d="M110 600 L110 300 Q110 80 310 80 Q510 80 310 80 Q510 80 510 300 L510 600"/>
+        <path d="M170 600 L170 320 Q170 150 310 150 Q450 150 450 320 L450 600"/>
+        <path d="M230 600 L230 350 Q230 220 310 220 Q390 220 390 350 L390 600"/>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <span class="tag">Preschool · Faith · Play · Early Learning</span>
+    <h1>Where young learners begin with <span class="accent">joy, routine, and purpose</span>.</h1>
+    <p class="lead">Our preschool program creates a warm, engaging first step for children as they learn to greet the day, build friendships, and explore the foundations of Islam, language, and early academics.</p>
+
+    <div class="hero-grid">
+      <div class="hero-card">
+        <h3>What families can expect</h3>
+        <ul>
+          <li>Gentle, age-appropriate learning in a caring classroom setting</li>
+          <li>Daily Islamic values, Qur’an exposure, and Arabic rhythm</li>
+          <li>Hands-on play, movement, stories, and circle time</li>
+          <li>Strong communication with teachers and family support</li>
+        </ul>
+      </div>
+      <div class="hero-card">
+        <h3>School year snapshot</h3>
+        <ul>
+          <li>Preschool begins August 10</li>
+          <li>KG–12 begins August 17</li>
+          <li>Balanced schedule with academics, lunch, rest, and outdoor play</li>
+          <li>Focused on readiness, confidence, and positive habits</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <span class="mono sec-label">At a glance</span>
+    <h2 class="sec-title">A preschool experience designed for early growth.</h2>
+    <p class="sec-lead">The program combines academic readiness with emotional security, helping children take first steps in a structured and loving environment.</p>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-num">Faith-centered</div>
+        <div class="stat-label">Daily habits, manners, and Islamic values woven into classroom life.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Play-based</div>
+        <div class="stat-label">Learning through centers, stories, movement, and hands-on exploration.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Warm routines</div>
+        <div class="stat-label">Predictable rhythms help children feel safe and confident.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Strong support</div>
+        <div class="stat-label">Teachers partner closely with families to support each child’s growth.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="section-shell">
+      <h3>Program pillars</h3>
+      <p>Preschool at Renaissance Academy is built around three core goals: helping children feel secure, grow in confidence, and prepare for future academic success with joy.</p>
+      <div class="program-grid">
+        <div class="program-card">
+          <h4>Faith & character</h4>
+          <ul>
+            <li>Morning greetings and Islamic manners</li>
+            <li>Simple Qur’an and dua exposure</li>
+            <li>Kindness, patience, and responsibility</li>
+          </ul>
+        </div>
+        <div class="program-card">
+          <h4>Early academics</h4>
+          <ul>
+            <li>Language and vocabulary growth</li>
+            <li>Pre-writing, counting, and problem-solving</li>
+            <li>Music, stories, and conversation-rich learning</li>
+          </ul>
+        </div>
+        <div class="program-card">
+          <h4>Social & motor growth</h4>
+          <ul>
+            <li>Friendship building and classroom routines</li>
+            <li>Fine and gross motor activities</li>
+            <li>Outdoor movement and healthy habits</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="section-shell">
+      <h3>Preschool schedule at a glance</h3>
+      <p>Children benefit from a predictable rhythm that balances learning, movement, rest, and connection with caring adults.</p>
+      <div class="schedule-layout">
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Focus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Morning</td>
+                <td>Arrival, greetings, circle time, and a gentle transition into play-based learning.</td>
+              </tr>
+              <tr>
+                <td>Midday</td>
+                <td>Small group lessons, language development, music, snack, and guided activity blocks.</td>
+              </tr>
+              <tr>
+                <td>Afternoon</td>
+                <td>Outdoor exploration, rest/quiet time, and social learning through centers and stories.</td>
+              </tr>
+              <tr>
+                <td>Dismissal</td>
+                <td>Reflection, calm transitions, and end-of-day communication with families.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="visual-card">
+          <svg viewBox="0 0 420 260" role="img" aria-label="Preschool day flow illustration">
+            <rect x="24" y="28" width="372" height="204" rx="24" fill="#ffffff" stroke="#e7ddff" />
+            <rect x="50" y="58" width="96" height="56" rx="12" fill="#f4ecff" stroke="#7c3aed" />
+            <rect x="162" y="58" width="96" height="56" rx="12" fill="#f4ecff" stroke="#7c3aed" />
+            <rect x="274" y="58" width="96" height="56" rx="12" fill="#f4ecff" stroke="#7c3aed" />
+            <rect x="88" y="150" width="244" height="56" rx="12" fill="#faf7ff" stroke="#7c3aed" />
+            <path d="M146 86h16" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" />
+            <path d="M258 86h16" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" />
+            <path d="M146 114v36" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" />
+            <path d="M274 114v36" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" />
+            <circle cx="146" cy="150" r="8" fill="#7c3aed" />
+            <circle cx="274" cy="150" r="8" fill="#7c3aed" />
+            <text x="68" y="92" text-anchor="middle" font-size="14" fill="#2a1259" font-family="Space Grotesk, sans-serif">Arrival</text>
+            <text x="180" y="92" text-anchor="middle" font-size="14" fill="#2a1259" font-family="Space Grotesk, sans-serif">Learning</text>
+            <text x="292" y="92" text-anchor="middle" font-size="14" fill="#2a1259" font-family="Space Grotesk, sans-serif">Play</text>
+            <text x="210" y="184" text-anchor="middle" font-size="14" fill="#2a1259" font-family="Space Grotesk, sans-serif">Rest + Connection</text>
+          </svg>
+        </div>
+      </div>
+      <div class="timeline-steps">
+        <div class="timeline-step">
+          <span class="label">Step 1</span>
+          <strong>Greeting the day</strong>
+          <p>Children settle in with routines, songs, and a calm start.</p>
+        </div>
+        <div class="timeline-step">
+          <span class="label">Step 2</span>
+          <strong>Learning blocks</strong>
+          <p>Teachers guide purposeful play, books, and early academic practice.</p>
+        </div>
+        <div class="timeline-step">
+          <span class="label">Step 3</span>
+          <strong>Movement & snack</strong>
+          <p>Outdoor time, healthy habits, and social interaction support growth.</p>
+        </div>
+        <div class="timeline-step">
+          <span class="label">Step 4</span>
+          <strong>Closing circle</strong>
+          <p>Families receive a warm wrap-up and a clear sense of the day’s progress.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="section-shell">
+      <h3>2026–2027 preschool calendar overview</h3>
+      <p>The school year is organized around a steady rhythm of learning, community, and family connection. Families will receive the full calendar with all holiday and special-event dates as the year approaches.</p>
+      <div class="table-card" style="margin-top:1.2rem;">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Preschool start</td>
+              <td>August 10</td>
+            </tr>
+            <tr>
+              <td>KG–12 start</td>
+              <td>August 17</td>
+            </tr>
+            <tr>
+              <td>School rhythm</td>
+              <td>Balanced academic time, play, movement, and rest across the day</td>
+            </tr>
+            <tr>
+              <td>Family communication</td>
+              <td>Teachers share updates, upcoming events, and classroom highlights regularly</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="next-band">
+      <div>
+        <span class="label">Admissions & enrollment</span>
+        <h3>Reserve your child’s place and begin the preschool journey.</h3>
+        <p>We would be glad to help you with placement questions, tuition details, and the application process.</p>
+      </div>
+      <a class="btn-outline" href="../admissions/">Apply for admission</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">Renaissance Academy · Preschool Program · North Austin</div>
+</footer>
+</body>
+</html>
