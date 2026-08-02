@@ -28,10 +28,28 @@
           "tagLabel": "Staff Day"
         },
         {
+          "date": "Aug 5",
+          "name": "Preschool Open House on Zoom, 12:35–1:35 PM (moved from Aug 6)",
+          "tag": "event",
+          "tagLabel": "Preschool"
+        },
+        {
+          "date": "Aug 7",
+          "name": "Preschool Meet & Greet, 9:00 AM–3:00 PM (PK4: 1:30–3:00 PM)",
+          "tag": "event",
+          "tagLabel": "Preschool"
+        },
+        {
           "date": "Aug 10",
           "name": "First Day of School for Pre-K Students",
           "tag": "key",
           "tagLabel": "Key Date"
+        },
+        {
+          "date": "Aug 10–21",
+          "name": "Preschool Two-Week Phase-In for New Children (early pick-up times)",
+          "tag": "event",
+          "tagLabel": "Preschool"
         },
         {
           "date": "Aug 10–13",
@@ -41,13 +59,13 @@
         },
         {
           "date": "Aug 12",
-          "name": "Open House & Supplies Drop-off",
+          "name": "Open House & Supplies Drop-off (K–12)",
           "tag": "event",
           "tagLabel": "School Event"
         },
         {
           "date": "Aug 14",
-          "name": "New Families Meet & Greet",
+          "name": "New Families Meet & Greet (K–12)",
           "tag": "event",
           "tagLabel": "School Event"
         },
@@ -56,6 +74,12 @@
           "name": "First Day of School (K–12)",
           "tag": "key",
           "tagLabel": "Key Date"
+        },
+        {
+          "date": "Aug 17",
+          "name": "Afterschool Program Begins (until 5:00 PM, including Mondays)",
+          "tag": "event",
+          "tagLabel": "School Event"
         }
       ]
     },
