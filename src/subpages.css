@@ -35,7 +35,7 @@
     font-family: var(--font-display);
     font-weight: 700;
     letter-spacing: -0.015em;
-    font-size: clamp(2.1rem, 4vw, 3.2rem);
+    font-size: clamp(2.1rem, 4.25vw, 3.2rem);
     line-height: 1.1;
     color: var(--color-ink);
     margin: 0.9rem 0 1.1rem;

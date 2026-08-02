@@ -62,7 +62,12 @@
    Base - global element defaults.
    ────────────────────────────────────────────────────────────────────── */
 @layer base {
-  html { scroll-behavior: smooth; }
+  /* Everything on the site is sized in rem, so the root size is the single
+     dial for overall text scale. 106.25% = 17px, a ~6% bump over the browser
+     default that lifts body copy without touching the layout rhythm (padding,
+     header height and card sizes stay in px). The print stylesheets are
+     hand-tuned in points and must not move - see the print reset below. */
+  html { scroll-behavior: smooth; font-size: 106.25%; }
   body {
     font-family: var(--font-sans);
     background: var(--color-white);
@@ -121,7 +126,7 @@
 
   .sec-label { margin-bottom: 1rem; display: block; }
   .sec-title {
-    font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+    font-size: clamp(1.8rem, 3.4vw, 2.7rem);
     line-height: 1.18;
     color: var(--color-ink);
     margin-bottom: 1.1rem;
@@ -211,14 +216,17 @@
     margin-top: 2px;
   }
 
+  /* Seven items plus the brand only just fit the 1140px .wrap, and the labels
+     grew with the root size - so the gaps give back the difference. Shrink
+     these further only alongside a check that the header still fits at 1200px. */
   .nav-menu {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.6rem;
     list-style: none;
     flex-shrink: 0;
     margin-left: auto;
-    padding-left: 2rem;
+    padding-left: 1.75rem;
   }
   .nav-menu li { flex-shrink: 0; }
   .nav-menu a {
@@ -324,7 +332,7 @@
     padding: 50px;
   }
   .hero h1 {
-    font-size: clamp(2.5rem, 5.2vw, 4.2rem);
+    font-size: clamp(2.5rem, 5.5vw, 4.2rem);
     line-height: 1.07;
     color: var(--color-ink);
     margin-bottom: 1.6rem;
@@ -349,7 +357,7 @@
     max-width: 1040px;
   }
   .hero-home h1 {
-    font-size: clamp(2rem, 4.4vw, 3.2rem);
+    font-size: clamp(2rem, 4.65vw, 3.2rem);
     margin-bottom: 0.9rem;
     max-width: 760px;
     text-shadow: none;
@@ -549,7 +557,7 @@
   }
   .quote-text {
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
     font-weight: 500;
     color: var(--color-on-dark);
     line-height: 1.45;
@@ -719,4 +727,12 @@
   .pad { padding: 60px 0; }
   .hero-inner { padding-top: 64px; padding-bottom: 72px; }
   .footer-top { grid-template-columns: 1fr; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Print - the calendar and supply-list sheets are hand-tuned in points to
+   land on one page, so the screen-side root bump must not reach them.
+   ────────────────────────────────────────────────────────────────────── */
+@media print {
+  html { font-size: 100%; }
 }
