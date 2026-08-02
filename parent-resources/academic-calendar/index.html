@@ -273,6 +273,42 @@
     .tag-comp     { background: rgba(14, 165, 233, 0.12); color: #0369a1; }
     .tag-event    { background: rgba(161, 132, 44, 0.14); color: #7c6414; }
 
+    /* ── Print button (on-screen) ── */
+    .print-toolbar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.55rem 0.9rem;
+      margin-top: 1rem;
+      max-width: 760px;
+    }
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(124,58,237,0.06);
+      border: 1px solid var(--purple-light);
+      border-radius: 8px;
+      padding: 9px 14px;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
+    }
+    .btn-print:hover {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+    .btn-print svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .print-hint { font-size: 0.82rem; color: var(--muted); }
+
+    /* Print-only blocks (see the print stylesheet at the end). */
+    .print-header, .print-note { display: none; }
+
     @media (max-width: 900px) {
       .cal-highlights { grid-template-columns: 1fr 1fr; }
       .cal-months { grid-template-columns: 1fr; }
@@ -286,6 +322,218 @@
         grid-column: 1 / -1;
         justify-self: start;
         margin-top: 2px;
+      }
+    }
+
+    /* ── Print stylesheet ────────────────────────────────────────────
+       One landscape sheet: the year grid, the legend and every date.
+       Sizes are in points and deliberately conservative so the page
+       never spills onto a second sheet. */
+    @media print {
+      @page { size: letter landscape; margin: 0.4in; }
+
+      .announce, .header, .page-hero, .final-cta, footer,
+      .nav-toggle, .nav-menu, .arch-bg,
+      .cal-disclaimer, .print-toolbar, .cal-year-hint { display: none !important; }
+
+      body > section:not(#academic-calendar) { display: none !important; }
+
+      body { background: #fff !important; color: #111 !important; }
+      #academic-calendar { background: #fff !important; padding: 0 !important; }
+      .wrap { max-width: 100% !important; padding: 0 !important; }
+
+      .print-header {
+        display: flex !important;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 12pt;
+        border-bottom: 1px solid #999;
+        padding-bottom: 3pt;
+        margin: 0 0 6pt;
+      }
+      .print-eyebrow {
+        font-family: 'Space Mono', monospace;
+        font-size: 7.5pt;
+        color: #555 !important;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 1pt;
+      }
+      .print-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 15pt;
+        line-height: 1.1;
+        color: #111 !important;
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+      .print-contact {
+        font-family: 'Space Mono', monospace;
+        font-size: 7pt;
+        line-height: 1.5;
+        color: #555 !important;
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      /* Key dates, as a single compact strip. */
+      .cal-highlights {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 0 10pt !important;
+        background: none !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+        margin: 0 0 7pt !important;
+      }
+      .cal-highlight {
+        background: none !important;
+        padding: 0 !important;
+        border-left: 2pt solid #7c3aed;
+        padding-left: 6pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .cal-highlight-date { font-size: 9.5pt !important; line-height: 1.1 !important; color: #5b21b6 !important; }
+      .cal-highlight-label { font-size: 6.8pt !important; line-height: 1.2; color: #333 !important; margin-top: 1pt !important; }
+
+      /* Year grid - five months across, two rows. */
+      .cal-year {
+        display: block !important;
+        background: none !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 0 7pt !important;
+      }
+      .cal-year-head { display: none !important; }
+      .cal-year-grid {
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 7pt 10pt !important;
+      }
+      .cal-mini-name {
+        font-size: 7.5pt !important;
+        color: #4c1d95 !important;
+        letter-spacing: 0.1em;
+        margin-bottom: 2pt !important;
+      }
+      .cal-mini-name .yr { color: #777 !important; }
+      .cal-mini-grid { gap: 1pt !important; }
+      .cal-dow { font-size: 5.5pt !important; color: #777 !important; padding-bottom: 1pt !important; }
+      .cal-cell {
+        aspect-ratio: auto !important;
+        height: 11pt !important;
+        line-height: 11pt !important;
+        font-size: 6.8pt !important;
+        border-radius: 2pt !important;
+        color: #222 !important;
+        box-shadow: none !important;
+        transform: none !important;
+      }
+      .cal-cell.is-weekend:not([data-tag]) { color: #999 !important; opacity: 1 !important; }
+      .cal-cell[data-tag] {
+        font-weight: 700;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .cal-cell[data-tag="key"]     { background: #e6dcfa !important; color: #4c1d95 !important; }
+      .cal-cell[data-tag="break"]   { background: #cfc2f7 !important; color: #3b1a80 !important; }
+      .cal-cell[data-tag="holiday"] { background: #fae3c4 !important; color: #92400e !important; }
+      .cal-cell[data-tag="islamic"] { background: #cfe8e0 !important; color: #065f46 !important; }
+      .cal-cell[data-tag="staff"]   { background: #dfe1e5 !important; color: #374151 !important; }
+      .cal-cell[data-tag="conf"]    { background: #d5e2fb !important; color: #1e40af !important; }
+      .cal-cell[data-tag="halfday"] { background: #f8d6e5 !important; color: #9d174d !important; }
+      .cal-cell[data-tag="test"]    { background: #fbdcc4 !important; color: #9a3412 !important; }
+      .cal-cell[data-tag="comp"]    { background: #cfe7f7 !important; color: #075985 !important; }
+      .cal-cell[data-tag="event"]   { background: #eee2bd !important; color: #6b5610 !important; }
+
+      /* The legend is what makes the coloured days readable - keep the
+         swatch colours in sync with the .cal-cell colours above. */
+      .cal-legend { gap: 4pt !important; margin: 0 0 6pt !important; }
+      .cal-legend .cal-tag {
+        font-size: 5.8pt !important;
+        padding: 1.5pt 6pt !important;
+        border: 1px solid rgba(0,0,0,0.12);
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .cal-legend .tag-key     { background: #e6dcfa !important; color: #4c1d95 !important; }
+      .cal-legend .tag-break   { background: #cfc2f7 !important; color: #3b1a80 !important; }
+      .cal-legend .tag-holiday { background: #fae3c4 !important; color: #92400e !important; }
+      .cal-legend .tag-islamic { background: #cfe8e0 !important; color: #065f46 !important; }
+      .cal-legend .tag-staff   { background: #dfe1e5 !important; color: #374151 !important; }
+      .cal-legend .tag-conf    { background: #d5e2fb !important; color: #1e40af !important; }
+      .cal-legend .tag-halfday { background: #f8d6e5 !important; color: #9d174d !important; }
+      .cal-legend .tag-test    { background: #fbdcc4 !important; color: #9a3412 !important; }
+      .cal-legend .tag-comp    { background: #cfe7f7 !important; color: #075985 !important; }
+      .cal-legend .tag-event   { background: #eee2bd !important; color: #6b5610 !important; }
+
+      /* Every date, flowing in newspaper columns under the grid. */
+      .cal-months {
+        display: block !important;
+        column-count: 5;
+        column-gap: 12pt;
+        border-top: 1px solid #ccc;
+        padding-top: 6pt;
+      }
+      .cal-month {
+        background: none !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 0 5pt;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .cal-month h3 {
+        font-family: 'Space Mono', monospace;
+        font-size: 6.5pt !important;
+        line-height: 1.2 !important;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #4c1d95 !important;
+        border-bottom: 1px solid #ddd !important;
+        padding-bottom: 1.5pt !important;
+        margin-bottom: 2pt !important;
+      }
+      .cal-events { display: block !important; }
+      /* line-height lives on the row: the spans inside can't shrink the
+         line box the row's own strut creates. */
+      .cal-event-row {
+        display: block !important;
+        font-size: 7.1pt !important;
+        line-height: 1.24 !important;
+        padding: 0 0 1.4pt !important;
+        border-bottom: 0 !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .cal-date {
+        font-size: 6.6pt !important;
+        color: #5b21b6 !important;
+        margin-right: 2.5pt;
+        white-space: nowrap;
+      }
+      .cal-event-name {
+        font-size: 7.1pt !important;
+        line-height: inherit !important;
+        color: #111 !important;
+      }
+      .cal-event-row .cal-tag { display: none !important; }
+
+      .print-note {
+        display: block !important;
+        font-size: 6.2pt;
+        line-height: 1.35;
+        color: #666 !important;
+        border-top: 1px solid #ccc;
+        margin: 6pt 0 0;
+        padding-top: 3pt;
       }
     }
   </style>
@@ -355,6 +603,17 @@
 
 <section class="pad" id="academic-calendar">
   <div class="wrap">
+    <!-- Shown only when printing (display:none on screen). -->
+    <div class="print-header">
+      <div>
+        <span class="print-eyebrow">Renaissance Academy · 2026–2027 School Year</span>
+        <h2 class="print-title">Academic Calendar</h2>
+      </div>
+      <div class="print-contact">
+        racademy.org<br />contact@racademy.org · 512-252-2277
+      </div>
+    </div>
+
     <div class="cal-disclaimer">
       <p class="cal-disclaimer-title">These dates can still change</p>
       <ul>
@@ -363,6 +622,14 @@
         <li>March 26 is held in reserve as the make-up day if weather closes the school.</li>
       </ul>
       <p>School communications always carry the final, confirmed dates.</p>
+    </div>
+
+    <div class="print-toolbar">
+      <button type="button" class="btn-print" id="print-calendar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print the whole year - one page
+      </button>
+      <span class="print-hint">Prints landscape on a single sheet - calendar grid and every date.</span>
     </div>
 
     <div class="cal-highlights" id="cal-highlights-root"></div>
@@ -388,6 +655,12 @@
     </div>
 
     <div class="cal-months" id="cal-months-root"></div>
+
+    <!-- Shown only when printing (display:none on screen). -->
+    <p class="print-note">
+      Dates may still change - school events and competitions are the most likely to move, and Islamic observances follow the moon sighting.
+      March 26 is held in reserve as the weather make-up day. School communications carry the final, confirmed dates.
+    </p>
   </div>
 </section>
 
@@ -721,6 +994,9 @@
 
     renderYearView(data.months || []);
   }
+
+  var printBtn = document.getElementById('print-calendar');
+  if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
 
   fetch('../../content/academic-calendar.json')
     .then(function (res) { return res.json(); })
