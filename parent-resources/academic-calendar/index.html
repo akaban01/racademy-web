@@ -327,10 +327,21 @@
 
     /* ── Print stylesheet ────────────────────────────────────────────
        One landscape sheet: the year grid, the legend and every date.
-       Sizes are in points and deliberately conservative so the page
-       never spills onto a second sheet. */
+
+       Sizes are in points and tuned to fill the sheet without spilling.
+       The two levers interact: a narrower @page margin widens the content
+       box, which shortens the newspaper columns below and buys room to set
+       the type larger. At 0.3in margins the layout spills at 1.05x, so
+       these sizes sit at 1.04x - about 0.2in of headroom, kept deliberately
+       because a real printer's unprintable area is not this generous.
+
+       Re-tune by scaling every pt value here together, then reprint and
+       confirm it is still one sheet. Measure with the real webfonts loaded:
+       under fallback fonts the layout appears to survive 1.05x, and it does
+       not. Months use break-inside: avoid, so column balancing is chunky
+       and the cliff between fits and spills is sharp. */
     @media print {
-      @page { size: letter landscape; margin: 0.4in; }
+      @page { size: letter landscape; margin: 0.3in; }
 
       .announce, .header, .page-hero, .final-cta, footer,
       .nav-toggle, .nav-menu, .arch-bg,
@@ -346,23 +357,23 @@
         display: flex !important;
         align-items: flex-end;
         justify-content: space-between;
-        gap: 12pt;
+        gap: 12.48pt;
         border-bottom: 1px solid #999;
-        padding-bottom: 3pt;
-        margin: 0 0 6pt;
+        padding-bottom: 3.12pt;
+        margin: 0 0 6.24pt;
       }
       .print-eyebrow {
         font-family: 'Space Mono', monospace;
-        font-size: 7.5pt;
+        font-size: 7.8pt;
         color: #555 !important;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         display: block;
-        margin-bottom: 1pt;
+        margin-bottom: 1.04pt;
       }
       .print-title {
         font-family: 'Space Grotesk', sans-serif;
-        font-size: 15pt;
+        font-size: 15.6pt;
         line-height: 1.1;
         color: #111 !important;
         margin: 0;
@@ -370,7 +381,7 @@
       }
       .print-contact {
         font-family: 'Space Mono', monospace;
-        font-size: 7pt;
+        font-size: 7.28pt;
         line-height: 1.5;
         color: #555 !important;
         text-align: right;
@@ -381,24 +392,24 @@
       .cal-highlights {
         display: grid !important;
         grid-template-columns: repeat(4, 1fr) !important;
-        gap: 0 10pt !important;
+        gap: 0 10.4pt !important;
         background: none !important;
         border: 0 !important;
         border-radius: 0 !important;
         box-shadow: none !important;
         overflow: visible !important;
-        margin: 0 0 7pt !important;
+        margin: 0 0 7.28pt !important;
       }
       .cal-highlight {
         background: none !important;
         padding: 0 !important;
-        border-left: 2pt solid #7c3aed;
-        padding-left: 6pt !important;
+        border-left: 2.08pt solid #7c3aed;
+        padding-left: 6.24pt !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
-      .cal-highlight-date { font-size: 9.5pt !important; line-height: 1.1 !important; color: #5b21b6 !important; }
-      .cal-highlight-label { font-size: 6.8pt !important; line-height: 1.2; color: #333 !important; margin-top: 1pt !important; }
+      .cal-highlight-date { font-size: 9.88pt !important; line-height: 1.1 !important; color: #5b21b6 !important; }
+      .cal-highlight-label { font-size: 7.07pt !important; line-height: 1.2; color: #333 !important; margin-top: 1.04pt !important; }
 
       /* Year grid - five months across, two rows. */
       .cal-year {
@@ -408,28 +419,28 @@
         border-radius: 0 !important;
         box-shadow: none !important;
         padding: 0 !important;
-        margin: 0 0 7pt !important;
+        margin: 0 0 7.28pt !important;
       }
       .cal-year-head { display: none !important; }
       .cal-year-grid {
         grid-template-columns: repeat(5, 1fr) !important;
-        gap: 7pt 10pt !important;
+        gap: 7.28pt 10.4pt !important;
       }
       .cal-mini-name {
-        font-size: 7.5pt !important;
+        font-size: 7.8pt !important;
         color: #4c1d95 !important;
         letter-spacing: 0.1em;
-        margin-bottom: 2pt !important;
+        margin-bottom: 2.08pt !important;
       }
       .cal-mini-name .yr { color: #777 !important; }
-      .cal-mini-grid { gap: 1pt !important; }
-      .cal-dow { font-size: 5.5pt !important; color: #777 !important; padding-bottom: 1pt !important; }
+      .cal-mini-grid { gap: 1.04pt !important; }
+      .cal-dow { font-size: 5.72pt !important; color: #777 !important; padding-bottom: 1.04pt !important; }
       .cal-cell {
         aspect-ratio: auto !important;
-        height: 11pt !important;
-        line-height: 11pt !important;
-        font-size: 6.8pt !important;
-        border-radius: 2pt !important;
+        height: 11.44pt !important;
+        line-height: 11.44pt !important;
+        font-size: 7.07pt !important;
+        border-radius: 2.08pt !important;
         color: #222 !important;
         box-shadow: none !important;
         transform: none !important;
@@ -453,10 +464,10 @@
 
       /* The legend is what makes the coloured days readable - keep the
          swatch colours in sync with the .cal-cell colours above. */
-      .cal-legend { gap: 4pt !important; margin: 0 0 6pt !important; }
+      .cal-legend { gap: 4.16pt !important; margin: 0 0 6.24pt !important; }
       .cal-legend .cal-tag {
-        font-size: 5.8pt !important;
-        padding: 1.5pt 6pt !important;
+        font-size: 6.03pt !important;
+        padding: 1.56pt 6.24pt !important;
         border: 1px solid rgba(0,0,0,0.12);
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
@@ -476,9 +487,9 @@
       .cal-months {
         display: block !important;
         column-count: 5;
-        column-gap: 12pt;
+        column-gap: 12.48pt;
         border-top: 1px solid #ccc;
-        padding-top: 6pt;
+        padding-top: 6.24pt;
       }
       .cal-month {
         background: none !important;
@@ -486,41 +497,41 @@
         border-radius: 0 !important;
         box-shadow: none !important;
         padding: 0 !important;
-        margin: 0 0 5pt;
+        margin: 0 0 5.2pt;
         break-inside: avoid;
         page-break-inside: avoid;
       }
       .cal-month h3 {
         font-family: 'Space Mono', monospace;
-        font-size: 6.5pt !important;
+        font-size: 6.76pt !important;
         line-height: 1.2 !important;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: #4c1d95 !important;
         border-bottom: 1px solid #ddd !important;
-        padding-bottom: 1.5pt !important;
-        margin-bottom: 2pt !important;
+        padding-bottom: 1.56pt !important;
+        margin-bottom: 2.08pt !important;
       }
       .cal-events { display: block !important; }
       /* line-height lives on the row: the spans inside can't shrink the
          line box the row's own strut creates. */
       .cal-event-row {
         display: block !important;
-        font-size: 7.1pt !important;
+        font-size: 7.38pt !important;
         line-height: 1.24 !important;
-        padding: 0 0 1.4pt !important;
+        padding: 0 0 1.46pt !important;
         border-bottom: 0 !important;
         break-inside: avoid;
         page-break-inside: avoid;
       }
       .cal-date {
-        font-size: 6.6pt !important;
+        font-size: 6.86pt !important;
         color: #5b21b6 !important;
-        margin-right: 2.5pt;
+        margin-right: 2.6pt;
         white-space: nowrap;
       }
       .cal-event-name {
-        font-size: 7.1pt !important;
+        font-size: 7.38pt !important;
         line-height: inherit !important;
         color: #111 !important;
       }
@@ -528,12 +539,12 @@
 
       .print-note {
         display: block !important;
-        font-size: 6.2pt;
+        font-size: 6.45pt;
         line-height: 1.35;
         color: #666 !important;
         border-top: 1px solid #ccc;
-        margin: 6pt 0 0;
-        padding-top: 3pt;
+        margin: 6.24pt 0 0;
+        padding-top: 3.12pt;
       }
     }
   </style>
