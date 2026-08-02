@@ -292,6 +292,135 @@
       margin: 0;
     }
 
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .event-card {
+      background: #fcfbff;
+      border: 1px solid var(--color-line);
+      border-radius: 16px;
+      padding: 1.35rem 1.2rem;
+    }
+
+    .event-card .when {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-purple);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .event-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--color-ink);
+      margin: 0 0 0.5rem;
+    }
+
+    .event-card p,
+    .event-card li {
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: var(--color-muted);
+      margin: 0;
+    }
+
+    .event-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.6rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .event-card li {
+      position: relative;
+      padding-left: 0.9rem;
+    }
+
+    .event-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-purple);
+    }
+
+    .event-card .agenda-time {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--color-ink);
+    }
+
+    .notice {
+      margin-top: 1.2rem;
+      background: #f8f4ff;
+      border: 1px solid var(--color-line);
+      border-left: 3px solid var(--color-purple);
+      border-radius: 12px;
+      padding: 0.95rem 1.1rem;
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: var(--color-muted);
+    }
+
+    .notice strong { color: var(--color-ink); }
+
+    .sched-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.4rem;
+      align-items: start;
+    }
+
+    .sched-grid h4 {
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      color: var(--color-ink);
+      margin: 0 0 0.75rem;
+    }
+
+    .table-card td.time-cell {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--color-ink);
+      white-space: nowrap;
+    }
+
+    .inline-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+    }
+
+    .inline-links a {
+      font-size: 0.9rem;
+      padding: 0.55rem 0.95rem;
+      border: 1px solid var(--color-line);
+      border-radius: 999px;
+      color: var(--color-purple);
+      text-decoration: none;
+      background: var(--color-white);
+      transition: all 0.2s;
+    }
+
+    .inline-links a:hover {
+      border-color: var(--color-purple);
+      background: #f8f4ff;
+    }
+
     .next-band {
       margin-top: 2.2rem;
       display: flex;
@@ -353,12 +482,14 @@
 
     @media (max-width: 980px) {
       .hero-grid,
-      .schedule-layout {
+      .schedule-layout,
+      .sched-grid {
         grid-template-columns: 1fr;
       }
       .stats-row,
       .program-grid,
-      .timeline-steps {
+      .timeline-steps,
+      .event-grid {
         grid-template-columns: 1fr 1fr;
       }
     }
@@ -366,17 +497,60 @@
     @media (max-width: 640px) {
       .stats-row,
       .program-grid,
-      .timeline-steps {
+      .timeline-steps,
+      .event-grid {
         grid-template-columns: 1fr;
       }
+
+      /* A four-column table does not fit a phone, so each day becomes its own
+         small block with the column name printed above the value. */
+      .stack-table thead { display: none; }
+
+      .stack-table table,
+      .stack-table tbody,
+      .stack-table tr,
+      .stack-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .stack-table tr {
+        padding: 0.85rem 0;
+        border-bottom: 1px solid var(--color-line-soft);
+      }
+
+      .stack-table tr:last-child { border-bottom: none; }
+
+      .stack-table td {
+        border: none;
+        padding: 0.2rem 0;
+      }
+
+      .stack-table td::before {
+        content: attr(data-label);
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-purple);
+      }
+
+      .stack-table td.date-cell {
+        font-size: 1rem;
+        color: var(--color-ink);
+        margin-bottom: 0.25rem;
+      }
+
+      .stack-table td.date-cell::before { content: none; }
     }
   </style>
 </head>
 <body>
 <div class="announce">
   <span class="dot"></span>
-  Preschool starts Aug 10 · KG-12 starts Aug 17 · Limited seats remain.
-  <a href="../admissions/">Start your application →</a>
+  Open House on Zoom Aug 5 · Meet &amp; Greet Aug 7 · Preschool starts Aug 10.
+  <a href="#getting-started">See the start-of-year details →</a>
 </div>
 
 <header class="header">
@@ -431,12 +605,12 @@
         </ul>
       </div>
       <div class="hero-card">
-        <h3>School year snapshot</h3>
+        <h3>Start of the 2026–2027 year</h3>
         <ul>
-          <li>Preschool begins August 10</li>
-          <li>KG–12 begins August 17</li>
-          <li>Balanced schedule with academics, lunch, rest, and outdoor play</li>
-          <li>Focused on readiness, confidence, and positive habits</li>
+          <li>Open House on Zoom — Wednesday, August 5, 12:35–1:35 PM</li>
+          <li>Meet &amp; Greet at school — Friday, August 7, 9:00 AM–3:00 PM</li>
+          <li>First day of preschool — Monday, August 10 (arrival 7:40–8:00 AM)</li>
+          <li>New children follow a two-week phase-in through August 21</li>
         </ul>
       </div>
     </div>
@@ -585,11 +759,243 @@
   </div>
 </section>
 
+<section class="pad" id="getting-started">
+  <div class="wrap">
+    <span class="mono sec-label">Before the first day</span>
+    <h2 class="sec-title">Three ways to get ready for the new year.</h2>
+    <p class="sec-lead">Families learn in different ways, so the preschool is sharing the same start-of-year information three times over: a live Zoom open house, an in-person Meet &amp; Greet, and a written welcome letter emailed to every family.</p>
+
+    <div class="event-grid">
+      <div class="event-card">
+        <span class="when">Wednesday, August 5 · 12:35–1:35 PM</span>
+        <h4>Open House on Zoom</h4>
+        <p>Held on Zoom rather than at school. The live link is shared with all preschool families on Tuesday, August 4, and the session is recorded so families who cannot attend receive the recording afterward.</p>
+        <ul>
+          <li><span class="agenda-time">12:30</span> — Ms. Delphine welcomes preschool families to the new year</li>
+          <li><span class="agenda-time">12:40</span> — PK2 expectations with Ms. Rola</li>
+          <li><span class="agenda-time">12:50</span> — PK3 expectations with Ms. Tasneem and Ms. Mahe</li>
+          <li><span class="agenda-time">1:00</span> — PK4 expectations and Arabic class with Ms. Sana and Ms. Ola</li>
+          <li><span class="agenda-time">1:30</span> — Preschool policies, daily operations, challenging behavior, volunteering, and Q&amp;A</li>
+        </ul>
+      </div>
+      <div class="event-card">
+        <span class="when">Friday, August 7 · 9:00 AM–3:00 PM</span>
+        <h4>Meet &amp; Greet at school</h4>
+        <p>An in-person visit so children can see their classroom, meet their teachers, and drop off supplies before the first day.</p>
+        <ul>
+          <li>PK4 families: 1:30–3:00 PM with Ms. Delphine, Ms. Sana, and Ms. Ola</li>
+          <li>PK4 invitations were sent by Punchbowl — please RSVP from that email</li>
+          <li>PK2 and PK3 times are confirmed by each classroom teacher</li>
+        </ul>
+      </div>
+      <div class="event-card">
+        <span class="when">Monday, August 10</span>
+        <h4>First day of preschool</h4>
+        <p>Arrival is between 7:40 and 8:00 AM for every child, every day.</p>
+        <ul>
+          <li>Bring a 3x5 photo of your child for the classroom emergency book</li>
+          <li>Backpack, lunch box, water bottle, nap mat, and spare clothes — all labeled</li>
+          <li>New children are picked up early during the two-week phase-in</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="notice">
+      <strong>Date change:</strong> the preschool open house originally listed for Thursday, August 6 now takes place on Zoom on Wednesday, August 5. The Meet &amp; Greet on Friday, August 7 is unchanged.
+    </div>
+
+    <div class="inline-links">
+      <a href="../parent-resources/supply-lists/">Preschool supply list →</a>
+      <a href="../parent-resources/academic-calendar/">2026–2027 academic calendar →</a>
+      <a href="mailto:contact@racademy.org">Email the preschool office →</a>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <div class="section-shell">
+      <h3>Arrival, dismissal, and Monday early pick-up</h3>
+      <p>The daily rhythm is the same for every preschool classroom, with one change families should plan around: <strong>every Monday is an early pick-up day for preschool and the big school, all year long.</strong></p>
+      <div class="table-card" style="margin-top:1.2rem;">
+        <table>
+          <thead>
+            <tr>
+              <th>When</th>
+              <th>What happens</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time-cell">7:40–8:00 AM</td>
+              <td>Arrival every day. Please tell the teacher about changes at home, a difficult night, or an early pick-up.</td>
+            </tr>
+            <tr>
+              <td class="time-cell">2:30–4:00 PM</td>
+              <td><strong>Mondays only</strong> — early pick-up window for preschool and the big school, throughout the school year.</td>
+            </tr>
+            <tr>
+              <td class="time-cell">3:25–3:50 PM</td>
+              <td>Regular dismissal Tuesday through Friday. Teachers read stories until the last child is picked up.</td>
+            </tr>
+            <tr>
+              <td class="time-cell">3:50–4:00 PM</td>
+              <td>Late arrivals at pick-up. At 4:00 PM afterschool children move to the PK4 room and classroom teachers go home.</td>
+            </tr>
+            <tr>
+              <td class="time-cell">From Aug 17</td>
+              <td>The afterschool program begins and runs until 5:00 PM — including Mondays.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="phase-in">
+  <div class="wrap">
+    <div class="section-shell">
+      <h3>The first two weeks for new children</h3>
+      <p>Preschoolers are as young as two, and for many this is the first time away from home. New children ease in over two weeks with short days that grow a little longer each day. Please plan the first two weeks so you can follow this schedule — it makes the transition far smoother. Returning children follow the regular day from August 10.</p>
+      <div class="table-card stack-table" style="margin-top:1.2rem;">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Arrival (everyone)</th>
+              <th>Pick-up for new children</th>
+              <th>Regular dismissal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time-cell date-cell" data-label="Date">Mon, Aug 10</td>
+              <td class="time-cell" data-label="Arrival (everyone)">7:40–8:00 AM</td>
+              <td  data-label="Pick-up for new children">9:30 AM</td>
+              <td  data-label="Regular dismissal">2:30–3:00 PM (all other children)</td>
+            </tr>
+            <tr>
+              <td class="time-cell date-cell" data-label="Date">Tue, Aug 11</td>
+              <td class="time-cell" data-label="Arrival (everyone)">7:40–8:00 AM</td>
+              <td  data-label="Pick-up for new children">10:00 AM</td>
+              <td  data-label="Regular dismissal">3:25–3:50 PM</td>
+            </tr>
+            <tr>
+              <td class="time-cell date-cell" data-label="Date">Wed, Aug 12</td>
+              <td class="time-cell" data-label="Arrival (everyone)">7:40–8:00 AM</td>
+              <td  data-label="Pick-up for new children">11:00 AM</td>
+              <td  data-label="Regular dismissal">3:25–3:50 PM</td>
+            </tr>
+            <tr>
+              <td class="time-cell date-cell" data-label="Date">Thu, Aug 13</td>
+              <td class="time-cell" data-label="Arrival (everyone)">7:40–8:00 AM</td>
+              <td  data-label="Pick-up for new children">11:45 AM, after lunch with their friends</td>
+              <td  data-label="Regular dismissal">3:25–3:50 PM</td>
+            </tr>
+            <tr>
+              <td class="time-cell date-cell" data-label="Date">Fri, Aug 14</td>
+              <td class="time-cell" data-label="Arrival (everyone)">7:40–8:00 AM</td>
+              <td  data-label="Pick-up for new children">11:45 AM</td>
+              <td  data-label="Regular dismissal">3:25–3:50 PM</td>
+            </tr>
+            <tr>
+              <td class="time-cell date-cell" data-label="Date">Mon, Aug 17 &amp; Tue, Aug 18</td>
+              <td class="time-cell" data-label="Arrival (everyone)">7:40–8:00 AM</td>
+              <td  data-label="Pick-up for new children">11:45 AM</td>
+              <td  data-label="Regular dismissal">Monday 2:30–3:00 PM; Tuesday 3:25–3:50 PM</td>
+            </tr>
+            <tr>
+              <td class="time-cell date-cell" data-label="Date">Wed, Aug 19 &amp; Thu, Aug 20</td>
+              <td class="time-cell" data-label="Arrival (everyone)">7:40–8:00 AM</td>
+              <td  data-label="Pick-up for new children">2:00 PM</td>
+              <td  data-label="Regular dismissal">3:25–3:50 PM</td>
+            </tr>
+            <tr>
+              <td class="time-cell date-cell" data-label="Date">Fri, Aug 21</td>
+              <td class="time-cell" data-label="Arrival (everyone)">7:40–8:00 AM</td>
+              <td  data-label="Pick-up for new children">New children stay all day</td>
+              <td  data-label="Regular dismissal">3:25–3:50 PM</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="notice">
+        Starting school brings separation anxiety, noisy classrooms, sharing toys, and a lot of new routines all at once. If the schedule is hard for your family, email Ms. Delphine — questions are always welcome and usually answered within a few hours.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="daily-schedules">
+  <div class="wrap">
+    <div class="section-shell">
+      <h3>Daily classroom schedules</h3>
+      <p>Each classroom follows its own published rhythm for 2026–2027. The PK4 daily schedule will be shared a little later and added here. Outdoor time is scheduled in the morning during August, September, and October, then moves as the weather changes.</p>
+      <div class="sched-grid">
+        <div class="table-card">
+          <h4>PK2 — 2026–2027</h4>
+          <table>
+            <tbody>
+              <tr><td class="time-cell">7:40–8:00</td><td>Arrival, table tops, diaper check</td></tr>
+              <tr><td class="time-cell">8:00–8:30</td><td>Diapers, bathroom, wash hands, morning snack</td></tr>
+              <tr><td class="time-cell">8:30–9:00</td><td>Outside time / garden (Aug–Oct)</td></tr>
+              <tr><td class="time-cell">9:00–9:30</td><td>Come in, wash hands, circle time, reading time</td></tr>
+              <tr><td class="time-cell">9:30–10:00</td><td>Diaper check, wash hands, planned activity</td></tr>
+              <tr><td class="time-cell">10:00–10:30</td><td>Free play, diapers, wash hands</td></tr>
+              <tr><td class="time-cell">10:30–10:45</td><td>Interactive story time — book or felt story</td></tr>
+              <tr><td class="time-cell">10:45–11:30</td><td>Get ready for lunch, wash hands, diaper check</td></tr>
+              <tr><td class="time-cell">11:30–11:45</td><td>Story time</td></tr>
+              <tr><td class="time-cell">11:45–1:45</td><td>Nap time</td></tr>
+              <tr><td class="time-cell">1:45–2:15</td><td>Get up, diapers, outside time, afternoon snack</td></tr>
+              <tr><td class="time-cell">2:15–2:30</td><td>Mondays only — pack up time</td></tr>
+              <tr><td class="time-cell">2:30–3:00</td><td>Mondays only — dismissal</td></tr>
+              <tr><td class="time-cell">2:15–3:00</td><td>Planned activity, Tuesday–Friday</td></tr>
+              <tr><td class="time-cell">3:00–3:25</td><td>Diapers, wash hands, pack backpacks, lunch boxes, water bottles</td></tr>
+              <tr><td class="time-cell">3:25–3:50</td><td>Dismissal and story time</td></tr>
+              <tr><td class="time-cell">3:50–4:00</td><td>Late arrivals</td></tr>
+              <tr><td class="time-cell">4:00</td><td>Afterschool children go to PK4; teachers go home</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-card">
+          <h4>PK3 — 2026–2027</h4>
+          <table>
+            <tbody>
+              <tr><td class="time-cell">7:40–8:00</td><td>Arrival, transition from home to school, table tops</td></tr>
+              <tr><td class="time-cell">8:00–8:30</td><td>Bathroom, wash hands, prayer, and morning snack</td></tr>
+              <tr><td class="time-cell">8:30–9:00</td><td>Group A outside; Group B language arts / story time (Aug–Oct)</td></tr>
+              <tr><td class="time-cell">9:00–9:30</td><td>Group B outside; Group A language arts / story time</td></tr>
+              <tr><td class="time-cell">9:30–9:45</td><td>Music and movement</td></tr>
+              <tr><td class="time-cell">9:45–10:05</td><td>Art</td></tr>
+              <tr><td class="time-cell">10:05–10:10</td><td>Bathroom, wash hands</td></tr>
+              <tr><td class="time-cell">10:10–10:30</td><td>Arabic / Islamic Studies — big group</td></tr>
+              <tr><td class="time-cell">10:35–11:15</td><td>Free play, centers, small group focus</td></tr>
+              <tr><td class="time-cell">11:15–12:00</td><td>Wash hands, lunch, bathroom, 5 minutes of relaxing yoga</td></tr>
+              <tr><td class="time-cell">12:00–1:15</td><td>Quiet time / nap</td></tr>
+              <tr><td class="time-cell">1:15–1:30</td><td>Wake up, bathroom, wash hands</td></tr>
+              <tr><td class="time-cell">1:30–2:00</td><td>Second reading</td></tr>
+              <tr><td class="time-cell">2:00–2:30</td><td>Group A outside; Group B math or science</td></tr>
+              <tr><td class="time-cell">2:30–3:00</td><td>Group B outside; Group A math or science</td></tr>
+              <tr><td class="time-cell">3:00–3:25</td><td>Wash hands, afternoon snack, pack up</td></tr>
+              <tr><td class="time-cell">3:25–3:50</td><td>Dismissal — a story is read until everyone is gone</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:0.9rem; line-height:1.7; color:var(--color-muted); margin-top:0.9rem;"><strong>Mondays in PK3:</strong> second reading runs 1:30–1:45, both groups go outside 1:45–2:15, afternoon snack and packing 2:15–2:30, and dismissal is 2:30–3:00 PM.</p>
+        </div>
+      </div>
+      <div class="notice">
+        <strong>Lunches and snacks:</strong> please send healthy meals and snacks your child can eat independently. The PK4 daily schedule is coming soon, and the full parent handbook — covering preschool policies, sick policies, behavior policies, and volunteer opportunities — will be sent to every family.
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="pad">
   <div class="wrap">
     <div class="section-shell">
       <h3>2026–2027 preschool calendar overview</h3>
-      <p>The school year is organized around a steady rhythm of learning, community, and family connection. Families will receive the full calendar with all holiday and special-event dates as the year approaches.</p>
+      <p>Key dates for the start of the year. Changes can still happen, and families always receive plenty of notice when they do.</p>
       <div class="table-card" style="margin-top:1.2rem;">
         <table>
           <thead>
@@ -600,16 +1006,32 @@
           </thead>
           <tbody>
             <tr>
+              <td>Open House (Zoom)</td>
+              <td>Wednesday, August 5, 12:35–1:35 PM — link shared August 4, session recorded</td>
+            </tr>
+            <tr>
+              <td>Meet &amp; Greet</td>
+              <td>Friday, August 7, 9:00 AM–3:00 PM — PK4 families 1:30–3:00 PM</td>
+            </tr>
+            <tr>
               <td>Preschool start</td>
-              <td>August 10</td>
+              <td>Monday, August 10 — arrival 7:40–8:00 AM</td>
+            </tr>
+            <tr>
+              <td>New-child phase-in</td>
+              <td>August 10–21, with early pick-up times that grow later each day</td>
             </tr>
             <tr>
               <td>KG–12 start</td>
-              <td>August 17</td>
+              <td>Monday, August 17</td>
             </tr>
             <tr>
-              <td>School rhythm</td>
-              <td>Balanced academic time, play, movement, and rest across the day</td>
+              <td>Afterschool program</td>
+              <td>Begins August 17, until 5:00 PM including Mondays</td>
+            </tr>
+            <tr>
+              <td>Monday early pick-up</td>
+              <td>2:30–4:00 PM every Monday, all year, for preschool and the big school</td>
             </tr>
             <tr>
               <td>Family communication</td>
