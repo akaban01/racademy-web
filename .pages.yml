@@ -100,31 +100,28 @@ content:
               - name: tag
                 label: Tag Color
                 type: select
+                description: "Pick \"No School\" for every day students stay home - breaks, holidays, Eid closures, student holidays. They all share one red colour so parents can spot them at a glance. \"Staff Day\" is only for staff work days outside the student year, and \"Observance\" is for Islamic dates when school is still in session."
                 options:
                   values:
+                    - name: "off"
+                      label: No School (break / holiday / student holiday)
                     - name: key
                       label: Key Date
-                    - name: holiday
-                      label: Holiday
-                    - name: break
-                      label: Break
-                    - name: islamic
-                      label: Islamic
+                    - name: staff
+                      label: Staff Day (students not in session)
                     - name: conf
                       label: Conference
-                    - name: staff
-                      label: Staff Day
-                    - name: halfday
-                      label: Half Day
                     - name: test
                       label: Testing
                     - name: comp
                       label: Competition
                     - name: event
                       label: School Event
+                    - name: islamic
+                      label: Observance (school in session)
                 required: true
               - name: tagLabel
                 label: Tag Text
                 type: string
-                description: "Text shown inside the colored tag, e.g. \"Half Day\" or \"Staff\"."
+                description: "Text shown inside the colored tag. Use \"No School\" for every day off so the badges read the same, e.g. \"No School\", \"Testing\", \"Staff Day\"."
                 required: true

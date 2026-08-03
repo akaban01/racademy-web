@@ -39,6 +39,24 @@
     .day-row .what { font-size: 0.95rem; color: var(--ink); line-height: 1.55; }
     .day-row .what em { color: var(--muted); font-style: normal; font-size: 0.86rem; display: block; margin-top: 1px; }
 
+    /* Dismissal note under the day schedule - same shape as .prek-note. */
+    .day-note {
+      margin-top: 1.2rem;
+      max-width: 760px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--purple);
+      border-radius: 12px;
+      background: var(--white);
+      padding: 1rem 1.3rem;
+    }
+    .day-note p {
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0;
+    }
+    .day-note strong { color: var(--ink); }
+
     .curric-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -244,6 +262,9 @@
       <div class="day-row"><span class="time">2:40</span><div class="what">Islamic Studies<em>Fiqh, hadith, seerah, and contemporary issues</em></div></div>
       <div class="day-row"><span class="time">3:25</span><div class="what">Elective or PE<em>Rotating: athletics, robotics, art, debate</em></div></div>
       <div class="day-row"><span class="time">4:00</span><div class="what">Dismissal</div></div>
+    </div>
+    <div class="day-note">
+      <p><strong>Mondays are early dismissal all year</strong> - 2:30 to 3:00 PM for the whole school, Pre-K through high school. Tuesday through Friday the regular dismissal window is 3:25 to 3:55 PM. The afterschool program runs until 5:00 PM, Mondays included.</p>
     </div>
   </div>
 </section>
