@@ -89,8 +89,8 @@
         {
           "date": "Sep 7",
           "name": "Labor Day - Student & Staff Holiday",
-          "tag": "holiday",
-          "tagLabel": "Holiday"
+          "tag": "off",
+          "tagLabel": "No School"
         }
       ]
     },
@@ -130,8 +130,8 @@
         {
           "date": "Oct 26",
           "name": "Student Holiday - Staff Planning & Prep",
-          "tag": "staff",
-          "tagLabel": "Staff Day"
+          "tag": "off",
+          "tagLabel": "No School"
         },
         {
           "date": "Oct 30",
@@ -159,8 +159,8 @@
         {
           "date": "Nov 23–27",
           "name": "Thanksgiving Break",
-          "tag": "break",
-          "tagLabel": "Break"
+          "tag": "off",
+          "tagLabel": "No School"
         },
         {
           "date": "Nov 30",
@@ -200,8 +200,8 @@
         {
           "date": "Dec 21–31",
           "name": "Winter Break",
-          "tag": "break",
-          "tagLabel": "Break"
+          "tag": "off",
+          "tagLabel": "No School"
         }
       ]
     },
@@ -211,8 +211,8 @@
         {
           "date": "Jan 1",
           "name": "Winter Break",
-          "tag": "break",
-          "tagLabel": "Break"
+          "tag": "off",
+          "tagLabel": "No School"
         },
         {
           "date": "Jan 11–14",
@@ -223,8 +223,8 @@
         {
           "date": "Jan 18",
           "name": "MLK Day",
-          "tag": "holiday",
-          "tagLabel": "Holiday"
+          "tag": "off",
+          "tagLabel": "No School"
         },
         {
           "date": "Jan 19–22",
@@ -259,13 +259,13 @@
           "date": "Feb 5",
           "name": "Welcome Ramadan Day",
           "tag": "islamic",
-          "tagLabel": "Islamic"
+          "tagLabel": "Observance"
         },
         {
           "date": "Feb 8",
           "name": "Ramadan Begins",
           "tag": "islamic",
-          "tagLabel": "Islamic"
+          "tagLabel": "Observance"
         }
       ]
     },
@@ -275,8 +275,8 @@
         {
           "date": "Mar 1–12",
           "name": "Ramadan / Eid / Spring Break",
-          "tag": "break",
-          "tagLabel": "Break"
+          "tag": "off",
+          "tagLabel": "No School"
         },
         {
           "date": "Mar 19",
@@ -345,8 +345,8 @@
         {
           "date": "May 17",
           "name": "No School - Eid al-Adha",
-          "tag": "islamic",
-          "tagLabel": "Islamic"
+          "tag": "off",
+          "tagLabel": "No School"
         },
         {
           "date": "May 20–25",

@@ -181,18 +181,38 @@
       background: currentColor;
       opacity: 0.75;
     }
-    .cal-cell.is-today { box-shadow: inset 0 0 0 1.5px var(--purple); }
+    /* ── Tag colours ──────────────────────────────────────────────────
+       The question a parent asks first is "is there school that day?", so
+       every day students do not attend - breaks, holidays, Eid closures,
+       student holidays - carries one colour and one label: red, "No School".
+       Nothing else on the calendar is red.
 
-    .cal-cell[data-tag="key"]     { background: rgba(124,58,237,0.16);  color: var(--purple-strong); }
-    .cal-cell[data-tag="break"]   { background: rgba(167,139,250,0.30); color: var(--purple-strong); }
-    .cal-cell[data-tag="holiday"] { background: rgba(217,119,6,0.16);   color: #b45309; }
-    .cal-cell[data-tag="islamic"] { background: rgba(16,122,95,0.16);   color: #047857; }
-    .cal-cell[data-tag="staff"]   { background: rgba(75,85,99,0.16);    color: #4b5563; }
-    .cal-cell[data-tag="conf"]    { background: rgba(37,99,235,0.16);   color: #1d4ed8; }
-    .cal-cell[data-tag="halfday"] { background: rgba(190,24,93,0.14);   color: #be185d; }
-    .cal-cell[data-tag="test"]    { background: rgba(234,88,12,0.16);   color: #c2410c; }
-    .cal-cell[data-tag="comp"]    { background: rgba(14,165,233,0.18);  color: #0369a1; }
-    .cal-cell[data-tag="event"]   { background: rgba(161,132,44,0.20);  color: #7c6414; }
+       The remaining tags are spread around the hue wheel so no two read as
+       the same colour at the 12px size of a grid cell:
+         red 0 · amber 38 · emerald 160 · cyan 190 · blue 225 · violet 262
+         · fuchsia 295 · slate (neutral)
+       Nothing sits between red and amber, or between fuchsia and red: those
+       are the neighbours a "no school" day could be mistaken for.
+       `break` and `holiday` are kept as aliases of `off` so calendar entries
+       written under the old tag names still render correctly. */
+    .cal-cell[data-tag="off"],
+    .cal-cell[data-tag="break"],
+    .cal-cell[data-tag="holiday"] {
+      background: rgba(220,38,38,0.16);
+      color: #b91c1c;
+      box-shadow: inset 0 0 0 1px rgba(185,28,28,0.30);
+    }
+    .cal-cell[data-tag="key"]     { background: rgba(109,40,217,0.18); color: #5b21b6; }
+    .cal-cell[data-tag="staff"]   { background: rgba(100,116,139,0.20); color: #475569; }
+    .cal-cell[data-tag="conf"]    { background: rgba(37,99,235,0.16);  color: #1d4ed8; }
+    .cal-cell[data-tag="test"]    { background: rgba(245,158,11,0.28); color: #b45309; }
+    .cal-cell[data-tag="comp"]    { background: rgba(8,145,178,0.20);  color: #0e7490; }
+    .cal-cell[data-tag="event"]   { background: rgba(192,38,211,0.15); color: #a21caf; }
+    .cal-cell[data-tag="islamic"] { background: rgba(5,150,105,0.20);  color: #047857; }
+
+    /* After the tag colours: "No School" also draws a ring, and today's ring
+       has to win over it. */
+    .cal-cell.is-today { box-shadow: inset 0 0 0 1.5px var(--purple); }
 
     .cal-event-row.is-flash {
       animation: calFlash 1.8s ease-out;
@@ -262,16 +282,34 @@
       border-radius: 999px;
       white-space: nowrap;
     }
-    .tag-key      { background: rgba(124,58,237,0.10);  color: var(--purple-strong); }
-    .tag-break    { background: rgba(167, 139, 250, 0.16); color: var(--purple-strong); }
-    .tag-holiday  { background: rgba(217, 119, 6, 0.10); color: #b45309; }
-    .tag-islamic  { background: rgba(16, 122, 95, 0.10); color: #047857; }
-    .tag-staff    { background: rgba(75, 85, 99, 0.10);  color: #4b5563; }
-    .tag-conf     { background: rgba(37, 99, 235, 0.10); color: #1d4ed8; }
-    .tag-halfday  { background: rgba(190, 24, 93, 0.08); color: #be185d; }
-    .tag-test     { background: rgba(234, 88, 12, 0.10);  color: #c2410c; }
-    .tag-comp     { background: rgba(14, 165, 233, 0.12); color: #0369a1; }
-    .tag-event    { background: rgba(161, 132, 44, 0.14); color: #7c6414; }
+    /* Same eight colours as the grid cells, at pill weight. */
+    .tag-off,
+    .tag-break,
+    .tag-holiday  { background: rgba(220, 38, 38, 0.12); color: #b91c1c; }
+    .tag-key      { background: rgba(109, 40, 217, 0.12); color: #5b21b6; }
+    .tag-staff    { background: rgba(100, 116, 139, 0.14); color: #475569; }
+    .tag-conf     { background: rgba(37, 99, 235, 0.11); color: #1d4ed8; }
+    .tag-test     { background: rgba(245, 158, 11, 0.20); color: #b45309; }
+    .tag-comp     { background: rgba(8, 145, 178, 0.14); color: #0e7490; }
+    .tag-event    { background: rgba(192, 38, 211, 0.11); color: #a21caf; }
+    .tag-islamic  { background: rgba(5, 150, 105, 0.14); color: #047857; }
+
+    /* "No School" leads the legend and carries the same ring as its cells. */
+    .cal-legend .tag-off { box-shadow: inset 0 0 0 1px rgba(185,28,28,0.30); }
+    /* Lives inside the legend row: its own line on screen, and in print it
+       falls in beside the pills so the sheet gains no height. */
+    .cal-legend-note {
+      flex-basis: 100%;
+      font-size: 0.86rem;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0.15rem 0 0;
+      max-width: 760px;
+    }
+    .cal-legend-note strong { color: #b91c1c; }
+    /* Print-only twin of the note - short enough to sit on the pill row, so the
+       single-sheet print gains no height. See the print stylesheet below. */
+    .cal-legend-note-print { display: none; }
 
     /* ── Print button (on-screen) ── */
     .print-toolbar {
@@ -451,16 +489,18 @@
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
-      .cal-cell[data-tag="key"]     { background: #e6dcfa !important; color: #4c1d95 !important; }
-      .cal-cell[data-tag="break"]   { background: #cfc2f7 !important; color: #3b1a80 !important; }
-      .cal-cell[data-tag="holiday"] { background: #fae3c4 !important; color: #92400e !important; }
-      .cal-cell[data-tag="islamic"] { background: #cfe8e0 !important; color: #065f46 !important; }
-      .cal-cell[data-tag="staff"]   { background: #dfe1e5 !important; color: #374151 !important; }
+      /* Flat equivalents of the screen tints - keep these in step with the
+         .cal-cell colours above, and with the legend swatches below. */
+      .cal-cell[data-tag="off"],
+      .cal-cell[data-tag="break"],
+      .cal-cell[data-tag="holiday"] { background: #f7cfcf !important; color: #991b1b !important; }
+      .cal-cell[data-tag="key"]     { background: #dccdf7 !important; color: #4c1d95 !important; }
+      .cal-cell[data-tag="staff"]   { background: #dee2e8 !important; color: #374151 !important; }
       .cal-cell[data-tag="conf"]    { background: #d5e2fb !important; color: #1e40af !important; }
-      .cal-cell[data-tag="halfday"] { background: #f8d6e5 !important; color: #9d174d !important; }
-      .cal-cell[data-tag="test"]    { background: #fbdcc4 !important; color: #9a3412 !important; }
-      .cal-cell[data-tag="comp"]    { background: #cfe7f7 !important; color: #075985 !important; }
-      .cal-cell[data-tag="event"]   { background: #eee2bd !important; color: #6b5610 !important; }
+      .cal-cell[data-tag="test"]    { background: #fce3bb !important; color: #92400e !important; }
+      .cal-cell[data-tag="comp"]    { background: #cbe8f1 !important; color: #0e7490 !important; }
+      .cal-cell[data-tag="event"]   { background: #f4cbf8 !important; color: #86198f !important; }
+      .cal-cell[data-tag="islamic"] { background: #cde9dc !important; color: #065f46 !important; }
 
       /* The legend is what makes the coloured days readable - keep the
          swatch colours in sync with the .cal-cell colours above. */
@@ -472,16 +512,27 @@
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
-      .cal-legend .tag-key     { background: #e6dcfa !important; color: #4c1d95 !important; }
-      .cal-legend .tag-break   { background: #cfc2f7 !important; color: #3b1a80 !important; }
-      .cal-legend .tag-holiday { background: #fae3c4 !important; color: #92400e !important; }
-      .cal-legend .tag-islamic { background: #cfe8e0 !important; color: #065f46 !important; }
-      .cal-legend .tag-staff   { background: #dfe1e5 !important; color: #374151 !important; }
+      .cal-legend .tag-off,
+      .cal-legend .tag-break,
+      .cal-legend .tag-holiday { background: #f7cfcf !important; color: #991b1b !important; }
+      .cal-legend .tag-key     { background: #dccdf7 !important; color: #4c1d95 !important; }
+      .cal-legend .tag-staff   { background: #dee2e8 !important; color: #374151 !important; }
       .cal-legend .tag-conf    { background: #d5e2fb !important; color: #1e40af !important; }
-      .cal-legend .tag-halfday { background: #f8d6e5 !important; color: #9d174d !important; }
-      .cal-legend .tag-test    { background: #fbdcc4 !important; color: #9a3412 !important; }
-      .cal-legend .tag-comp    { background: #cfe7f7 !important; color: #075985 !important; }
-      .cal-legend .tag-event   { background: #eee2bd !important; color: #6b5610 !important; }
+      .cal-legend .tag-test    { background: #fce3bb !important; color: #92400e !important; }
+      .cal-legend .tag-comp    { background: #cbe8f1 !important; color: #0e7490 !important; }
+      .cal-legend .tag-event   { background: #f4cbf8 !important; color: #86198f !important; }
+      .cal-legend .tag-islamic { background: #cde9dc !important; color: #065f46 !important; }
+
+      .cal-legend-note { display: none !important; }
+      .cal-legend-note-print {
+        display: inline !important;
+        align-self: center;
+        font-size: 6.03pt !important;
+        line-height: 1.2;
+        color: #444 !important;
+        margin-left: 2.08pt;
+      }
+      .cal-legend-note-print strong { color: #991b1b !important; }
 
       /* Every date, flowing in newspaper columns under the grid. */
       .cal-months {
@@ -654,15 +705,19 @@
     </div>
 
     <div class="cal-legend" aria-label="Calendar legend">
+      <span class="cal-tag tag-off">No School</span>
       <span class="cal-tag tag-key">Key Date</span>
       <span class="cal-tag tag-staff">Staff Day</span>
-      <span class="cal-tag tag-break">Break</span>
       <span class="cal-tag tag-conf">Conference</span>
       <span class="cal-tag tag-test">Testing</span>
       <span class="cal-tag tag-comp">Competition</span>
       <span class="cal-tag tag-event">School Event</span>
-      <span class="cal-tag tag-islamic">Islamic</span>
-      <span class="cal-tag tag-holiday">Holiday</span>
+      <span class="cal-tag tag-islamic">Observance</span>
+      <span class="cal-legend-note">
+        <strong>Red means students do not attend</strong> - every break, holiday, Eid closure, and student holiday
+        shares that one colour. Every other colour is a day school is in session.
+      </span>
+      <span class="cal-legend-note-print"><strong>Red = no school for students.</strong></span>
     </div>
 
     <div class="cal-months" id="cal-months-root"></div>
@@ -753,8 +808,9 @@
                      'July','August','September','October','November','December'];
   var DOW = ['S','M','T','W','T','F','S'];
   /* Which tag wins the colour of a day that carries several events - parents
-     scan first for "is there school", so breaks and holidays sit at the top. */
-  var TAG_PRIORITY = ['break','holiday','islamic','key','conf','halfday','test','comp','event','staff'];
+     scan first for "is there school", so "No School" sits at the top. 'break'
+     and 'holiday' are legacy aliases of 'off' and rank alongside it. */
+  var TAG_PRIORITY = ['off','break','holiday','staff','key','conf','test','comp','islamic','event'];
 
   function dayKey(y, m, d) { return y + '-' + m + '-' + d; }
 
