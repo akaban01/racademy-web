@@ -78,17 +78,49 @@
   <div class="wrap">
     <span class="mono sec-label">Give Online</span>
     <h2 class="sec-title">Make a secure gift right now.</h2>
-    <p class="lead">This form currently supports our School Operations fund. Dedicated online forms for the New Campus and Scholarship funds are coming soon - until then, contact the office to direct a gift there.</p>
-    <div class="zeffy-embed">
-      <div data-zeffy-embed data-form-url="/embed/donation-form/school-operations"></div>
-      <div data-zeffy-embed-fallback style="display:none;">
-        <div style="position:relative;overflow:hidden;height:450px;width:100%;"><iframe title='Donation form powered by Zeffy' style='position: absolute; border: 0; top:0;left:0;bottom:0;right:0;width:100%;height:100%' data-zeffy-embed-src='https://www.zeffy.com/embed/donation-form/school-operations' allowpaymentrequest allowTransparency="true"></iframe></div>
+    <p class="lead">Pick the fund you'd like to support and its secure Zeffy donation form opens right here on the page. Every fund now has its own form - if you'd like your gift to go somewhere more specific, contact the office and we'll direct it.</p>
+    <div class="give-grid">
+      <div class="give-card">
+        <span class="label">Day to Day</span>
+        <h3>General Donations</h3>
+        <p>Unrestricted giving toward School Operations - instruction, facilities, and the staff who keep the school running every day.</p>
+        <button type="button" class="btn-primary"
+                zeffy-form-link="https://www.zeffy.com/embed/donation-form/school-operations?modal=true"
+                data-zeffy-fallback-url="https://www.zeffy.com/donation-form/school-operations">
+          Give to General Donations
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </button>
       </div>
-      <script
-        src="https://www.zeffy.com/embed/v2/zeffy-embed.js"
-        onerror="document.querySelectorAll('[data-zeffy-embed-fallback]').forEach(function(el){el.style.display='block';el.querySelectorAll('iframe[data-zeffy-embed-src]').forEach(function(f){f.src=f.getAttribute('data-zeffy-embed-src');});});">
-      </script>
+      <div class="give-card">
+        <span class="label">Students</span>
+        <h3>Scholarship</h3>
+        <p>Need-based aid so a deserving student's seat isn't decided by a family's finances.</p>
+        <button type="button" class="btn-primary"
+                zeffy-form-link="https://www.zeffy.com/embed/donation-form/scholarships-9?modal=true"
+                data-zeffy-fallback-url="https://www.zeffy.com/donation-form/scholarships-9">
+          Give to Scholarship
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <div class="give-card">
+        <span class="label">Building</span>
+        <h3>New Campus</h3>
+        <p>Toward the 19-acre Pre-K through 12th grade campus in Leander - a permanent home built to serve the families on our waiting list.</p>
+        <button type="button" class="btn-primary"
+                zeffy-form-link="https://www.zeffy.com/embed/donation-form/19-acre-campus?modal=true"
+                data-zeffy-fallback-url="https://www.zeffy.com/donation-form/19-acre-campus">
+          Give to New Campus
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
     </div>
+    <noscript>
+      <p class="give-note">JavaScript is turned off, so the forms can't open in a window here. You can still give on Zeffy directly: <a href="https://www.zeffy.com/donation-form/school-operations" target="_blank" rel="noopener">General Donations</a>, <a href="https://www.zeffy.com/donation-form/scholarships-9" target="_blank" rel="noopener">Scholarship</a>, or <a href="https://www.zeffy.com/donation-form/19-acre-campus" target="_blank" rel="noopener">New Campus</a>.</p>
+    </noscript>
+    <script
+      src="https://zeffy-scripts.s3.ca-central-1.amazonaws.com/embed-form-script.min.js"
+      onerror="document.querySelectorAll('[data-zeffy-fallback-url]').forEach(function(b){b.addEventListener('click',function(){window.open(b.getAttribute('data-zeffy-fallback-url'),'_blank','noopener');});});">
+    </script>
   </div>
 </section>
 
