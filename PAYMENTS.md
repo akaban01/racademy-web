@@ -16,20 +16,20 @@ There are two separate kinds of "payments" on the website:
 
 ## Adding another donation fund
 
-Each fund on `/donate/` is one card with its own button. To add the next one
-(**New Campus**), create the form in Zeffy, open its **Share → Embed** options,
-and send the developer the two lines Zeffy gives you - the `zeffy-form-link`
-address ending in `?modal=true`, and the slug of the public form page
-(`https://www.zeffy.com/donation-form/...`). Nothing else is needed; the card
-is a few lines of copy plus that link.
-
-The forms in place today:
+Each fund on `/donate/` is one card with its own button. All three funds are
+live today:
 
 | Fund | Zeffy form |
 |---|---|
 | General Donations | `school-operations` |
 | Scholarship | `scholarships-9` |
-| New Campus | not created yet |
+| New Campus | `19-acre-campus` |
+
+To add a fourth later, create the form in Zeffy, open its **Share → Embed**
+options, and send the developer the two lines Zeffy gives you - the
+`zeffy-form-link` address ending in `?modal=true`, and the address of the
+public form page (`https://www.zeffy.com/donation-form/...`). Nothing else is
+needed; the card is a few lines of copy plus that link.
 
 ---
 
