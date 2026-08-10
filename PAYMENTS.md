@@ -9,8 +9,27 @@ There are two separate kinds of "payments" on the website:
 
 | Type | Where | Status |
 |---|---|---|
-| **Donations** (general giving) | `/donate/` page | Lists PayPal / Zelle / etc. A Zeffy donation form will be embedded here once the school provides the Zeffy embed code. Not started yet. |
+| **Donations** (general giving) | `/donate/` page | Live. Zeffy donation forms are embedded for **General Donations** and **Scholarship** - each fund has a button that opens its form in a pop-up window. A **New Campus** form is still to come. The page also lists PayPal / Zelle / etc. |
 | **Fee payments** (Stripe) | Application fee, transcript fees | Backend is built and connected to a **live** Stripe account. The "Pay" buttons are **not yet on the website** - see TODO below. |
+
+---
+
+## Adding another donation fund
+
+Each fund on `/donate/` is one card with its own button. To add the next one
+(**New Campus**), create the form in Zeffy, open its **Share → Embed** options,
+and send the developer the two lines Zeffy gives you - the `zeffy-form-link`
+address ending in `?modal=true`, and the slug of the public form page
+(`https://www.zeffy.com/donation-form/...`). Nothing else is needed; the card
+is a few lines of copy plus that link.
+
+The forms in place today:
+
+| Fund | Zeffy form |
+|---|---|
+| General Donations | `school-operations` |
+| Scholarship | `scholarships-9` |
+| New Campus | not created yet |
 
 ---
 
