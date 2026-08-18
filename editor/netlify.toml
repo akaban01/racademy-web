@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+# Single-page app: let the editor's own router handle /callback and any
+# other client-side route instead of Netlify 404ing on a direct hit.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

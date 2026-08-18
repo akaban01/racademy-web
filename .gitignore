@@ -6,3 +6,6 @@ Thumbs.db
 .env
 .env.local
 .netlify/
+
+# Editor SPA build output — rebuilt fresh by Netlify on each deploy.
+editor/dist/

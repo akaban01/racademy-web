@@ -4,7 +4,8 @@
   "description": "Renaissance Academy website",
   "private": true,
   "scripts": {
-    "build": "tailwindcss -i ./src/input.css -o ./dist/styles.css --minify",
+    "build": "npm run build:content && npm run build:css",
+    "build:content": "node scripts/build-content.mjs",
     "build:css": "tailwindcss -i ./src/input.css -o ./dist/styles.css --minify",
     "dev": "tailwindcss -i ./src/input.css -o ./dist/styles.css --watch",
     "watch:css": "tailwindcss -i ./src/input.css -o ./dist/styles.css --watch",
@@ -12,6 +13,9 @@
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.1",
+    "esbuild": "^0.24.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "tailwindcss": "^4.3.1"
   },
   "dependencies": {
