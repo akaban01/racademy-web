@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Parent Resources - Renaissance Academy</title>
-  <meta name="description" content="Everything Renaissance Academy families need for the school year - the academic calendar, supply lists by grade, and uniform requirements." />
+  <meta name="description" content="Everything Renaissance Academy families need for the school year - the RenWeb ParentsWeb login, the academic calendar, supply lists by grade, and uniform requirements." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
@@ -87,6 +87,18 @@
       color: var(--purple);
     }
     .resource-card:hover .rc-cta { color: var(--purple-strong); }
+
+    /* Direct portal link for families who only need the login, not the guide. */
+    .quick-note {
+      margin-top: 1.1rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .quick-note a { color: var(--purple); }
+    .quick-note code {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.82em;
+    }
 
     @media (max-width: 900px) {
       .resource-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
@@ -208,6 +220,11 @@
     <h2 class="sec-title">Start here.</h2>
     <p class="sec-lead">The most-asked-for items for families this year.</p>
     <div class="resource-grid">
+      <a class="resource-card" href="parentsweb/">
+        <h3>ParentsWeb Login</h3>
+        <p>Grades, attendance, lesson plans, and report cards in RenWeb - plus how to set up your account.</p>
+        <span class="rc-cta"><span class="rc-cta-text">Go to ParentsWeb </span>→</span>
+      </a>
       <a class="resource-card" href="academic-calendar/">
         <h3>Academic Calendar</h3>
         <p>Important dates for the 2026–2027 school year - breaks, holidays, conferences, and observances.</p>
@@ -234,6 +251,11 @@
         <span class="rc-cta"><span class="rc-cta-text">Email us </span>→</span>
       </a>
     </div>
+    <p class="quick-note">
+      Already have an account? Log in directly at
+      <a href="https://ra-tx.client.renweb.com/pw/" target="_blank" rel="noopener">ra-tx.client.renweb.com/pw/</a>
+      (district code <code>RA-TX</code>).
+    </p>
   </div>
 </section>
 
