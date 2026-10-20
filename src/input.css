@@ -736,3 +736,8 @@
 @media print {
   html { font-size: 100%; }
 }
+
+/* Site-wide primary heading face. Georgia is a broadly installed system font. */
+h1 {
+  font-family: Georgia, "Times New Roman", Times, serif !important;
+}

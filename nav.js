@@ -5,7 +5,7 @@
   var logoUrl = scriptTag ? new URL('ra-logo.webp', scriptTag.src).href : 'ra-logo.webp';
   var style = document.createElement('style');
   style.setAttribute('data-brand-mark', 'true');
-  style.textContent = '.brand-mark img{display:block;width:100%;height:100%;object-fit:contain;}.brand-mark svg{display:none;}';
+  style.textContent = '.brand-mark img{display:block;width:100%;height:100%;object-fit:contain;}.brand-mark svg{display:none;}h1{font-family:Georgia,"Times New Roman",Times,serif!important;}';
   document.head.appendChild(style);
 
   function applyBrandMark() {

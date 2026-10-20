@@ -15,12 +15,6 @@
     .banquet-hero .lead { margin-inline: auto; }
     .banquet-hero .breadcrumb { justify-content: center; }
     .banquet-hero h1 { max-width: 760px; margin-inline: auto; }
-    .event-mark {
-      width: 64px; height: 64px; margin: 0 auto 1rem; border-radius: 50%;
-      display: grid; place-items: center; color: #fff;
-      background: linear-gradient(145deg, var(--color-purple-light), var(--color-purple-strong));
-      box-shadow: 0 14px 34px rgba(109,40,217,.24);
-    }
     .banquet-actions {
       display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: .75rem; max-width: 980px; margin: 2rem auto 0;
@@ -68,7 +62,7 @@
     .pledge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .form-field { display: flex; flex-direction: column; gap: .4rem; }
     .form-field.full { grid-column: 1 / -1; }
-    .form-field label, .choice-label { color: var(--color-purple-deep); font-weight: 700; font-size: .88rem; }
+    .form-field label { color: var(--color-purple-deep); font-weight: 700; font-size: .88rem; }
     .form-field input, .form-field select, .form-field textarea {
       width: 100%; min-height: 48px; border: 1px solid rgba(42,18,89,.2); border-radius: 10px;
       background: #fff; color: var(--color-ink); padding: .72rem .8rem; font: inherit;
@@ -77,9 +71,7 @@
     .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
       outline: 3px solid rgba(124,58,237,.15); border-color: var(--color-purple);
     }
-    .pledge-choice { display: flex; flex-wrap: wrap; gap: .65rem 1.2rem; padding-top: .25rem; }
-    .pledge-choice label { display: inline-flex; align-items: center; gap: .45rem; color: var(--color-muted); }
-    .pledge-choice input { accent-color: var(--color-purple); width: 18px; height: 18px; }
+    .form-field[hidden] { display: none; }
     .form-note { color: var(--color-muted); font-size: .82rem; margin: 1rem 0; }
     .back-top { display: flex; justify-content: center; margin-top: 2rem; }
     .back-top a { color: var(--color-purple); font: 700 .72rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; }
@@ -125,10 +117,8 @@
     <div class="arch-bg" aria-hidden="true"><svg width="620" height="640" viewBox="0 0 620 640" fill="none" style="right:-80px;top:-80px"><g stroke="#7c3aed" stroke-width="1.4" opacity=".15"><path d="M110 600V300Q110 80 310 80t200 220v300"/><path d="M170 600V320q0-170 140-170t140 170v280"/><path d="M230 600V350q0-130 80-130t80 130v250"/></g></svg></div>
     <div class="wrap">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../">Home</a><span class="sep">/</span><span class="current">Banquet</span></nav>
-      <div class="event-mark" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 21h16M6 21V10a6 6 0 0 1 12 0v11M9 21v-8h6v8M8 6h8"/></svg></div>
-      <span class="mono">Together, we build the future</span>
-      <h1>Renaissance Academy <span class="accent">Annual Banquet</span></h1>
-      <p class="lead">Welcome. Follow the evening's program, support our students, make a pledge, or share your feedback.</p>
+      <h1><span class="accent">Renaissance Annual Banquet 2026</span></h1>
+      <p class="lead">Shaping a brighter future together</p>
       <nav class="banquet-actions" aria-label="Banquet page sections">
         <a class="banquet-action" href="#agenda"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h4"/></svg>Program Agenda</a>
         <a class="banquet-action" href="#donate"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6.5-8 11-8 11z"/></svg>Donate</a>
@@ -177,9 +167,14 @@
           <div class="form-field"><label for="last-name">Last name *</label><input id="last-name" name="last-name" type="text" autocomplete="family-name" required /></div>
           <div class="form-field"><label for="email">Email *</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
           <div class="form-field"><label for="phone">Phone *</label><input id="phone" name="phone" type="tel" autocomplete="tel" required /></div>
+          <div class="form-field full"><label for="address-line-1">Street address *</label><input id="address-line-1" name="address-line-1" type="text" autocomplete="address-line1" required /></div>
+          <div class="form-field full"><label for="address-line-2">Apartment, suite, or unit</label><input id="address-line-2" name="address-line-2" type="text" autocomplete="address-line2" /></div>
+          <div class="form-field"><label for="city">City *</label><input id="city" name="city" type="text" autocomplete="address-level2" required /></div>
+          <div class="form-field"><label for="state">State *</label><input id="state" name="state" type="text" autocomplete="address-level1" required /></div>
+          <div class="form-field"><label for="postal-code">ZIP code *</label><input id="postal-code" name="postal-code" type="text" inputmode="numeric" autocomplete="postal-code" required /></div>
           <div class="form-field"><label for="amount">Pledge amount (USD) *</label><input id="amount" name="pledge-amount" type="number" min="1" step="1" inputmode="numeric" placeholder="$" required /></div>
-          <div class="form-field"><label for="designation">Designate my pledge</label><select id="designation" name="designation"><option value="Where needed most">Where needed most</option><option value="New campus">New campus</option><option value="Scholarships">Student scholarships</option><option value="School operations">School operations</option></select></div>
-          <fieldset class="form-field full" style="border:0;padding:0;margin:0"><legend class="choice-label">Pledge frequency *</legend><div class="pledge-choice"><label><input type="radio" name="frequency" value="One time" required /> One-time pledge</label><label><input type="radio" name="frequency" value="Monthly" /> Monthly pledge</label><label><input type="radio" name="frequency" value="Annually" /> Annual pledge</label></div></fieldset>
+          <div class="form-field"><label for="frequency">Pledge frequency *</label><select id="frequency" name="frequency" required><option value="One-time">One-time</option><option value="Monthly">Monthly</option></select></div>
+          <div class="form-field" id="months-field" hidden><label for="months">Number of months *</label><input id="months" name="number-of-months" type="number" min="1" step="1" inputmode="numeric" /></div>
           <div class="form-field full"><label for="notes">Notes or preferred contact time</label><textarea id="notes" name="notes"></textarea></div>
         </div>
         <p class="form-note">This form records a pledge only; it does not process a payment. Renaissance Academy will contact you to arrange fulfillment.</p>
@@ -210,5 +205,22 @@
     <div class="footer-bottom"><span>© 2026 Renaissance Academy. All rights reserved.</span><span class="mono" style="color:var(--on-dark-dim)">Bismillah · Since 2007</span></div>
   </div>
 </footer>
+<script>
+  (function () {
+    var frequency = document.getElementById('frequency');
+    var monthsField = document.getElementById('months-field');
+    var months = document.getElementById('months');
+
+    function updateMonthsField() {
+      var isMonthly = frequency.value === 'Monthly';
+      monthsField.hidden = !isMonthly;
+      months.required = isMonthly;
+      if (!isMonthly) months.value = '';
+    }
+
+    frequency.addEventListener('change', updateMonthsField);
+    updateMonthsField();
+  }());
+</script>
 </body>
 </html>
