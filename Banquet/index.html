@@ -219,7 +219,6 @@
     var form = document.getElementById('banquet-pledge-form');
     var submitButton = document.getElementById('pledge-submit');
     var status = document.getElementById('pledge-status');
-    var responseFrame = document.getElementById('pledge-submission-target');
 
     function updateMonthsField() {
       var isMonthly = frequency.value === 'Monthly';
@@ -238,7 +237,8 @@
     });
 
     window.addEventListener('message', function (event) {
-      if (event.source !== responseFrame.contentWindow || !event.data || event.data.source !== 'banquet-pledge') return;
+      var isGoogleOrigin = event.origin === 'https://script.google.com' || /^https:\/\/(?:[^.]+\.)*googleusercontent\.com$/.test(event.origin);
+      if (!isGoogleOrigin || !event.data || event.data.source !== 'banquet-pledge') return;
 
       submitButton.disabled = false;
       if (event.data.ok) {

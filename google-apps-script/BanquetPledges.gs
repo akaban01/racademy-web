@@ -95,6 +95,6 @@ function htmlResponse_(value) {
   }).replace(/</g, "\\u003c");
 
   return HtmlService.createHtmlOutput(
-    "<!doctype html><html><body><script>window.parent.postMessage(" + message + ", '*');<\/script></body></html>"
+    "<!doctype html><html><body><script>window.top.postMessage(" + message + ", '*');<\/script></body></html>"
   ).setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
