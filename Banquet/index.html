@@ -73,6 +73,10 @@
     }
     .form-field[hidden] { display: none; }
     .form-note { color: var(--color-muted); font-size: .82rem; margin: 1rem 0; }
+    .honeypot-field { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+    .form-status { min-height: 1.5rem; margin-top: 1rem; color: var(--color-muted); font-size: .9rem; font-weight: 600; }
+    .form-status.is-success { color: #26734d; }
+    .form-status.is-error { color: #a12b2b; }
     .back-top { display: flex; justify-content: center; margin-top: 2rem; }
     .back-top a { color: var(--color-purple); font: 700 .72rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; }
     .feedback-card { text-align: center; }
@@ -159,9 +163,9 @@
   <section class="banquet-section band-panel" id="pledge">
     <div class="wrap">
       <div class="section-head"><span class="mono sec-label">Make Your Commitment</span><h2 class="sec-title">Pledge Your Support</h2><p class="sec-lead">Submit your pledge today. Our team will follow up with the details needed to complete your gift.</p></div>
-      <form class="pledge-card" name="banquet-pledge" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <form class="pledge-card" id="banquet-pledge-form" name="banquet-pledge" method="POST" action="https://script.google.com/macros/s/AKfycbzmxaSpniM3fCgi4S_-Lakai1TDfGLFeoxs9N4wUYFfd6rpY87vzTYebsG_X5XYb1cK/exec" target="pledge-submission-target">
         <input type="hidden" name="form-name" value="banquet-pledge" />
-        <p hidden><label>Do not fill this out: <input name="bot-field" /></label></p>
+        <div class="honeypot-field" aria-hidden="true"><label>Leave this field empty <input name="bot-field" type="text" tabindex="-1" autocomplete="off" /></label></div>
         <div class="pledge-grid">
           <div class="form-field"><label for="first-name">First name *</label><input id="first-name" name="first-name" type="text" autocomplete="given-name" required /></div>
           <div class="form-field"><label for="last-name">Last name *</label><input id="last-name" name="last-name" type="text" autocomplete="family-name" required /></div>
@@ -178,8 +182,10 @@
           <div class="form-field full"><label for="notes">Notes or preferred contact time</label><textarea id="notes" name="notes"></textarea></div>
         </div>
         <p class="form-note">This form records a pledge only; it does not process a payment. Renaissance Academy will contact you to arrange fulfillment.</p>
-        <button class="primary-link" type="submit">Submit my pledge <span aria-hidden="true">→</span></button>
+        <button class="primary-link" id="pledge-submit" type="submit">Submit my pledge <span aria-hidden="true">→</span></button>
+        <p class="form-status" id="pledge-status" role="status" aria-live="polite"></p>
       </form>
+      <iframe name="pledge-submission-target" id="pledge-submission-target" title="Pledge submission response" hidden></iframe>
       <div class="back-top"><a href="#top" aria-label="Back to top from pledge form">↑ Back to top</a></div>
     </div>
   </section>
@@ -210,6 +216,10 @@
     var frequency = document.getElementById('frequency');
     var monthsField = document.getElementById('months-field');
     var months = document.getElementById('months');
+    var form = document.getElementById('banquet-pledge-form');
+    var submitButton = document.getElementById('pledge-submit');
+    var status = document.getElementById('pledge-status');
+    var responseFrame = document.getElementById('pledge-submission-target');
 
     function updateMonthsField() {
       var isMonthly = frequency.value === 'Monthly';
@@ -220,6 +230,27 @@
 
     frequency.addEventListener('change', updateMonthsField);
     updateMonthsField();
+
+    form.addEventListener('submit', function () {
+      submitButton.disabled = true;
+      status.className = 'form-status';
+      status.textContent = 'Submitting your pledge…';
+    });
+
+    window.addEventListener('message', function (event) {
+      if (event.source !== responseFrame.contentWindow || !event.data || event.data.source !== 'banquet-pledge') return;
+
+      submitButton.disabled = false;
+      if (event.data.ok) {
+        form.reset();
+        updateMonthsField();
+        status.className = 'form-status is-success';
+        status.textContent = 'Thank you. Your pledge has been recorded.';
+      } else {
+        status.className = 'form-status is-error';
+        status.textContent = event.data.error || 'We could not record your pledge. Please try again.';
+      }
+    });
   }());
 </script>
 </body>

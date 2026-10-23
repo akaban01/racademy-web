@@ -19,17 +19,13 @@ const HEADERS = [
 
 function doPost(e) {
   try {
-    const request = JSON.parse(e.postData.contents);
-    const expectedSecret = PropertiesService.getScriptProperties().getProperty("WEBHOOK_SECRET");
-
-    if (!expectedSecret || request.secret !== expectedSecret) {
-      return jsonResponse_({ ok: false, error: "Unauthorized" });
-    }
-
-    const pledge = request.pledge || {};
+    const pledge = e && e.parameter ? e.parameter : {};
+    if (pledge["bot-field"]) return htmlResponse_({ ok: true });
     if (pledge["form-name"] !== "banquet-pledge") {
-      return jsonResponse_({ ok: false, error: "Unexpected form" });
+      return htmlResponse_({ ok: false, error: "Invalid pledge form submission." });
     }
+
+    validatePledge_(pledge);
 
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
@@ -46,7 +42,7 @@ function doPost(e) {
       }
 
       sheet.appendRow([
-        safeCell_(request.submittedAt),
+        new Date(),
         safeCell_(pledge["first-name"]),
         safeCell_(pledge["last-name"]),
         safeCell_(pledge.email),
@@ -65,10 +61,24 @@ function doPost(e) {
       lock.releaseLock();
     }
 
-    return jsonResponse_({ ok: true });
+    return htmlResponse_({ ok: true });
   } catch (error) {
     console.error(error);
-    return jsonResponse_({ ok: false, error: String(error.message || error) });
+    return htmlResponse_({ ok: false, error: String(error.message || error) });
+  }
+}
+
+function validatePledge_(pledge) {
+  const required = ["first-name", "last-name", "email", "phone", "address-line-1", "city", "state", "postal-code", "pledge-amount", "frequency"];
+  required.forEach(function (field) {
+    if (!String(pledge[field] || "").trim()) throw new Error("Please complete all required fields.");
+  });
+
+  if (!/^\S+@\S+\.\S+$/.test(pledge.email)) throw new Error("Please enter a valid email address.");
+  if (!(Number(pledge["pledge-amount"]) > 0)) throw new Error("Please enter a valid pledge amount.");
+  if (["One-time", "Monthly"].indexOf(pledge.frequency) === -1) throw new Error("Please select a valid pledge frequency.");
+  if (pledge.frequency === "Monthly" && !(Number(pledge["number-of-months"]) > 0)) {
+    throw new Error("Please enter the number of months for your monthly pledge.");
   }
 }
 
@@ -77,8 +87,14 @@ function safeCell_(value) {
   return /^[=+\-@]/.test(text) ? "'" + text : text;
 }
 
-function jsonResponse_(value) {
-  return ContentService
-    .createTextOutput(JSON.stringify(value))
-    .setMimeType(ContentService.MimeType.JSON);
+function htmlResponse_(value) {
+  const message = JSON.stringify({
+    source: "banquet-pledge",
+    ok: Boolean(value.ok),
+    error: value.error || "",
+  }).replace(/</g, "\\u003c");
+
+  return HtmlService.createHtmlOutput(
+    "<!doctype html><html><body><script>window.parent.postMessage(" + message + ", '*');<\/script></body></html>"
+  ).setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
