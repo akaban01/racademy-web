@@ -34,16 +34,10 @@
     .banquet-section .section-head { text-align: center; margin-bottom: 2rem; }
     .banquet-section .section-head .sec-title,
     .banquet-section .section-head .sec-lead { margin-inline: auto; }
-    .agenda-list { list-style: none; padding: 0; margin: 0 auto; max-width: 620px; counter-reset: agenda; }
+    .agenda-list { list-style: none; padding: 0; margin: 0 auto; max-width: 620px; }
     .agenda-list li {
-      counter-increment: agenda; display: grid; grid-template-columns: 40px 1fr; align-items: center;
-      gap: .9rem; padding: .9rem 1rem; margin-bottom: .55rem; border: 1px solid var(--color-line);
-      border-radius: 13px; background: #fff; color: var(--color-ink); font-weight: 600; text-align: left;
-    }
-    .agenda-list li::before {
-      content: counter(agenda, decimal-leading-zero); font: 700 .68rem/1 var(--font-mono);
-      color: var(--color-purple); width: 34px; height: 34px; border-radius: 50%;
-      display: grid; place-items: center; background: var(--color-lavender-2);
+      padding: .9rem 1rem; margin-bottom: .55rem; border: 1px solid var(--color-line);
+      border-radius: 13px; background: #fff; color: var(--color-ink); font-weight: 600; text-align: center;
     }
     .donate-card, .pledge-card, .feedback-card {
       max-width: 760px; margin: 0 auto; background: #fff; border: 1px solid var(--color-line);
@@ -53,6 +47,7 @@
     .giving-option { padding: 1rem; border-radius: 12px; background: var(--color-lavender); }
     .giving-option strong { display: block; color: var(--color-purple-deep); margin-bottom: .2rem; }
     .giving-option span { color: var(--color-muted); font-size: .9rem; }
+    .giving-option .primary-link { margin-top: .85rem; }
     .primary-link {
       display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px;
       padding: .75rem 1.1rem; border: 0; border-radius: 999px; background: var(--color-purple);
@@ -87,7 +82,7 @@
       .banquet-actions { grid-template-columns: 1fr 1fr; gap: .6rem; }
       .banquet-action { min-height: 72px; font-size: .86rem; }
       .banquet-section { padding: 56px 0; }
-      .agenda-list li { grid-template-columns: 36px 1fr; padding: .8rem; }
+      .agenda-list li { padding: .8rem; }
       .giving-options, .pledge-grid { grid-template-columns: 1fr; }
       .form-field.full { grid-column: auto; }
       .donate-card, .pledge-card, .feedback-card { padding: 1.2rem; border-radius: 16px; }
@@ -136,8 +131,8 @@
     <div class="wrap">
       <div class="section-head"><span class="mono sec-label">Tonight's Program</span><h2 class="sec-title">Program Agenda</h2><p class="sec-lead">An evening of faith, celebration, school updates, and community support.</p></div>
       <ol class="agenda-list">
-        <li>Introduction</li><li>Quran Recitation</li><li>Student Performances</li><li>Alumni Presentation</li><li>School Update</li>
-        <li>New Campus Update</li><li>Principal's Speech</li><li>Fundraiser</li><li>Lunch</li><li>Prayer</li>
+        <li>Opening Remarks</li><li>Quran Recitation</li><li>Student Performance</li><li>Alumni Presentation</li><li>School Update</li>
+        <li>New Campus Update</li><li>Principal's Keynote Speech</li><li>Fundraiser</li><li>Lunch</li><li>Vote of Thanks</li><li>Dhur Prayer</li>
       </ol>
       <div class="back-top"><a href="#top" aria-label="Back to top from program agenda">↑ Back to top</a></div>
     </div>
@@ -148,13 +143,18 @@
       <div class="section-head"><span class="mono sec-label">Support Our Mission</span><h2 class="sec-title">Make a Donation</h2><p class="sec-lead">Your tax-deductible gift helps Renaissance Academy serve students today and build for tomorrow.</p></div>
       <div class="donate-card">
         <div class="giving-options">
-          <div class="giving-option"><strong>Online</strong><span>Give securely by card through our donation page.</span></div>
-          <div class="giving-option"><strong>Zelle or PayPal</strong><span>Contact the school office for the current account details.</span></div>
+          <div class="giving-option">
+            <strong>Online</strong>
+            <span>Give securely by card through our donation page.</span>
+            <button type="button" class="primary-link"
+                    zeffy-form-link="https://www.zeffy.com/embed/donation-form/19-acre-campus?modal=true"
+                    data-zeffy-fallback-url="https://www.zeffy.com/donation-form/19-acre-campus">Donate</button>
+            <noscript><p class="form-note"><a href="https://www.zeffy.com/donation-form/19-acre-campus" target="_blank" rel="noopener noreferrer">Donate securely on Zeffy</a>.</p></noscript>
+          </div>
+          <div class="giving-option"><strong>Zelle</strong><span>Send your donation to <a href="mailto:NewCampus@racademy.org">NewCampus@racademy.org</a>.</span></div>
           <div class="giving-option"><strong>Check</strong><span>Make checks payable to Renaissance Academy.</span></div>
-          <div class="giving-option"><strong>Employer Match</strong><span>Ask your employer whether they match charitable gifts.</span></div>
+          <div class="giving-option"><strong>Employer Match</strong><span>These companies already match donations to Renaissance Academy: Microsoft, IBM, Apple, Cisco, Dell, Visa, eBay, Qualcomm, AMD, Emerson, and Samsung. Ask your employer whether they match charitable gifts.</span></div>
         </div>
-        <a class="primary-link" href="../donate/">Open secure donation options <span aria-hidden="true">→</span></a>
-        <p class="form-note">Questions? Call <a href="tel:5122522277">512-252-2277</a> or email <a href="mailto:contact@racademy.org">contact@racademy.org</a>.</p>
       </div>
       <div class="back-top"><a href="#top" aria-label="Back to top from donate section">↑ Back to top</a></div>
     </div>
@@ -211,6 +211,10 @@
     <div class="footer-bottom"><span>© 2026 Renaissance Academy. All rights reserved.</span><span class="mono" style="color:var(--on-dark-dim)">Bismillah · Since 2007</span></div>
   </div>
 </footer>
+<script
+  src="https://zeffy-scripts.s3.ca-central-1.amazonaws.com/embed-form-script.min.js"
+  onerror="document.querySelectorAll('[data-zeffy-fallback-url]').forEach(function(button){button.addEventListener('click',function(){window.open(button.getAttribute('data-zeffy-fallback-url'),'_blank','noopener');});});">
+</script>
 <script>
   (function () {
     var frequency = document.getElementById('frequency');
