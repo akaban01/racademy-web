@@ -70,9 +70,29 @@
     .form-field[hidden] { display: none; }
     .form-note { color: var(--color-muted); font-size: .82rem; margin: 1rem 0; }
     .honeypot-field { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
-    .form-status { min-height: 1.5rem; margin-top: 1rem; color: var(--color-muted); font-size: .9rem; font-weight: 600; }
-    .form-status.is-success { color: #26734d; }
-    .form-status.is-error { color: #a12b2b; }
+    .pledge-modal {
+      width: min(92vw, 520px); border: 1px solid var(--color-line); border-radius: 22px;
+      padding: 0; color: var(--color-ink); background: #fff;
+      box-shadow: 0 28px 80px rgba(30,12,68,.35);
+    }
+    .pledge-modal::backdrop { background: rgba(30,12,68,.68); backdrop-filter: blur(4px); }
+    .pledge-modal-inner { padding: 2rem 1.5rem; text-align: center; }
+    .pledge-modal h3 { margin: 0 0 .8rem; color: var(--color-purple-deep); font-size: 1.5rem; }
+    .pledge-modal p { margin: 0 auto 1.25rem; color: var(--color-muted); line-height: 1.7; }
+    .pledge-spinner {
+      width: 54px; height: 54px; margin: 0 auto 1.25rem; border: 5px solid var(--color-lavender-2);
+      border-top-color: var(--color-purple); border-radius: 50%; animation: pledge-spin .8s linear infinite;
+    }
+    .pledge-code {
+      display: block; width: fit-content; margin: 1rem auto; padding: .55rem 1.15rem;
+      border: 2px solid var(--color-purple-light); border-radius: 12px;
+      background: var(--color-lavender-2); color: var(--color-purple-deep);
+      font: 700 2rem/1 var(--font-mono); letter-spacing: .12em;
+    }
+    .pledge-code:focus { outline: 3px solid rgba(124,58,237,.3); outline-offset: 4px; }
+    .pledge-error { color: #a12b2b !important; }
+    @keyframes pledge-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .pledge-spinner { animation-duration: 1.8s; } }
     .back-top { display: flex; justify-content: center; margin-top: 2rem; }
     .back-top a { color: var(--color-purple); font: 700 .72rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; }
     .feedback-card { text-align: center; }
@@ -184,9 +204,30 @@
         </div>
         <p class="form-note">This form records a pledge only; it does not process a payment. Renaissance Academy will contact you to arrange fulfillment.</p>
         <button class="primary-link" id="pledge-submit" type="submit">Submit my pledge <span aria-hidden="true">→</span></button>
-        <p class="form-status" id="pledge-status" role="status" aria-live="polite"></p>
+        <p class="form-note">Please note the code shown after you submit your pledge.</p>
       </form>
       <iframe name="pledge-submission-target" id="pledge-submission-target" title="Pledge submission response" hidden></iframe>
+      <dialog class="pledge-modal" id="pledge-modal" aria-label="Pledge submission status">
+        <div class="pledge-modal-inner" tabindex="-1" id="pledge-modal-focus">
+          <div id="pledge-loading" role="status" aria-live="polite">
+            <div class="pledge-spinner" aria-hidden="true"></div>
+            <h3>Submitting pledge…</h3>
+            <p>Please wait while we record your pledge.</p>
+          </div>
+          <div id="pledge-success" hidden>
+            <h3>Thank you for your pledge!</h3>
+            <p>Please write this code on your pledge card along with your name.</p>
+            <strong class="pledge-code" id="pledge-code" tabindex="-1" aria-label="Pledge code 1990">1990</strong>
+            <p>Jazakallahu khairan!</p>
+            <button class="primary-link" id="pledge-close-success" type="button">Close</button>
+          </div>
+          <div id="pledge-error" hidden>
+            <h3>We couldn't submit your pledge</h3>
+            <p class="pledge-error" id="pledge-error-message"></p>
+            <button class="primary-link" id="pledge-close-error" type="button">Close and try again</button>
+          </div>
+        </div>
+      </dialog>
       <div class="back-top"><a href="#top" aria-label="Back to top from pledge form">↑ Back to top</a></div>
     </div>
   </section>
@@ -223,7 +264,15 @@
     var months = document.getElementById('months');
     var form = document.getElementById('banquet-pledge-form');
     var submitButton = document.getElementById('pledge-submit');
-    var status = document.getElementById('pledge-status');
+    var modal = document.getElementById('pledge-modal');
+    var modalFocus = document.getElementById('pledge-modal-focus');
+    var loadingPanel = document.getElementById('pledge-loading');
+    var successPanel = document.getElementById('pledge-success');
+    var errorPanel = document.getElementById('pledge-error');
+    var errorMessage = document.getElementById('pledge-error-message');
+    var pledgeCode = document.getElementById('pledge-code');
+    var closeSuccess = document.getElementById('pledge-close-success');
+    var closeError = document.getElementById('pledge-close-error');
 
     function updateMonthsField() {
       var isMonthly = frequency.value === 'Monthly';
@@ -237,8 +286,11 @@
 
     form.addEventListener('submit', function () {
       submitButton.disabled = true;
-      status.className = 'form-status';
-      status.textContent = 'Submitting your pledge…';
+      loadingPanel.hidden = false;
+      successPanel.hidden = true;
+      errorPanel.hidden = true;
+      if (!modal.open) modal.showModal();
+      modalFocus.focus();
     });
 
     window.addEventListener('message', function (event) {
@@ -246,15 +298,28 @@
       if (!isGoogleOrigin || !event.data || event.data.source !== 'banquet-pledge') return;
 
       submitButton.disabled = false;
+      loadingPanel.hidden = true;
       if (event.data.ok) {
         form.reset();
         updateMonthsField();
-        status.className = 'form-status is-success';
-        status.textContent = 'Thank you. Your pledge has been recorded.';
+        successPanel.hidden = false;
+        pledgeCode.focus();
       } else {
-        status.className = 'form-status is-error';
-        status.textContent = event.data.error || 'We could not record your pledge. Please try again.';
+        errorPanel.hidden = false;
+        errorMessage.textContent = event.data.error || 'We could not record your pledge. Please try again.';
+        closeError.focus();
       }
+    });
+
+    function closePledgeModal() {
+      modal.close();
+      submitButton.focus();
+    }
+
+    closeSuccess.addEventListener('click', closePledgeModal);
+    closeError.addEventListener('click', closePledgeModal);
+    modal.addEventListener('cancel', function (event) {
+      if (submitButton.disabled) event.preventDefault();
     });
   }());
 </script>
