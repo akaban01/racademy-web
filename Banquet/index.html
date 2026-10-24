@@ -72,7 +72,8 @@
     .honeypot-field { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
     .pledge-modal {
       width: min(92vw, 520px); border: 1px solid var(--color-line); border-radius: 22px;
-      padding: 0; color: var(--color-ink); background: #fff;
+      max-height: 90vh; margin: auto; padding: 0; color: var(--color-ink); background: #fff;
+      position: fixed; inset: 0; overflow-y: auto;
       box-shadow: 0 28px 80px rgba(30,12,68,.35);
     }
     .pledge-modal::backdrop { background: rgba(30,12,68,.68); backdrop-filter: blur(4px); }
