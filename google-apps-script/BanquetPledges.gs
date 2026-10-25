@@ -1,5 +1,7 @@
 const SPREADSHEET_ID = "1FjX4iTmN1ZBYO7XsYwSmouIQWNQTD02oCM_vsRS98yA";
 const SHEET_NAME = "Pledges";
+const FROM_ADDRESS = "Gifts@racademy.org";
+const SENDER_NAME = "Renaissance Academy Gifts";
 const HEADERS = [
   "Submitted at",
   "First name",
@@ -26,6 +28,7 @@ function doPost(e) {
     }
 
     validatePledge_(pledge);
+    const fromAddress = getVerifiedFromAddress_();
 
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
@@ -61,11 +64,92 @@ function doPost(e) {
       lock.releaseLock();
     }
 
+    sendPledgeConfirmation_(pledge, fromAddress);
+
     return htmlResponse_({ ok: true });
   } catch (error) {
     console.error(error);
     return htmlResponse_({ ok: false, error: String(error.message || error) });
   }
+}
+
+function getVerifiedFromAddress_() {
+  const alias = GmailApp.getAliases().find(function (address) {
+    return address.toLowerCase() === FROM_ADDRESS.toLowerCase();
+  });
+
+  if (!alias) {
+    throw new Error(FROM_ADDRESS + " must be configured as a verified Gmail Send mail as alias for the Apps Script owner.");
+  }
+  return alias;
+}
+
+function sendPledgeConfirmation_(pledge, fromAddress) {
+  const fullName = (pledge["first-name"] + " " + pledge["last-name"]).trim();
+  const address = [
+    pledge["address-line-1"],
+    pledge["address-line-2"],
+    [pledge.city, pledge.state, pledge["postal-code"]].filter(Boolean).join(", "),
+  ].filter(Boolean).join("\n");
+  const months = pledge.frequency === "Monthly" ? pledge["number-of-months"] : "Not applicable";
+  const notes = pledge.notes || "None";
+  const subject = "Your Renaissance Academy Banquet pledge";
+  const body = [
+    "Jazakallahu khairan for your pledge, " + pledge["first-name"] + "!",
+    "",
+    "We received the following pledge details:",
+    "Name: " + fullName,
+    "Email: " + pledge.email,
+    "Phone: " + pledge.phone,
+    "Address: " + address.replace(/\n/g, ", "),
+    "Pledge amount: $" + pledge["pledge-amount"],
+    "Frequency: " + pledge.frequency,
+    "Number of months: " + months,
+    "Notes: " + notes,
+    "",
+    "To avoid double counting, submitting this form is not announced or counted in the tracker. Please raise your hand for Sh Abdulraoof to acknowledge your pledge amount, or text (512) 924-8350 to record it anonymously.",
+    "",
+    "Renaissance Academy",
+  ].join("\n");
+
+  const details = [
+    ["Name", fullName],
+    ["Email", pledge.email],
+    ["Phone", pledge.phone],
+    ["Address", address.replace(/\n/g, "<br>")],
+    ["Pledge amount", "$" + pledge["pledge-amount"]],
+    ["Frequency", pledge.frequency],
+    ["Number of months", months],
+    ["Notes", notes],
+  ].map(function (item) {
+    return "<tr><th style=\"padding:8px 12px;text-align:left;vertical-align:top;background:#f7f5fe;color:#2a1259;\">" +
+      escapeHtml_(item[0]) + "</th><td style=\"padding:8px 12px;color:#1d1336;\">" +
+      (item[0] === "Address" ? item[1].split("<br>").map(escapeHtml_).join("<br>") : escapeHtml_(item[1])) + "</td></tr>";
+  }).join("");
+
+  const htmlBody =
+    "<div style=\"font-family:Arial,sans-serif;max-width:640px;margin:auto;color:#1d1336;line-height:1.6;\">" +
+    "<h1 style=\"color:#6d28d9;font-size:26px;\">Jazakallahu khairan for your pledge!</h1>" +
+    "<p>We received the following pledge details:</p>" +
+    "<table style=\"width:100%;border-collapse:collapse;border:1px solid #ddd6fe;\">" + details + "</table>" +
+    "<p style=\"margin-top:20px;padding:14px;background:#efeafd;border-left:4px solid #7c3aed;\"><strong>Important:</strong> To avoid double counting, submitting this form is not announced or counted in the tracker. Please raise your hand for Sh Abdulraoof to acknowledge your pledge amount, or text <a href=\"tel:5129248350\">(512) 924-8350</a> to record it anonymously.</p>" +
+    "<p>Renaissance Academy</p></div>";
+
+  GmailApp.sendEmail(pledge.email, subject, body, {
+    from: fromAddress,
+    replyTo: fromAddress,
+    name: SENDER_NAME,
+    htmlBody: htmlBody,
+  });
+}
+
+function escapeHtml_(value) {
+  return String(value == null ? "" : value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 function validatePledge_(pledge) {

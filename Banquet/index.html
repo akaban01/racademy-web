@@ -34,6 +34,15 @@
     .banquet-section .section-head { text-align: center; margin-bottom: 2rem; }
     .banquet-section .section-head .sec-title,
     .banquet-section .section-head .sec-lead { margin-inline: auto; }
+    .pledge-intro-callout {
+      max-width: 720px; margin: 1.25rem auto 0; padding: 1rem 1.15rem;
+      border: 1px solid var(--color-purple-light); border-left: 5px solid var(--color-purple);
+      border-radius: 12px; background: var(--color-lavender-2); text-align: left;
+      box-shadow: 0 8px 22px rgba(42,18,89,.08);
+    }
+    .pledge-intro-note { margin: 0; color: var(--color-purple-deep); font-weight: 600; line-height: 1.6; }
+    .pledge-intro-note + .pledge-intro-note { margin-top: .65rem; padding-top: .65rem; border-top: 1px solid var(--color-line); }
+    .pledge-intro-note a { color: var(--color-purple-strong); font-weight: 700; }
     .agenda-list { list-style: none; padding: 0; margin: 0 auto; max-width: 620px; }
     .agenda-list li {
       padding: .9rem 1rem; margin-bottom: .55rem; border: 1px solid var(--color-line);
@@ -69,6 +78,7 @@
     }
     .form-field[hidden] { display: none; }
     .form-note { color: var(--color-muted); font-size: .82rem; margin: 1rem 0; }
+    .pledge-submit-note { font-weight: 700; }
     .honeypot-field { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
     .pledge-modal {
       width: min(92vw, 520px); border: 1px solid var(--color-line); border-radius: 22px;
@@ -84,13 +94,6 @@
       width: 54px; height: 54px; margin: 0 auto 1.25rem; border: 5px solid var(--color-lavender-2);
       border-top-color: var(--color-purple); border-radius: 50%; animation: pledge-spin .8s linear infinite;
     }
-    .pledge-code {
-      display: block; width: fit-content; margin: 1rem auto; padding: .55rem 1.15rem;
-      border: 2px solid var(--color-purple-light); border-radius: 12px;
-      background: var(--color-lavender-2); color: var(--color-purple-deep);
-      font: 700 2rem/1 var(--font-mono); letter-spacing: .12em;
-    }
-    .pledge-code:focus { outline: 3px solid rgba(124,58,237,.3); outline-offset: 4px; }
     .pledge-error { color: #a12b2b !important; }
     @keyframes pledge-spin { to { transform: rotate(360deg); } }
     @media (prefers-reduced-motion: reduce) { .pledge-spinner { animation-duration: 1.8s; } }
@@ -184,7 +187,15 @@
 
   <section class="banquet-section band-panel" id="pledge">
     <div class="wrap">
-      <div class="section-head"><span class="mono sec-label">Make Your Commitment</span><h2 class="sec-title">Pledge Your Support</h2><p class="sec-lead">Submit your pledge today. Our team will follow up with the details needed to complete your gift.</p></div>
+      <div class="section-head">
+        <span class="mono sec-label">Make Your Commitment</span>
+        <h2 class="sec-title">Pledge Your Support</h2>
+        <p class="sec-lead">Submit your pledge today. Our team will follow up with the details needed to complete your gift.</p>
+        <aside class="pledge-intro-callout" aria-label="Important pledge instructions">
+          <p class="pledge-intro-note">This form is used for pledge details only, not announcing or tracking.</p>
+          <p class="pledge-intro-note">To record your pledge: Raise your hand for Sh Abdulraoof or submit your pledge anonymously to: <a href="tel:5129248350">(512) 924-8350</a>.</p>
+        </aside>
+      </div>
       <form class="pledge-card" id="banquet-pledge-form" name="banquet-pledge" method="POST" action="https://script.google.com/macros/s/AKfycbzmxaSpniM3fCgi4S_-Lakai1TDfGLFeoxs9N4wUYFfd6rpY87vzTYebsG_X5XYb1cK/exec" target="pledge-submission-target">
         <input type="hidden" name="form-name" value="banquet-pledge" />
         <div class="honeypot-field" aria-hidden="true"><label>Leave this field empty <input name="bot-field" type="text" tabindex="-1" autocomplete="off" /></label></div>
@@ -205,7 +216,7 @@
         </div>
         <p class="form-note">This form records a pledge only; it does not process a payment. Renaissance Academy will contact you to arrange fulfillment.</p>
         <button class="primary-link" id="pledge-submit" type="submit">Submit my pledge <span aria-hidden="true">→</span></button>
-        <p class="form-note">Please note the code shown after you submit your pledge.</p>
+        <p class="form-note pledge-submit-note">To avoid double counting, submitting this pledge will not be announced or counted in the tracker; please raise your hand to acknowledge your pledge amount. Or text <a href="tel:5129248350">(512) 924-8350</a> to record it anonymously.</p>
       </form>
       <iframe name="pledge-submission-target" id="pledge-submission-target" title="Pledge submission response" hidden></iframe>
       <dialog class="pledge-modal" id="pledge-modal" aria-label="Pledge submission status">
@@ -216,10 +227,8 @@
             <p>Please wait while we record your pledge.</p>
           </div>
           <div id="pledge-success" hidden>
-            <h3>Thank you for your pledge!</h3>
-            <p>Please write this code on your pledge card along with your name.</p>
-            <strong class="pledge-code" id="pledge-code" tabindex="-1" aria-label="Pledge code 1990">1990</strong>
-            <p>Jazakallahu khairan!</p>
+            <h3>Jazakallahu khairan for your pledge!</h3>
+            <p>To avoid double counting, submitting this pledge will not be announced or counted in the tracker; please raise your hand to acknowledge your pledge amount. Or text <a href="tel:5129248350">(512) 924-8350</a> to record it anonymously.</p>
             <button class="primary-link" id="pledge-close-success" type="button">Close</button>
           </div>
           <div id="pledge-error" hidden>
@@ -271,7 +280,6 @@
     var successPanel = document.getElementById('pledge-success');
     var errorPanel = document.getElementById('pledge-error');
     var errorMessage = document.getElementById('pledge-error-message');
-    var pledgeCode = document.getElementById('pledge-code');
     var closeSuccess = document.getElementById('pledge-close-success');
     var closeError = document.getElementById('pledge-close-error');
 
@@ -304,7 +312,7 @@
         form.reset();
         updateMonthsField();
         successPanel.hidden = false;
-        pledgeCode.focus();
+        closeSuccess.focus();
       } else {
         errorPanel.hidden = false;
         errorMessage.textContent = event.data.error || 'We could not record your pledge. Please try again.';

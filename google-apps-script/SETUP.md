@@ -11,7 +11,22 @@ Forms and Netlify Functions are not involved.
 3. Replace the editor contents with `BanquetPledges.gs` from this directory.
 4. Save the project and name it **Banquet Pledge Sync**.
 
-## 2. Deploy the script
+## 2. Configure the sender address
+
+The Google account that owns and deploys the Apps Script must have
+`Gifts@racademy.org` configured as a verified Gmail **Send mail as** address.
+
+1. Sign in to Gmail as the Apps Script owner.
+2. Open **Settings → See all settings → Accounts**.
+3. Under **Send mail as**, add and verify `Gifts@racademy.org` if it is not
+   already present.
+4. Confirm that the address appears as an available sender in Gmail.
+
+The script deliberately rejects submissions before writing to the spreadsheet
+if this sender alias is missing, preventing pledges from being recorded without
+the requested confirmation email.
+
+## 3. Deploy the script
 
 For a new deployment:
 
@@ -34,7 +49,10 @@ The Banquet page is configured to use this deployment URL:
 
 `https://script.google.com/macros/s/AKfycbzmxaSpniM3fCgi4S_-Lakai1TDfGLFeoxs9N4wUYFfd6rpY87vzTYebsG_X5XYb1cK/exec`
 
-## 3. Verify
+The updated script requests Gmail permission in addition to spreadsheet
+permission. Approve both permissions when prompted.
+
+## 4. Verify
 
 After deploying the latest Apps Script version and publishing the website,
 submit one test pledge. Confirm that:
@@ -42,6 +60,8 @@ submit one test pledge. Confirm that:
 1. The page displays “Thank you. Your pledge has been recorded.”
 2. A `Pledges` tab exists in the spreadsheet.
 3. The test pledge appears as a new row with the correct values.
+4. The donor receives an email containing their pledge details, sent from
+   `Gifts@racademy.org`.
 
 If the row does not appear, open **Executions** in Apps Script and review the
 latest `doPost` execution.
