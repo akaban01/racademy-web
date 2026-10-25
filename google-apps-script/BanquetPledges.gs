@@ -84,6 +84,17 @@ function getVerifiedFromAddress_() {
   return alias;
 }
 
+/**
+ * Run this function once from the Apps Script editor as the account that owns
+ * the web-app deployment. Google will prompt that account to authorize Gmail
+ * access, and the function will verify the required Send mail as alias.
+ */
+function authorizeGmailAccess() {
+  const fromAddress = getVerifiedFromAddress_();
+  console.log("Gmail access authorized. Confirmation emails will be sent from " + fromAddress + ".");
+  return "Authorized: " + fromAddress;
+}
+
 function sendPledgeConfirmation_(pledge, fromAddress) {
   const fullName = (pledge["first-name"] + " " + pledge["last-name"]).trim();
   const address = [
